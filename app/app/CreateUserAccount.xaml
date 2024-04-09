@@ -1,0 +1,56 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="app.CreateUserAccount">
+	<Grid>
+		<Image Source="gradient_image.png" Aspect="AspectFill" HeightRequest="1000"/>
+		<!-- Your other content goes here -->
+		<StackLayout Padding="20">
+			<Label Text="Create an account as:" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,40"/>
+
+			<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+				<Button Padding="30,0,30,0" Text="User" Clicked="UserButton_Clicked" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="#06A0B5" CornerRadius="27" FontSize="20"/>
+				<Frame Margin="30,0,0,0" Padding="0"  CornerRadius="27" BorderColor="White" BackgroundColor="Transparent">
+					<Button Padding="30,0,30,0" Text="Artist" Clicked="CreateButton_Clicked" TextColor="White" BackgroundColor="Transparent" FontSize="20" FontFamily="Nunito_Sans_Font.ttf"/>
+				</Frame>
+
+			</StackLayout>
+
+			<Frame CornerRadius="15" BackgroundColor="#6BFFFFFF" Padding="10" Margin="0,10,0,0">
+				<StackLayout>
+					<!--
+				Sign up as user
+				-->
+					<Label Text="Sign up" FontFamily="Nunito_Sans_Font.ttf" FontAttributes="Bold" HorizontalOptions="Center" Padding="50" FontSize="32"/>
+
+					<!--
+				Sign up fields
+				-->
+					<Frame CornerRadius="27" Padding="0" Margin="0,10,0,0" BackgroundColor="#1E1E1E">
+						<Entry Placeholder="Username" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="#1E1E1E" PlaceholderColor="#FFFFFF"/>
+					</Frame>
+					<Frame CornerRadius="27" Padding="0" Margin="0,10,0,0" BackgroundColor="#1E1E1E">
+						<Entry Placeholder="Email" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="#1E1E1E" PlaceholderColor="#FFFFFF"/>
+					</Frame>
+					<Frame CornerRadius="27" Padding="0" Margin="0,10,0,0" BackgroundColor="#1E1E1E">
+						<Entry Placeholder="Password" IsPassword="True" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="#1E1E1E" PlaceholderColor="#FFFFFF"/>
+					</Frame>
+					<!--
+				Create button
+				-->
+					<Button Text="Create" Margin="0,20,0,0" Clicked="CreateButton_Clicked" BackgroundColor="#06A0B5" TextColor="white" CornerRadius="35"/>
+
+					<!--
+				Already have an account? Log in
+				-->
+					<Label Text="Already have an account? Log in" FontFamily="Nunito_Sans_Font.ttf" HorizontalOptions="Center" Margin="0,20,0,0" FontSize="15"/>
+				</StackLayout>
+			</Frame>
+
+		</StackLayout>
+		</Grid>
+    
+	
+		
+    
+</ContentPage>
+    
