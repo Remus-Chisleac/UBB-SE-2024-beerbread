@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="app.CreateArtistAccount">
+
+    <ScrollView>
+        <Grid>
+            <Image Source="gradient_image.png" Aspect="AspectFill" HeightRequest="2000" />
+            <!-- Your other content goes here -->
+            <StackLayout Padding="0">
+                <Label Text="Create an account as:" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,20" TextColor="White"/>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Frame Margin="0,0,0,40" Padding="0" CornerRadius="27" BorderColor="White" BackgroundColor="Transparent">
+                        <Button Text="User" Padding="30,0,30,0" Clicked="UserButton_Clicked" TextColor="White" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="Transparent" FontSize="20"/>
+                    </Frame>
+                    <Button  Text="Artist" Margin="30,0,0,40" Padding="30,0,30,0" Clicked="ArtistButton_Clicked" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="#06A0B5" CornerRadius="27" FontSize="20"/>
+                </StackLayout>
+
+                <Frame CornerRadius="15" BackgroundColor="#6BFFFFFF" Padding="10" Margin="0,10,0,0">
+                    <StackLayout>
+                        <!--Sign up as artist-->
+                        <Label Text="Sign up as artist" FontFamily="Nunito_Sans_Font.ttf" FontAttributes="Bold" HorizontalOptions="Center" Padding="20" FontSize="26" TextColor="White"/>
+
+                        <!--Sign up fields-->
+
+                        <!--Name-->
+                        <Frame CornerRadius="27" Margin="0,10,0,0" BackgroundColor="#1E1E1E" Padding="9">
+                            <Grid>
+                                <Image Source="user_icon.png" HeightRequest="25" WidthRequest="25" Margin="10,0,0,0" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Entry x:Name="ArtistEntryName" Margin="50,0,0,0" Placeholder="Name" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="#1E1E1E" PlaceholderColor="#FFFFFF" TextColor="White"/>
+                            </Grid>
+                        </Frame>
+
+                        <!--Username-->
+                        <Frame CornerRadius="27" Margin="0,10,0,0" BackgroundColor="#1E1E1E" Padding="9">
+                            <Grid>
+                                <Image Source="user_icon.png" HeightRequest="25" WidthRequest="25" Margin="10,0,0,0" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Entry x:Name="ArtistEntryUsername" Margin="50,0,0,0" Placeholder="Username" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="#1E1E1E" PlaceholderColor="#FFFFFF" TextColor="White"/>
+                            </Grid>
+                        </Frame>
+
+                        <!--Country-->
+                        <Frame CornerRadius="27" Margin="0,10,0,0" BackgroundColor="#1E1E1E" Padding="9">
+                            <Grid>
+                                <Image Source="country_icon.png" HeightRequest="25" WidthRequest="25" Margin="10,0,0,0" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Entry x:Name="ArtistEntryCountry" Margin="50,0,0,0" Placeholder="Country" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="#1E1E1E" PlaceholderColor="#FFFFFF" TextColor="White"/>
+                            </Grid>
+                        </Frame>
+
+                        <!---Date of Birth-->
+                        <Frame CornerRadius="27" Margin="0,10,0,0" BackgroundColor="#1E1E1E" Padding="9">
+                            <Grid>
+                                <Image Source="calendar_icon.png" HeightRequest="25" WidthRequest="25" Margin="10,0,0,0" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Entry x:Name="ArtistEntryDateBirth" Margin="50,0,0,0" Placeholder="Date of birth" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="#1E1E1E" PlaceholderColor="#FFFFFF" TextColor="White"/>
+                            </Grid>
+                        </Frame>
+
+                        <!--Email-->
+                        <Frame CornerRadius="27" Margin="0,10,0,0" BackgroundColor="#1E1E1E"  Padding="9">
+                            <Grid>
+                                <Image Source="mail_icon.png" HeightRequest="25" WidthRequest="25" Margin="10,0,0,0" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Entry x:Name="ArtistEntryEmail" Margin="50,0,0,0" Placeholder="Email" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="#1E1E1E" PlaceholderColor="#FFFFFF" TextColor="White"/>
+                            </Grid>
+                        </Frame>
+
+                        <!--Password-->
+                        <Frame CornerRadius="27" Margin="0,10,0,0" BackgroundColor="#1E1E1E" Padding="9">
+                            <Grid>
+                                <Image Source="lock_icon.png" HeightRequest="25" WidthRequest="25" Margin="10,0,0,0" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Entry x:Name="ArtistEntryPassword" Margin="50,0,0,0" Placeholder="Password" IsPassword="True" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="#1E1E1E" PlaceholderColor="#FFFFFF" TextColor="White"/>
+                            </Grid>
+                        </Frame>
+
+                        <!--Create button-->
+
+                        <Button Text="Create" Margin="0,20,0,0" Clicked="CreateButton_Clicked" BackgroundColor="#06A0B5" TextColor="white" CornerRadius="35"/>
+
+                        <!--
+			    Already have an account? Log in
+			    -->
+                        <Label Text="Already have an account?" FontFamily="Nunito_Sans_Font.ttf" HorizontalOptions="Center" Margin="0,20,0,0" FontSize="15"/>
+                        <Label Text="Log in" FontFamily="Nunito_Sans_Font.ttf" TextColor="#06A0B5" FontSize="15" HorizontalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="LoginButton_Clicked"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>
