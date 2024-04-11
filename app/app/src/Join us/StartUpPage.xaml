@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="app.src.Join_us.StartUpPage">
+    <Grid>
+        <!--Background image-->
+        <Image Source="gradient_image.png" Aspect="AspectFill"/>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.55*"/>
+                <RowDefinition Height="0.45*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <VerticalStackLayout Grid.Row="0">
+                <Label Text="Listen" FontFamily="NunitoSans" FontSize="80" FontAttributes="Bold" Margin="0,40,0,-30" TextColor="Black" HorizontalTextAlignment="Center"/>
+                <Label Text="with" FontFamily="NunitoSans" FontSize="80" FontAttributes="Bold" Margin="0,0,0,-40" TextColor="Black" HorizontalOptions="Center"/>
+                <Label Text="us" FontFamily="NunitoSans" FontSize="80" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <Grid Grid.Row="1"
+                   Padding="20">
+                <Frame BackgroundColor="black" 
+                       Opacity="0.45" 
+                       BorderColor="Transparent" 
+                       Margin="20,0,20,20" 
+                       WidthRequest="340" 
+                       HeightRequest="320" 
+                       CornerRadius="15"/>
+                <StackLayout >
+                    <Label FontFamily="NunitoSans"
+                           Text="Join us today" FontSize="30" 
+                           FontAttributes="Bold" TextDecorations="Underline" 
+                           TextColor="White" HorizontalOptions="Center"/>
+                    <Button FontFamily="NunitoSans"
+                            Text="Create an account" 
+                            BorderColor="White" 
+                            BorderWidth="1" WidthRequest="240" 
+                            HeightRequest="40"
+                            BackgroundColor="Transparent" TextColor="White" 
+                            FontSize="20" FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            CornerRadius="25" Margin="0,30,0,0"
+                            Padding="0"
+                            Clicked="onCreateAccountClicked"/>
+
+                    <Label FontFamily="NunitoSans"
+                           Text="By signing up, you agree to the Term of Service and Privacy Policy, including cookie us." 
+                           FontSize="10" 
+                           TextColor="White" 
+                           HorizontalOptions="Center"
+                           WidthRequest="240"
+                               Margin="0,5,0,0"
+                           CharacterSpacing="0.75"/>
+                               
+                    <Frame HeightRequest="50" Margin="0,20,0,0"
+                           BackgroundColor="Transparent" BorderColor="Transparent"/>
+
+                    <Label FontFamily="NunitoSans"
+                           Text="Already have an account?" 
+                           FontSize="15" 
+                           TextColor="White" 
+                           HorizontalOptions="Start"
+                           Margin="55,0,0,0"
+                           />
+                    <Button FontFamily="NunitoSans"
+                            Text="Log In" BackgroundColor="White"
+                            TextColor="Black"
+                            WidthRequest="240"
+                            HeightRequest="35"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            CornerRadius="25" 
+                            Margin="0,5,0,0"
+                            Padding="0"
+                            Clicked="onLogInClicked"/>
+                </StackLayout>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</ContentPage>
