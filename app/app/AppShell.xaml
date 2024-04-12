@@ -6,8 +6,9 @@
     xmlns:local="clr-namespace:app"
     xmlns:src="clr-namespace:app.src.Join_us"
     Shell.FlyoutBehavior="Disabled"
-    Title="app">
-
+    Title="app"
+    >
+    
     <ShellContent
         ContentTemplate="{DataTemplate src:StartUpPage}"
         Route="StartUpPage" />

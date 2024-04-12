@@ -21,6 +21,8 @@ namespace app
         private void ArtistButton_Clicked(object sender, EventArgs e)
         {
             // Switch to Artist mode
+            CreateArtistAccount createArtistAccount = new CreateArtistAccount();
+            Navigation.PushAsync(createArtistAccount);
         }
 
         private void CreateButton_Clicked(object sender, EventArgs e)
@@ -51,6 +53,10 @@ namespace app
             //pop up on screen saying "Account created successfully"
             DisplayAlert("Alert", "Account created successfully", "OK");
 
+            //clear the text fields
+            UserEntryUsername.Text = "";
+            UserEntryPassword.Text = "";
+            UserEntryEmail.Text = "";
         }
 
         private void LoginButton_Clicked(object sender, EventArgs e)
