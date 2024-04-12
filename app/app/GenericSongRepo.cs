@@ -9,7 +9,7 @@ namespace app
 {
     internal class GenericSongRepo
     {
-        Dictionary<int, Song> songs;
+        public Dictionary<int, Song> songs { get; set; }
         public int id { get; set; }
         public string name { get; set; }
 
