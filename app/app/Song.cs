@@ -11,16 +11,16 @@ namespace app
 
     {
 
-        private int id { get; set; }
-        private string name { get; set; }
-        private string artist { get; set; }
-        private string album { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string artist { get; set; }
+        public string album { get; set; }
 
-        private int likes { get; set; }
+        public int likes { get; set; }
 
-        private int duration { get; set; }
+        public int duration { get; set; }
 
-        private int timePlayed { get; set; }
+        public int timePlayed { get; set; }
 
         public Song(int id, string name, string artist, string album, int duration)
         {
