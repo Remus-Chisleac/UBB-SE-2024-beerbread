@@ -1262,64 +1262,11 @@
 									"model": {
 										"$ref": "AAAAAAGOlCB7TTWL5pU="
 									},
-									"subViews": [
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGOlCDA9ECghWU=",
-											"_parent": {
-												"$ref": "AAAAAAGOlCB7TTWU9xU="
-											},
-											"model": {
-												"$ref": "AAAAAAGOlCDA7ECR86E="
-											},
-											"font": "Arial;13;0",
-											"left": 1429,
-											"top": 597,
-											"width": 231,
-											"height": 13,
-											"text": "+addAlbum()",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGOlCD3lUG7dmo=",
-											"_parent": {
-												"$ref": "AAAAAAGOlCB7TTWU9xU="
-											},
-											"model": {
-												"$ref": "AAAAAAGOlCD3kEGsOiw="
-											},
-											"font": "Arial;13;0",
-											"left": 1429,
-											"top": 612,
-											"width": 231,
-											"height": 13,
-											"text": "+removeAlbum()",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGOmeM7d2VY9zo=",
-											"_parent": {
-												"$ref": "AAAAAAGOlCB7TTWU9xU="
-											},
-											"model": {
-												"$ref": "AAAAAAGOmeM7b2VVChU="
-											},
-											"font": "Arial;13;0",
-											"left": 1429,
-											"top": 627,
-											"width": 231,
-											"height": 13,
-											"text": "+publishSong(song: Song)",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"left": 1424,
 									"top": 592,
 									"width": 241,
-									"height": 53
+									"height": 10
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -4390,13 +4337,47 @@
 											"height": 13,
 											"text": "+removeAlbum()",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGO0ogMeAQjPGE=",
+											"_parent": {
+												"$ref": "AAAAAAGOwtBAEyJM7D4="
+											},
+											"model": {
+												"$ref": "AAAAAAGO0ogMYAQXqP0="
+											},
+											"font": "Arial;13;0",
+											"left": 213,
+											"top": 854,
+											"width": 359,
+											"height": 13,
+											"text": "+publishSong(song: Song)",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGO0og/jwSYTtw=",
+											"_parent": {
+												"$ref": "AAAAAAGOwtBAEyJM7D4="
+											},
+											"model": {
+												"$ref": "AAAAAAGO0og/ggSMTp0="
+											},
+											"font": "Arial;13;0",
+											"left": 213,
+											"top": 869,
+											"width": 359,
+											"height": 13,
+											"text": "+removeSong(song: Song, artistGUID: guid)",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 208,
 									"top": 819,
 									"width": 369,
-									"height": 38
+									"height": 68
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -4451,7 +4432,7 @@
 							"left": 208,
 							"top": 784,
 							"width": 368,
-							"height": 73,
+							"height": 103,
 							"nameCompartment": {
 								"$ref": "AAAAAAGOwtBAEyJGy0A="
 							},
@@ -5550,45 +5531,6 @@
 							"name": "albums: HashMap<Integer, Album>",
 							"type": ""
 						}
-					],
-					"operations": [
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAGOlCDA7ECR86E=",
-							"_parent": {
-								"$ref": "AAAAAAGOlCB7TTWL5pU="
-							},
-							"name": "addAlbum"
-						},
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAGOlCD3kEGsOiw=",
-							"_parent": {
-								"$ref": "AAAAAAGOlCB7TTWL5pU="
-							},
-							"name": "removeAlbum"
-						},
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAGOmeM7b2VVChU=",
-							"_parent": {
-								"$ref": "AAAAAAGOlCB7TTWL5pU="
-							},
-							"name": "publishSong",
-							"parameters": [
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAGOmeQLDWXsrGI=",
-									"_parent": {
-										"$ref": "AAAAAAGOmeM7b2VVChU="
-									},
-									"name": "song",
-									"type": {
-										"$ref": "AAAAAAGOlBDGQvmEECQ="
-									}
-								}
-							]
-						}
 					]
 				},
 				{
@@ -6515,6 +6457,57 @@
 								"$ref": "AAAAAAGOwtBAEyJDpAU="
 							},
 							"name": "removeAlbum"
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGO0ogMYAQXqP0=",
+							"_parent": {
+								"$ref": "AAAAAAGOwtBAEyJDpAU="
+							},
+							"name": "publishSong",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGO0og/TwRvkO4=",
+									"_parent": {
+										"$ref": "AAAAAAGO0ogMYAQXqP0="
+									},
+									"name": "song",
+									"type": {
+										"$ref": "AAAAAAGOlBDGQvmEECQ="
+									}
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGO0og/ggSMTp0=",
+							"_parent": {
+								"$ref": "AAAAAAGOwtBAEyJDpAU="
+							},
+							"name": "removeSong",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGO0ohqcQTkPEM=",
+									"_parent": {
+										"$ref": "AAAAAAGO0og/ggSMTp0="
+									},
+									"name": "song",
+									"type": {
+										"$ref": "AAAAAAGOlBDGQvmEECQ="
+									}
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGO0olhvwY0FGg=",
+									"_parent": {
+										"$ref": "AAAAAAGO0og/ggSMTp0="
+									},
+									"name": "artistGUID",
+									"type": "guid"
+								}
+							]
 						}
 					],
 					"receptions": [
