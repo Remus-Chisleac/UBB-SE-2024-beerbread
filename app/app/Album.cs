@@ -9,23 +9,13 @@ namespace app
     internal class Album: GenericSongRepo
     {
 
-        public bool isPublic { get; set; }
-        public Album(int id, string name, bool isPublic): base(id, name)
+        public string description { get; set; }
+        public Album(int id, string name, string description): base(id, name)
         {
-            this.isPublic = isPublic;
+            this.description = description;
         }
 
-        public bool EmptyPlaylist()
-        {
-            try {
-                this.songs.Clear();
-                return true;
-            }
-            catch(Exception exception)
-            {
-                return false;
-            }
-        }
+       
 
     }
 }
