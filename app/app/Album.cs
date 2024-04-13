@@ -14,8 +14,5 @@ namespace app
         {
             this.description = description;
         }
-
-       
-
     }
 }
