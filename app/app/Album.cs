@@ -10,7 +10,7 @@ namespace app
     {
 
         public string description { get; set; }
-        public Album(int id, string name, string description): base(id, name)
+        public Album(Guid owner, int id, string name, string description): base(owner, id, name)
         {
             this.description = description;
         }
