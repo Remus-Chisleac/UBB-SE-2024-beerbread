@@ -37,8 +37,14 @@ namespace app
 
         public bool RemoveSong(Song songToRemove)
         {
-            return songs.Remove(songToRemove.id); 
+            return songs.Remove(songToRemove.id);
 
         }
+        public int GetSongNumbert()
+        {
+            return songs.Count;
+        }
+
     }
-    }
+}
+
