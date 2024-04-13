@@ -13,6 +13,7 @@
                     {
                         fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                         fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                        fonts.AddFont("Nunito_Sans_Font.ttf", "NunitoSans");
                     });
 
     #if DEBUG

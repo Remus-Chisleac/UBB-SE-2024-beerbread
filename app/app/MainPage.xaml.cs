@@ -2,7 +2,6 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
 
         public MainPage()
         {
@@ -11,8 +10,11 @@
 
         private void OnCreateAccountClicked(object sender, EventArgs e)
         {
-            CreateUserAccount createUserAccount = new CreateUserAccount();
-            Navigation.PushAsync(createUserAccount);
+            CreateAccountDefault createAccountDefault = new CreateAccountDefault();
+            Navigation.PushAsync(createAccountDefault);
+            
+            //CreateUserAccount createUserAccount = new CreateUserAccount();
+            //Navigation.PushAsync(createUserAccount);
 
         }
     }
