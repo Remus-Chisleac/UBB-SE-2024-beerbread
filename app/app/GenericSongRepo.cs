@@ -13,8 +13,11 @@ namespace app
         public int id { get; set; }
         public string name { get; set; }
 
-        public GenericSongRepo(int id, string name)
+        public Guid owner { get;}
+
+        public GenericSongRepo(Guid owner, int id, string name)
         {
+            this.owner = owner;
             this.id = id;
             this.name = name;
             songs = new Dictionary<int, Song>();
