@@ -2,7 +2,8 @@
 <ContentPage
     x:Class="app.src.Main_page.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    HideSoftInputOnTapped="True">
 
     <Grid>
         <Image
@@ -87,6 +88,9 @@
                     IsClippedToBounds="True"
                     VerticalOptions="Center"
                     WidthRequest="40">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onMusicCreatorTap" />
+                    </Frame.GestureRecognizers>
                     <Image
                         Margin="-20"
                         Aspect="AspectFit"
@@ -106,6 +110,9 @@
                     IsClippedToBounds="True"
                     VerticalOptions="Center"
                     WidthRequest="40">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onUserAccountTap" />
+                    </Frame.GestureRecognizers>
                     <Image
                         Margin="-20"
                         Aspect="AspectFit"
@@ -116,12 +123,16 @@
             </Grid>
             <!--  search bar  -->
             <Frame
+                x:Name="search_frame"
                 Grid.Row="1"
                 Margin="20,0,20,0"
                 Padding="0"
-                BackgroundColor="LightGray"
+                BackgroundColor="#d9d9d9"
                 CornerRadius="15"
                 HeightRequest="45">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onSearchTap" />
+                </Frame.GestureRecognizers>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.1*" />
@@ -134,13 +145,16 @@
                         Source="search_icon.png"
                         WidthRequest="20" />
                     <Entry
-                        x:Name="search"
+                        x:Name="search_entry"
                         Grid.Column="1"
                         Margin="0,0,20,0"
+                        Focused="onSearchFocus"
                         FontSize="15"
                         Placeholder="Search"
                         PlaceholderColor="Black"
-                        TextColor="Black" />
+                        TextColor="Black"
+                        Unfocused="onSearchUnFocus" />
+
                 </Grid>
             </Frame>
             <!--  Continue Listening  -->
@@ -659,8 +673,12 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <VerticalStackLayout Grid.Column="0">
+                <VerticalStackLayout x:Name="bottomNavbar_Home" Grid.Column="0">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onHomeTap" />
+                    </VerticalStackLayout.GestureRecognizers>
                     <Image
+                        x:Name="bottomNavbar_HomeImage"
                         Margin="0,15,0,0"
                         Aspect="AspectFit"
                         HeightRequest="15"
@@ -669,6 +687,7 @@
                         VerticalOptions="Center"
                         WidthRequest="15" />
                     <Label
+                        x:Name="bottomNavbar_HomeLabel"
                         Margin="0,5,0,0"
                         FontAttributes="Bold"
                         FontSize="12"
@@ -676,8 +695,12 @@
                         Text="Home"
                         TextColor="#00c2cb" />
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout x:Name="bottomNavbar_Explore" Grid.Column="1">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onExploreTap" />
+                    </VerticalStackLayout.GestureRecognizers>
                     <Image
+                        x:Name="bottomNavbar_ExploreImage"
                         Margin="0,15,0,0"
                         Aspect="AspectFit"
                         HeightRequest="15"
@@ -686,6 +709,7 @@
                         VerticalOptions="Center"
                         WidthRequest="15" />
                     <Label
+                        x:Name="bottomNavbar_ExploreLabel"
                         Margin="0,5,0,0"
                         FontAttributes="Bold"
                         FontSize="12"
@@ -693,8 +717,12 @@
                         Text="Explore"
                         TextColor="White" />
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.Column="2">
+                <VerticalStackLayout x:Name="bottomNavbar_Library" Grid.Column="2">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onLibraryTap" />
+                    </VerticalStackLayout.GestureRecognizers>
                     <Image
+                        x:Name="bottomNavbar_LibraryImage"
                         Margin="0,15,0,0"
                         Aspect="AspectFit"
                         HeightRequest="15"
@@ -703,6 +731,7 @@
                         VerticalOptions="Center"
                         WidthRequest="15" />
                     <Label
+                        x:Name="bottomNavbar_LibraryLabel"
                         Margin="0,5,0,0"
                         FontAttributes="Bold"
                         FontSize="12"
