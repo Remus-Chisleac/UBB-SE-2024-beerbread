@@ -4,41 +4,41 @@ namespace app;
 
 public partial class CreateArtistAccount : ContentPage
 {
-	public CreateArtistAccount()
-	{
-		InitializeComponent();
-	}
+    public CreateArtistAccount()
+    {
+        InitializeComponent();
+    }
 
-	private void UserButton_Clicked(object sender, EventArgs e)
-	{
+    private void UserButton_Clicked(object sender, EventArgs e)
+    {
         // Switch to User mode
         CreateUserAccount createUserAccount = new CreateUserAccount();
         Navigation.PushAsync(createUserAccount);
     }
 
-	private void ArtistButton_Clicked(object sender, EventArgs e)
-	{
-		// Switch to Artist mode
-	}
+    private void ArtistButton_Clicked(object sender, EventArgs e)
+    {
+        // Switch to Artist mode
+    }
 
-	private void CreateButton_Clicked(object sender, EventArgs e)
-	{
-		// Perform create action
-		string name = ArtistEntryName.Text;
-		string username = ArtistEntryUsername.Text;
-		string country = ArtistEntryCountry.Text;
-		string dateBirth = ArtistEntryDateBirth.Text;
-		string email = ArtistEntryEmail.Text;
-		string password = ArtistEntryPassword.Text;
+    private void CreateButton_Clicked(object sender, EventArgs e)
+    {
+        // Perform create action
+        string name = ArtistEntryName.Text;
+        string username = ArtistEntryUsername.Text;
+        string country = ArtistEntryCountry.Text;
+        string dateBirth = ArtistEntryDateBirth.Text;
+        string email = ArtistEntryEmail.Text;
+        string password = ArtistEntryPassword.Text;
 
-		if (!IsNameValid(name))
-		{
+        if (!IsNameValid(name))
+        {
             DisplayAlert("Name Error", "Can only contain letters", "OK");
             return;
         }
 
-		if (username.Length < 6)
-		{
+        if (username.Length < 6)
+        {
             DisplayAlert("Username Error", "Must be at least 6 characters", "OK");
             return;
         }
@@ -79,13 +79,13 @@ public partial class CreateArtistAccount : ContentPage
 
     }
 
-	private bool IsNameValid(string name)
-	{
+    private bool IsNameValid(string name)
+    {
         return !string.IsNullOrEmpty(name) && name.All(char.IsLetter);
     }
 
-	private bool IsCountryValid(string country)
-	{
+    private bool IsCountryValid(string country)
+    {
         return !string.IsNullOrEmpty(country) && country.All(char.IsLetter);
     }
 
@@ -135,8 +135,10 @@ public partial class CreateArtistAccount : ContentPage
     private void LoginButton_Clicked(object sender, EventArgs e)
     {
 
-        //pop up on screen saying "Login page not implemented yet"
-        DisplayAlert("Alert", "Login page not implemented yet", "OK");
+        //src.PlaylistsPage playlistsPage = new src.PlaylistsPage();
+        //Navigation.PushAsync(playlistsPage);
 
+        src.LogIn logIn = new src.LogIn();
+        Navigation.PushAsync(logIn);
     }
 }

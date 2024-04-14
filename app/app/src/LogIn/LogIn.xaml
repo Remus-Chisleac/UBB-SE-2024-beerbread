@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="app.src.LogIn">
+
+    <ScrollView>
+        <Grid>
+            <Image Source="gradient_image.png" Aspect="AspectFill" HeightRequest="2000" />
+
+            <StackLayout>
+
+                <Frame CornerRadius="15" BackgroundColor="#6BFFFFFF" Padding="10" Margin="20,150,20,0">
+                    <StackLayout>
+                        <!--Log into account-->
+                        <Label Text="Log into your accout:" FontFamily="Nunito_Sans_Font.ttf" FontAttributes="Bold" HorizontalOptions="Center" Padding="20" FontSize="26" TextColor="White"/>
+
+                        <!--Log iN fields-->
+
+                        <!--Email-->
+                        <Frame CornerRadius="27" Margin="0,10,0,0" BackgroundColor="#1E1E1E"  Padding="9">
+                            <Grid>
+                                <Image Source="mail_icon.png" HeightRequest="25" WidthRequest="25" Margin="10,0,0,0" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Entry x:Name="LogInEntryEmail" Margin="50,0,0,0" Placeholder="Email" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="#1E1E1E" PlaceholderColor="#FFFFFF" TextColor="White"/>
+                            </Grid>
+                        </Frame>
+
+                        <!--Password-->
+                        <Frame CornerRadius="27" Margin="0,10,0,0" BackgroundColor="#1E1E1E" Padding="9">
+                            <Grid>
+                                <Image Source="lock_icon.png" HeightRequest="25" WidthRequest="25" Margin="10,0,0,0" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                <Entry x:Name="LogInEntryPassword" Margin="50,0,0,0" Placeholder="Password" IsPassword="True" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="#1E1E1E" PlaceholderColor="#FFFFFF" TextColor="White"/>
+                            </Grid>
+                        </Frame>
+
+                        <!--LogIn button-->
+
+                        <Button Text="Log in" Margin="0,20,0,0" Clicked="LogInButton_Clicked" BackgroundColor="#06A0B5" TextColor="white" CornerRadius="35"/>
+
+                        <!-- Dont have an accout? Sign Up  -->
+
+                        <Label Text="Dont have an accout?" FontFamily="Nunito_Sans_Font.ttf" HorizontalOptions="Center" Margin="0,20,0,0" FontSize="15"/>
+                        <Label Text="Sign Up" FontFamily="NunitoSans" TextColor="#06A0B5" FontSize="15" HorizontalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SignUpButton_Clicked"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

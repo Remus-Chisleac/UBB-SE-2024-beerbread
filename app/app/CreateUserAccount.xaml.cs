@@ -62,8 +62,8 @@ namespace app
         private void LoginButton_Clicked(object sender, EventArgs e)
         {
 
-            //pop up on screen saying "Login page not implemented yet"
-            DisplayAlert("Alert", "Login page not implemented yet", "OK");
+            src.LogIn logIn = new src.LogIn();
+            Navigation.PushAsync(logIn);
 
         }
     }

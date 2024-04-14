@@ -2,10 +2,10 @@ namespace app.src.Join_us;
 
 public partial class StartUpPage : ContentPage
 {
-	public StartUpPage()
-	{
-		InitializeComponent();
-	}
+    public StartUpPage()
+    {
+        InitializeComponent();
+    }
 
     private void onCreateAccountClicked(object sender, EventArgs e)
     {
@@ -14,6 +14,7 @@ public partial class StartUpPage : ContentPage
     }
     private void onLogInClicked(object sender, EventArgs e)
     {
-
+        src.LogIn logIn = new src.LogIn();
+        Navigation.PushAsync(logIn);
     }
 }

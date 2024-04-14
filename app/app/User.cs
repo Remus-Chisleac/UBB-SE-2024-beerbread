@@ -16,11 +16,11 @@ namespace app
         public Dictionary<int, Playlist> playlists { get; set; }
         public User(string email, string username, string salt, string hashPassword) : base(email, username, salt, hashPassword)
         {
-            history = new Playlist(0, "History");
-            likedSongs = new Playlist(1, "Liked Songs");
-            blockedSongs = new Playlist(2, "Blocked Songs");
+            //history = new Playlist(0, "History");
+            //likedSongs = new Playlist(1, "Liked Songs");
+            //blockedSongs = new Playlist(2, "Blocked Songs");
             playlists = new Dictionary<int, Playlist>();
         }
-        
+
     }
 }

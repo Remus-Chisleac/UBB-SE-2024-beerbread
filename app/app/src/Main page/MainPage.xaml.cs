@@ -1,5 +1,3 @@
-using Android.App;
-
 namespace app.src.Main_page;
 
 public partial class MainPage : ContentPage
@@ -46,7 +44,8 @@ public partial class MainPage : ContentPage
 
     private void onLibraryTap(object sender, TappedEventArgs e)
     {
-        DisplayAlert("Library", "Not yet implemented", "OK");
+        src.PlaylistsPage playlistsPage = new src.PlaylistsPage();
+        Navigation.PushAsync(playlistsPage);
     }
 
     private void onSearchTap(object sender, TappedEventArgs e)
