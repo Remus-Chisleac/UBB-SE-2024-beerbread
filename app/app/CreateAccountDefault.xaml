@@ -1,19 +1,52 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="app.CreateAccountDefault">
+<ContentPage
+    x:Class="app.CreateAccountDefault"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Grid>
-        <Image Source="gradient_image.png" Aspect="AspectFill" HeightRequest="1000"/>
-        <!-- Your other content goes here -->
+        <Image
+            Aspect="AspectFill"
+            HeightRequest="1000"
+            Source="gradient_image.png" />
+        <!--  Your other content goes here  -->
         <StackLayout Padding="20">
-            <Label Text="Create an account as:" HorizontalOptions="Center" FontSize="20" Margin="0,0,0,20" TextColor="White"/>
+            <Label
+                Margin="0,0,0,20"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="Create an account as:"
+                TextColor="White" />
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Frame Margin="30,0,10,40" Padding="0" CornerRadius="27" BorderColor="White" BackgroundColor="Transparent">
-                    <Button Text="User" Padding="30,0,30,0" Clicked="UserButton_Clicked" TextColor="White" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="Transparent" FontSize="20"/>
+            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                <Frame
+                    Margin="30,0,10,40"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    BorderColor="White"
+                    CornerRadius="27">
+                    <Button
+                        Padding="30,0,30,0"
+                        BackgroundColor="Transparent"
+                        Clicked="UserButton_Clicked"
+                        FontFamily="NunitoSans"
+                        FontSize="20"
+                        Text="User"
+                        TextColor="White" />
                 </Frame>
-                <Frame Margin="30,0,20,40" Padding="0" CornerRadius="27" BorderColor="White" BackgroundColor="Transparent">
-                    <Button Text="Artist" Padding="30,0,30,0" Clicked="ArtistButton_Clicked" TextColor="White" FontFamily="Nunito_Sans_Font.ttf" BackgroundColor="Transparent" FontSize="20" />
+                <Frame
+                    Margin="30,0,20,40"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    BorderColor="White"
+                    CornerRadius="27">
+                    <Button
+                        Padding="30,0,30,0"
+                        BackgroundColor="Transparent"
+                        Clicked="ArtistButton_Clicked"
+                        FontFamily="NunitoSans"
+                        FontSize="20"
+                        Text="Artist"
+                        TextColor="White" />
                 </Frame>
             </StackLayout>
         </StackLayout>
