@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace app
 {
-    
+
     internal class Playlist : GenericSongRepo
     {
         public bool isPublic { get; set; }
-        public Playlist(int id, string name, bool isPublic = false) : base(id, name)
+        public Playlist(int id, Guid owner, string name, bool isPublic = false) : base(owner, id, name)
         {
             this.isPublic = isPublic; // By default, a playlist is private
         }
@@ -19,6 +19,6 @@ namespace app
             return songs.Count == 0;
         }
     }
-    
-    
+
+
 }
