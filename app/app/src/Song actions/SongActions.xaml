@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="app.src.Song_actions.SongActions"
+             Title="SongActions">
+    <ScrollView>
+        <Grid>
+            <Image Source="gradient_image3.png" Aspect="AspectFill" HeightRequest="1000"/>
+            
+            <StackLayout Padding="20">
+                <Image Source="back_icon.png" HeightRequest="35" WidthRequest="35" HorizontalOptions="Start"/>
+                
+                <StackLayout Padding="20">
+                    <Image Source="song_image.png" Margin="10,30,10,10" HeightRequest="240" WidthRequest="240" HorizontalOptions="Center"/>
+                    <Label Text="grainy days" Margin="0,5,0,0" FontAttributes="Bold" FontFamily="NunitoSans" TextColor="White" FontSize="20" HorizontalOptions="Center"/>
+                    <Label Text="moody." FontAttributes="Bold" Margin="0,0,0,20" FontFamily="NunitoSans" TextColor="Gray" FontSize="16" HorizontalOptions="Center"/>
+                    <!--Add to playlist-->
+                    <HorizontalStackLayout Padding="5" HorizontalOptions="Start">
+                        <Image Source="add_song_icon.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start"/>
+                        <Label Text="Add to playlist" Margin="10,15,10,10" FontFamily="NunitoSans" FontAttributes="Bold" TextColor="White">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAddToPlaylistTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
+                    <!--Remove from playlist-->
+                    <HorizontalStackLayout Padding="5" HorizontalOptions="Start">
+                        <Image Source="remove_icon.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start"/>
+                        <Label Text="Remove from playlist" Margin="10,15,10,10" FontFamily="NunitoSans" FontAttributes="Bold" TextColor="White">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnRemoveFromPlaylistTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
+                    <!--Report song-->
+                    <HorizontalStackLayout Padding="5" HorizontalOptions="Start">
+                        <Image Source="report_icon1.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start"/>
+                        <Label Text="Report song" Margin="10,15,10,10" FontFamily="NunitoSans" FontAttributes="Bold" TextColor="White">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnReportSongTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
+                     <!--Block song-->
+                    <HorizontalStackLayout Padding="5" HorizontalOptions="Start">
+                        <Image Source="block_icon.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start"/>
+                        <Label Text="Block song" Margin="10,15,10,10" FontFamily="NunitoSans" FontAttributes="Bold" TextColor="White">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnBlockSongTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
+                </StackLayout>
+                 
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>
