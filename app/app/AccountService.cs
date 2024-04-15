@@ -12,6 +12,12 @@ namespace app
         public AccountService()
         {
             accounts = new Dictionary<string, Account>();
+
+            List<Account> listOfAccounts = AccountsXmlDataStorage.LoadAccounts();
+            foreach (Account account in listOfAccounts)
+            {
+                accounts.Add(account.Email, account);
+            }
         }
 
         // Creation

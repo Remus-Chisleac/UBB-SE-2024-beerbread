@@ -1,10 +1,12 @@
+using app;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 
-public class SongsXmlDataStorage
+internal class SongsXmlDataStorage
 {
-    public string filePath = "";
+    public static string filePath = "D:\\ISS\\Project\\app\\app\\XMLDataStorageSongs.xml";
     //Serialize Songs to the Xml file
     public static void SaveSongs(List<Song> songs)
     {
@@ -27,6 +29,6 @@ public class SongsXmlDataStorage
     public static Song SearchSong(string songName)
     {
         List<Song> songs = LoadSongs();
-        return songs.Any(song => song.name == songName);
+        return songs.FirstOrDefault(song => song.name == songName);
     }
 }
