@@ -31,6 +31,7 @@ public partial class SongPage : ContentPage
             return "00:00";
         }
     }
+    bool noAutoChange = true;
     Song song;
     public SongPage(Song song)
     {
@@ -45,6 +46,10 @@ public partial class SongPage : ContentPage
         else
             mediaElement.Source = MediaSource.FromUri(song.path);
         mediaElement.Volume = 0.75;
+        if (song.img_path != "")
+            songImage.Source = song.img_path;
+        else
+            songImage.Source = "song_image.jpeg";
     }
     private void mediaElement_loaded(object sender, EventArgs e)
     {
@@ -54,7 +59,9 @@ public partial class SongPage : ContentPage
 
     private void MediaElement_PositionChanged(object? sender, CommunityToolkit.Maui.Core.Primitives.MediaPositionChangedEventArgs e)
     {
-        progress_bar.Progress = (mediaElement.Position).TotalSeconds / (mediaElement.Duration).TotalSeconds;
+        noAutoChange = false;
+        progress_bar.Value = (mediaElement.Position).TotalSeconds / (mediaElement.Duration).TotalSeconds;
+        noAutoChange = true;
         OnPropertyChanged(nameof(Position));
         total_song_time.Text = mediaElement.Duration.ToString(@"mm\:ss");
     }
@@ -84,7 +91,7 @@ public partial class SongPage : ContentPage
 
     private void onSongDetailButtonTapped(object sender, EventArgs e)
     {
-        src.Song_actions.SongActions songActions = new();
+        src.Song_actions.SongActions songActions = new(this.song);
         Navigation.PushAsync(songActions);
     }
 
@@ -101,15 +108,12 @@ public partial class SongPage : ContentPage
             like_button.Source = "liked_unpressed_button.png";
         }
     }
-
-
     private void goBackSongButton(object sender, EventArgs e)
     {
-
-
-        DisplayAlert("Error", "Not implemented yet.", "OK");
-        return;
-
+        if (mediaElement.Position.TotalSeconds > 5)
+        {
+            mediaElement.SeekTo(TimeSpan.FromSeconds(0));
+        }
     }
 
     private void PlayPauseButton(object sender, TappedEventArgs e)
@@ -136,4 +140,17 @@ public partial class SongPage : ContentPage
         return;
     }
 
+    private void onDragStartedValueChange(object sender, EventArgs e)
+    {
+        isPlaying = false;
+        mediaElement.Pause();
+        progress_bar.ThumbColor = Color.FromArgb("#FF7cffcf");
+    }
+    private void onDragCompletedValueChange(object sender, EventArgs e)
+    {
+        mediaElement.SeekTo(TimeSpan.FromSeconds(progress_bar.Value * mediaElement.Duration.TotalSeconds));
+        isPlaying = true;
+        mediaElement.Play();
+        progress_bar.ThumbColor = Color.FromArgb("#FF7cadff");
+    }
 }

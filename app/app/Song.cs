@@ -13,7 +13,6 @@ namespace app
         public string name { get; set; }
         public string artist { get; set; }
         public string album { get; set; }
-        public string path { get; set; }
 
         public int likes { get; set; }
 
@@ -21,9 +20,10 @@ namespace app
 
         public int timePlayed { get; set; }
 
-        public string path {  get; set; }
+        public string path { get; set; }
+        public string img_path { get; set; }
 
-        public Song(int id, string name, string artist, string album, int duration,string path)
+        public Song(int id, string name, string artist, string album, int duration, string path, string img_path = "")
         {
             this.id = id;
             this.name = name;
@@ -33,6 +33,7 @@ namespace app
             this.likes = 0;
             this.timePlayed = 0;
             this.path = path;
+            this.img_path = img_path;
         }
         public string GetTimeString()
         {

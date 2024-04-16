@@ -106,13 +106,14 @@
 
                 <Frame
                     Padding="0"
+                    CornerRadius="30"
                     HeightRequest="300"
                     HorizontalOptions="Center"
                     IsClippedToBounds="True"
                     VerticalOptions="Center"
                     WidthRequest="300">
 
-                    <Image Source="song_image.jpeg" />
+                    <Image x:Name="songImage" Aspect="AspectFill" />
 
                 </Frame>
 
@@ -206,18 +207,24 @@
                     IsVisible="False"
                     Loaded="mediaElement_loaded"
                     ShouldAutoPlay="False" />
-                <ProgressBar
+                <Slider
                     x:Name="progress_bar"
                     Grid.Row="0"
                     Grid.ColumnSpan="2"
-                    Margin="25,0,25,5"
-                    BackgroundColor="Black"
-                    HorizontalOptions="Fill"
+                    Margin="10,0,10,5"
+                    BackgroundColor="Transparent"
+                    DragCompleted="onDragCompletedValueChange"
+                    DragStarted="onDragStartedValueChange"
+                    HorizontalOptions="FillAndExpand"
                     InputTransparent="False"
                     IsEnabled="True"
+                    Maximum="1"
                     MaximumHeightRequest="10"
-                    Progress="1"
-                    ProgressColor="Turquoise" />
+                    MaximumTrackColor="LightGrey"
+                    Minimum="0"
+                    MinimumTrackColor="#FF7CEEFF"
+                    ThumbColor="#FF7cadff"
+                    Value="0" />
 
 
                 <!--  DIN SONG  -->
@@ -225,7 +232,7 @@
                     x:Name="current_song_time"
                     Grid.Row="1"
                     Grid.Column="0"
-                    Margin="25,0,20,0"
+                    Margin="25,0,25,0"
                     Padding="0"
                     FontAttributes="Bold"
                     FontFamily="NunitoSans"
