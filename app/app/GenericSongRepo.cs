@@ -21,6 +21,13 @@ namespace app
             this.id = id;
             this.name = name;
             songs = new Dictionary<int, Song>();
+
+            List<Song> values = SongsXmlDataStorage.LoadSongs();
+            foreach(Song s in values)
+            {
+                songs.Add(s.id, s);
+            }
+           
         }
 
 
@@ -30,6 +37,7 @@ namespace app
             try
             {
                 songs.Add(songToAdd.id, songToAdd);
+                SongsXmlDataStorage.SaveSongs(new List<Song> { songToAdd });
             }
             catch (Exception exception)
             {
@@ -40,10 +48,11 @@ namespace app
 
         public bool RemoveSong(Song songToRemove)
         {
+            SongsXmlDataStorage.RemoveSong(songToRemove.id);
             return songs.Remove(songToRemove.id);
 
         }
-        public int GetSongNumbert()
+        public int GetSongsNumber()
         {
             return songs.Count;
         }
