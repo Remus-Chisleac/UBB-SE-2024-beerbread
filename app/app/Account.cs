@@ -3,7 +3,7 @@ using System.Text;
 
 namespace app
 {
-    internal class Account
+    public class Account
     {
         // Properties
         public string Email { get; set; }
@@ -11,6 +11,16 @@ namespace app
         protected string HashedPassword { get; set; }
         public string Salt { get; set; }
         public Guid Id { get; }
+
+        // Empty constructor
+        public Account()
+        {
+            Email = "";
+            Username = "";
+            HashedPassword = "";
+            Salt = "";
+            Id = Guid.NewGuid();
+        }
 
         // Constructor
         public Account(string email, string username, string salt, string hashPassword)

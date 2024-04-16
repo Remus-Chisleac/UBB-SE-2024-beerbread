@@ -21,8 +21,6 @@ namespace app
 
         public int timePlayed { get; set; }
 
-        public string path {  get; set; }
-
         public Song(int id, string name, string artist, string album, int duration,string path)
         {
             this.id = id;

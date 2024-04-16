@@ -50,6 +50,19 @@ namespace app
                 return;
             }
 
+            // Create an instance of AccountService
+            AccountService accountService = new AccountService();
+
+            // Check if email already exists
+            if (accountService.AccountExists(email))
+            {
+                DisplayAlert("Account Error", "An account with this email already exists", "OK");
+                return;
+            }
+
+            // Create the account using AccountService
+            accountService.CreateAccount(email, username, password);
+
             //pop up on screen saying "Account created successfully"
             DisplayAlert("Alert", "Account created successfully", "OK");
 

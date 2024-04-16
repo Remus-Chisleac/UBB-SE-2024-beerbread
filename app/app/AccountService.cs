@@ -69,5 +69,11 @@ namespace app
                 return Convert.ToBase64String(hashedBytes);
             }
         }
+
+        // Check if an account with the given email already exists
+        public bool AccountExists(string email)
+        {
+            return accounts.ContainsKey(email);
+        }
     }
 }
