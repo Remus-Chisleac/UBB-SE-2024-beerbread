@@ -1,4 +1,5 @@
 using app;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,8 +7,23 @@ using System.Xml.Serialization;
 
 internal class AccountsXmlDataStorage
 {
-	//Predefined file, containing the accounts
-	public static string filePath = "D:\\ISS\\Project\\app\\app\\XMLDataStorageAccounts.xml";
+    public static string GetFilePath()
+    {
+        string fileName = "XMLDataStorageAccounts.xml";
+        switch (Device.RuntimePlatform)
+        {
+            case Device.Android:
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), fileName);
+            case Device.iOS:
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..", "Library", fileName);
+            case Device.UWP:
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fileName);
+            default:
+                throw new NotImplementedException("Platform not supported");
+        }
+    }
+    //Predefined file, containing the accounts
+    public static string filePath = GetFilePath();
 
 	// Serialize list of accounts to XML file
 	public static void SaveAccounts(List<Account> accounts)
