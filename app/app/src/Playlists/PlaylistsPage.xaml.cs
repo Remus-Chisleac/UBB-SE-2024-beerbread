@@ -23,16 +23,14 @@ public partial class PlaylistsPage : ContentPage
 
     private void BackButtonTapped(object sender, EventArgs e)
     {
-
-        Main_page.MainPage mainpage = new Main_page.MainPage();
-        Navigation.PushAsync(mainpage);
+        Navigation.PopAsync();
     }
 
 
 
     private void PlaylistDetailPageButton(object sender, EventArgs e)
     {
-        
+
         DisplayAlert("Error", "Aici o sa fie pagina de detalii playlist.", "OK");
         return;
 
@@ -42,24 +40,18 @@ public partial class PlaylistsPage : ContentPage
     private void LibraryPageButtonClicked(object sender, EventArgs e)
     {
 
-        PlaylistsPage playlistsPage = new PlaylistsPage();
-        Navigation.PushAsync(playlistsPage);
     }
 
 
     private void SearchPageButtonClicked(object sender, EventArgs e)
     {
-        Main_page.MainPage mainpage = new src.Main_page.MainPage();
-        Navigation.PushAsync(mainpage);
-
+        Navigation.PopAsync();
     }
 
 
     private void HomePageButtonClicked(object sender, EventArgs e)
     {
-        Main_page.MainPage mainpage = new src.Main_page.MainPage();
-        Navigation.PushAsync(mainpage);
-
+        Navigation.PopAsync();
     }
 
 }

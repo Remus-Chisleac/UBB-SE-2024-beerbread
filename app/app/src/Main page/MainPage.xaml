@@ -2,8 +2,7 @@
 <ContentPage
     x:Class="app.src.Main_page.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    >
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Grid>
         <Image
@@ -181,6 +180,7 @@
                     Text="Continue Listening"
                     TextColor="White" />
                 <Grid
+                    x:Name="songsGrid"
                     Grid.Row="1"
                     Margin="20,0,20,0"
                     Padding="0">
@@ -193,6 +193,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
+                    <!--
                     <Frame
                         Grid.Row="0"
                         Grid.Column="0"
@@ -201,7 +202,7 @@
                         BackgroundColor="#33436369"
                         BorderColor="Transparent"
                         CornerRadius="15">
-                        <HorizontalStackLayout>
+                        <HorizontalStackLayout ClassId="0">
                             <Frame
                                 BackgroundColor="White"
                                 CornerRadius="10"
@@ -211,7 +212,6 @@
                                     Margin="-20"
                                     Aspect="AspectFill"
                                     Source="song_image.jpeg" />
-
                             </Frame>
                             <Label
                                 Margin="5,0,0,0"
@@ -220,13 +220,9 @@
                                 FontSize="15"
                                 Text="Playlist 1"
                                 TextColor="White"
-                                VerticalOptions="Center" >
-
-                            </Label>
-
-                            <!--ADDED NEW-->
+                                VerticalOptions="Center" />
                             <HorizontalStackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="firstSongButton" />
+                                <TapGestureRecognizer Tapped="onSongTap"/>
                             </HorizontalStackLayout.GestureRecognizers>
 
 
@@ -377,6 +373,7 @@
                                 VerticalOptions="Center" />
                         </HorizontalStackLayout>
                     </Frame>
+                    -->
                 </Grid>
             </Grid>
             <!--  Your Top Mixes  -->

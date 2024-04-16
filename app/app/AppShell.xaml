@@ -9,6 +9,6 @@
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="false">
 
-    <ShellContent ContentTemplate="{DataTemplate test:MainPage}" Route="StartUpPage" />
+    <ShellContent ContentTemplate="{DataTemplate src:StartUpPage}" Route="StartUpPage" />
 
 </Shell>
