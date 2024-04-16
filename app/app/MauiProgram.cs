@@ -1,29 +1,27 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 
-    namespace app
+namespace app
+{
+    public static class MauiProgram
     {
-        public static class MauiProgram
+        public static MauiApp CreateMauiApp()
         {
-            public static MauiApp CreateMauiApp()
+            var builder = MauiApp.CreateBuilder();
+            builder
+                .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
+                .UseMauiCommunityToolkitMediaElement()
+                .ConfigureFonts(fonts =>
             {
-                var builder = MauiApp.CreateBuilder();
-                builder
-                    .UseMauiApp<App>()
-                    .UseMauiCommunityToolkitMediaElement()
-                    .ConfigureFonts(fonts =>
-                    {
-                        fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                        fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                        fonts.AddFont("Nunito_Sans_Font.ttf", "NunitoSans");
-                    });
-
-    #if DEBUG
-    		    builder.Logging.AddDebug();
-    #endif
-                
-
-                return builder.Build();
-            }
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("Nunito_Sans_Font.ttf", "NunitoSans");
+            });
+#if DEBUG
+            builder.Logging.AddDebug();
+#endif
+            return builder.Build();
         }
     }
+}

@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="app.src.Song_page.SongPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:songs="app/Resources/songs"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    <Grid>
+        <Image
+            Aspect="AspectFill"
+            HeightRequest="1000"
+            Source="gradient_image3.png" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <!--  back button | detail button  -->
+                <RowDefinition Height="0.1*" />
+                <!--  song image  -->
+                <RowDefinition Height="0.9*" />
+                <!--  title | artist | love song  -->
+                <RowDefinition Height="0.2*" />
+                <!--  song line  -->
+                <RowDefinition Height="0.2*" />
+                <!--  play | pause buttons  -->
+                <RowDefinition Height="0.1*" />
+                <!--  song lirics  -->
+                <RowDefinition Height="0.4*" />
+
+            </Grid.RowDefinitions>
+
+
+
+            <!--  back button | detail button  -->
+            <Grid Grid.Row="0" Margin="5,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*" />
+                    <ColumnDefinition Width="0.9*" />
+
+                </Grid.ColumnDefinitions>
+
+                <!--  back button  -->
+                <Frame
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="40,10,0,0"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    VerticalOptions="Center"
+                    WidthRequest="80">
+                    <Image
+                        Aspect="AspectFit"
+                        HeightRequest="30"
+                        Source="back_icon.png"
+                        WidthRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="onBackButtonTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+
+
+                <!--  details button  -->
+                <Frame
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="240,10,0,0"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    VerticalOptions="Center"
+                    WidthRequest="40">
+                    <Image
+                        Margin="-20"
+                        Aspect="AspectFit"
+                        HeightRequest="30"
+                        Source="delete_menu.png"
+                        WidthRequest="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="onSongDetailButtonTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+
+                </Frame>
+            </Grid>
+
+
+            <!--  song image  -->
+            <Grid
+                Grid.Row="1"
+                Margin="20,40,20,0"
+                Padding="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+
+                <Frame
+                    Padding="0"
+                    HeightRequest="300"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    VerticalOptions="Center"
+                    WidthRequest="300">
+
+                    <Image Source="song_image.jpeg" />
+
+                </Frame>
+
+            </Grid>
+
+
+
+            <!--  title | artist | liked song  -->
+            <Grid Grid.Row="2" Margin="20,20,20,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="0.5*" />
+                </Grid.ColumnDefinitions>
+
+                <HorizontalStackLayout>
+
+
+                    <!--  TITLE  -->
+                    <Label
+                        x:Name="song_name"
+                        Grid.Row="0"
+                        Margin="25,0,20,0"
+                        Padding="0"
+                        FontAttributes="Bold"
+                        FontFamily="NunitoSans"
+                        FontSize="22"
+                        HorizontalTextAlignment="Start"
+                        Text="grainy days"
+                        TextColor="White" />
+
+                </HorizontalStackLayout>
+
+                <!--  ARTIST  -->
+                <Label
+                    x:Name="artist_name"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="25,0,20,0"
+                    Padding="0"
+                    FontAttributes="Bold"
+                    FontFamily="NunitoSans"
+                    FontSize="16"
+                    HorizontalTextAlignment="Start"
+                    Text="moody."
+                    TextColor="Gray" />
+
+                <!--  LOVE/LIKE BUTTON  -->
+                <Image
+                    x:Name="like_button"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="100,0,20,0"
+                    Source="liked_unpressed_button.png"
+                    WidthRequest="20">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="onLikedButtonClicked" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+
+            </Grid>
+
+
+
+            <!--  bara progres + secunde  -->
+            <Grid
+                Grid.Row="3"
+                Margin="20,20,20,0"
+                Padding="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="0.5*" />
+
+                </Grid.ColumnDefinitions>
+
+
+                <toolkit:MediaElement
+                    x:Name="mediaElement"
+                    InputTransparent="False"
+                    IsEnabled="False"
+                    IsVisible="False"
+                    Loaded="mediaElement_loaded"
+                    ShouldAutoPlay="False" />
+                <ProgressBar
+                    x:Name="progress_bar"
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Margin="25,0,25,5"
+                    BackgroundColor="Black"
+                    HorizontalOptions="Fill"
+                    InputTransparent="False"
+                    IsEnabled="True"
+                    MaximumHeightRequest="10"
+                    Progress="1"
+                    ProgressColor="Turquoise" />
+
+
+                <!--  DIN SONG  -->
+                <Label
+                    x:Name="current_song_time"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="25,0,20,0"
+                    Padding="0"
+                    FontAttributes="Bold"
+                    FontFamily="NunitoSans"
+                    FontSize="12"
+                    HorizontalTextAlignment="Start"
+                    Text="{Binding Position}"
+                    TextColor="Gray" />
+                <!--  TIMP TOTAL SONG  -->
+                <Label
+                    x:Name="total_song_time"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="25,0,25,0"
+                    Padding="0"
+                    FontAttributes="Bold"
+                    FontFamily="NunitoSans"
+                    FontSize="12"
+                    HorizontalTextAlignment="End"
+                    Text="00:00"
+                    TextColor="Gray" />
+            </Grid>
+
+
+
+            <!--  back button | forward button  -->
+            <Grid Grid.Row="4" Margin="5,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.4*" />
+
+
+                </Grid.ColumnDefinitions>
+
+                <!--  back button  -->
+                <Frame
+                    x:Name="back_one_song_button"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    HeightRequest="40"
+                    HorizontalOptions="End"
+                    IsClippedToBounds="True"
+                    VerticalOptions="Center">
+                    <Image
+                        Aspect="AspectFit"
+                        HeightRequest="30"
+                        Source="previous_song_button.png"
+                        WidthRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="goBackSongButton" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+
+                <!--  play pause  button  -->
+                <Frame
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    HeightRequest="60"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    VerticalOptions="Center">
+                    <Image
+                        x:Name="play_one_song_button"
+                        Aspect="AspectFit"
+                        HeightRequest="60"
+                        Source="play_song_button.png"
+                        WidthRequest="60">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="PlayPauseButton" />
+                        </Image.GestureRecognizers>
+
+
+                    </Image>
+                </Frame>
+
+
+                <!--  forward button  -->
+                <Frame
+                    x:Name="forward_one_song_button"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    HeightRequest="40"
+                    HorizontalOptions="Start"
+                    IsClippedToBounds="True"
+                    VerticalOptions="Center">
+                    <Image
+                        Aspect="AspectFit"
+                        HeightRequest="30"
+                        Source="next_song_button.png"
+                        WidthRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="goForwardSongButton" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+            </Grid>
+
+
+            <!--  lirics  -->
+            <Grid Grid.Row="5" Margin="0,150,0,0">
+
+                <Frame
+                    BackgroundColor="Turquoise"
+                    CornerRadius="10"
+                    HeightRequest="200"
+                    WidthRequest="300">
+                    <ScrollView VerticalScrollBarVisibility="Always">
+                        <Label
+                            FontAttributes="Bold"
+                            FontFamily="NunitoSans"
+                            FontSize="15"
+                            HorizontalOptions="Center"
+                            Text="sd,mm,dc jkvdkjjksj sdskjv skjdv kj svd ksdj vskjd vksj vskjd vskj dvksjd  sdskjv skjdv kj svd ksdj vskjd vksj vskjd vskj dvksjd  sdskjv skjdv kj svd ksdj vskjd vksj vskjd vskj dvksjdvksjd vksdjv skvjs dkvjs dvksjd we wkejkj ekj we kjwejkfkjwefdwk jwfkwe fwkefjwej wekjewj wekjwebwe"
+                            TextColor="White"
+                            WidthRequest="270" />
+                    </ScrollView>
+                </Frame>
+            </Grid>
+
+
+
+
+
+
+
+
+
+        </Grid>
+
+
+    </Grid>
+
+
+
+
+</ContentPage>
+

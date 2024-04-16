@@ -58,23 +58,12 @@
 
 	<ItemGroup>
 		<None Remove="Nunito_Sans_Font.ttf" />
-		<None Remove="Resources\Images\add_song_icon.png" />
-		<None Remove="Resources\Images\block_icon.png" />
 		<None Remove="Resources\Images\calendar_icon.png" />
 		<None Remove="Resources\Images\country_icon.png" />
 		<None Remove="Resources\Images\gradient_image.png" />
 		<None Remove="Resources\Images\gradient_image2.png" />
-		<None Remove="Resources\Images\gradient_image3.png" />
 		<None Remove="Resources\Images\lock_icon.png" />
 		<None Remove="Resources\Images\mail_icon.png" />
-		<None Remove="Resources\Images\more_icon.png" />
-		<None Remove="Resources\Images\play_icon.png" />
-		<None Remove="Resources\Images\remove_icon.png" />
-		<None Remove="Resources\Images\report_icon.png" />
-		<None Remove="Resources\Images\report_icon1.png" />
-		<None Remove="Resources\Images\song1.mp3" />
-		<None Remove="Resources\Images\song_image.png" />
-		<None Remove="Resources\Images\stop_icon.png" />
 		<None Remove="Resources\Images\user_icon.png" />
 	</ItemGroup>
 
@@ -83,10 +72,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="8.0.1" />
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="3.1.0" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.20" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.20" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="src\HistoryTab\HistoryPage.xaml.cs">
+			<DependentUpon>HistoryPage.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -99,11 +95,11 @@
 		<MauiXaml Update="CreateUserAccount.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="src\Song actions\SongActions.xaml">
-		  <Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
 		<MauiXaml Update="src\Song page\SongPage.xaml">
-		  <Generator>MSBuild:Compile</Generator>
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="src\HistoryTab\HistoryPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="src\Join us\StartUpPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
@@ -114,6 +110,11 @@
 		<MauiXaml Update="src\Playlists\PlaylistsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Resources\Images\historyPage\" />
+		<Folder Include="Resources\songs\" />
 	</ItemGroup>
 
 </Project>
