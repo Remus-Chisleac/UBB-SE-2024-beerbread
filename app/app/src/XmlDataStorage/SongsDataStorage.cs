@@ -31,4 +31,20 @@ internal class SongsXmlDataStorage
         List<Song> songs = LoadSongs();
         return songs.FirstOrDefault(song => song.name == songName);
     }
+    //Removing a song by it's id
+    public static bool RemoveSong(int id)
+    {
+        List<Song> songs = LoadSongs();
+        Song songToRemove = songs.FirstOrDefault(song => song.id == id);
+        if (songToRemove != null)
+        {
+            songs.Remove(songToRemove);
+            SaveSongs(songs);
+            return true; 
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

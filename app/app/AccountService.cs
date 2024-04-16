@@ -27,6 +27,7 @@ namespace app
             string hashedPassword = HashPassword(password, salt);
             Account newAccount = new Account(email, username, salt, hashedPassword);
             accounts[email] = newAccount;
+            AccountsXmlDataStorage.SaveAccounts(new List<Account> { newAccount });
         }
 
         // Authentication

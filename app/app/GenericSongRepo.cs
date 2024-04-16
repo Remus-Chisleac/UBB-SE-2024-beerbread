@@ -37,6 +37,7 @@ namespace app
             try
             {
                 songs.Add(songToAdd.id, songToAdd);
+                SongsXmlDataStorage.SaveSongs(new List<Song> { songToAdd });
             }
             catch (Exception exception)
             {
@@ -47,10 +48,11 @@ namespace app
 
         public bool RemoveSong(Song songToRemove)
         {
+            SongsXmlDataStorage.RemoveSong(songToRemove.id);
             return songs.Remove(songToRemove.id);
 
         }
-        public int GetSongNumbert()
+        public int GetSongsNumber()
         {
             return songs.Count;
         }
