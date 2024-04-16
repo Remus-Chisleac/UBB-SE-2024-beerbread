@@ -21,6 +21,13 @@ namespace app
             this.id = id;
             this.name = name;
             songs = new Dictionary<int, Song>();
+
+            List<Song> values = SongsXmlDataStorage.LoadSongs();
+            foreach(Song s in values)
+            {
+                songs.Add(s.id, s);
+            }
+
         }
 
 
