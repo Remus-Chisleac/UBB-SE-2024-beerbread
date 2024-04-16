@@ -22,7 +22,9 @@ namespace app
 
         public int timePlayed { get; set; }
 
-        public Song(int id, string name, string artist, string album, int duration)
+        public string path {  get; set; }
+
+        public Song(int id, string name, string artist, string album, int duration,string path)
         {
             this.id = id;
             this.name = name;
@@ -31,6 +33,7 @@ namespace app
             this.duration = duration;
             this.likes = 0;
             this.timePlayed = 0;
+            this.path = path;
         }
     }
 }
