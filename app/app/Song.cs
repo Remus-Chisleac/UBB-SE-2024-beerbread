@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace app
 {
-    internal class Song
-
-
+    public class Song
     {
 
         public int id { get; set; }
         public string name { get; set; }
         public string artist { get; set; }
         public string album { get; set; }
+        public string path { get; set; }
 
         public int likes { get; set; }
 
@@ -34,6 +33,12 @@ namespace app
             this.likes = 0;
             this.timePlayed = 0;
             this.path = path;
+        }
+        public string GetTimeString()
+        {
+            int minutes = duration / 60;
+            int seconds = duration % 60;
+            return minutes + ":" + seconds;
         }
     }
 }

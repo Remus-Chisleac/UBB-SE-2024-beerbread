@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="app.src.HistoryTab.HistoryTab"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+
+    <Grid>
+
+        <Image
+            Aspect="AspectFill"
+            HeightRequest="2000"
+            Source="background_history.png" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--  top bar  -->
+            <Grid Grid.Row="0" Margin="5,10,5,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*" />
+                    <ColumnDefinition Width="0.8*" />
+                </Grid.ColumnDefinitions>
+                <!--  back button  -->
+                <Frame
+                    Grid.Column="0"
+                    Margin="40,10,0,0"
+                    Padding="0,0,0,0"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    VerticalOptions="Center"
+                    WidthRequest="80">
+                    <Image
+                        Margin="-20"
+                        Aspect="AspectFit"
+                        HeightRequest="30"
+                        Source="back_icon.png"
+                        WidthRequest="30" />
+                </Frame>
+                <!--  title  -->
+                <VerticalStackLayout
+                    Grid.Column="1"
+                    Margin="40,10,0,0"
+                    Padding="0"
+                    HeightRequest="40"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    WidthRequest="180">
+
+                    <Label
+                        Margin="0,5,0,0"
+                        FontAttributes="Bold"
+                        FontFamily="NunitoSans"
+                        FontSize="Title"
+                        Text="Your Profile"
+                        TextColor="Turquoise" />
+
+                </VerticalStackLayout>
+            </Grid>
+
+            <Frame
+                Grid.Row="1"
+                Margin="10,10,10,10"
+                Padding="0"
+                BackgroundColor="Transparent"
+                BorderColor="Transparent"
+                CornerRadius="10"
+                HasShadow="False">
+                <ScrollView>
+                    <Button
+                        Margin="0,0,0,0"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"
+                        CornerRadius="10" />
+                </ScrollView>
+            </Frame>
+        </Grid>
+    </Grid>
+</ContentPage>

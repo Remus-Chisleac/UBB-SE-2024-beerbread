@@ -5,12 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:app"
     xmlns:src="clr-namespace:app.src.Join_us"
+    xmlns:test="clr-namespace:app.src.Main_page"
     Shell.FlyoutBehavior="Disabled"
-    Shell.NavBarIsVisible="false"
-    >
+    Shell.NavBarIsVisible="false">
 
-    <ShellContent
-        ContentTemplate="{DataTemplate src:StartUpPage}"
-        Route="StartUpPage" />
+    <ShellContent ContentTemplate="{DataTemplate test:MainPage}" Route="StartUpPage" />
 
 </Shell>

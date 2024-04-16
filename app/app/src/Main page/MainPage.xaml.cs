@@ -1,3 +1,4 @@
+
 namespace app.src.Main_page;
 
 public partial class MainPage : ContentPage
@@ -53,6 +54,8 @@ public partial class MainPage : ContentPage
 
         bottomNavbar_HomeImage.Source = "home.png";
         bottomNavbar_HomeLabel.TextColor = Color.FromArgb("#ffffff");
+
+
     }
 
     private void onLibraryTap(object sender, TappedEventArgs e)
@@ -89,4 +92,17 @@ public partial class MainPage : ContentPage
         bottomNavbar_HomeImage.Source = "home_blue.png";
         bottomNavbar_HomeLabel.TextColor = Color.FromArgb("#00c2cb");
     }
+
+
+    //ADDED NEW
+    private void firstSongButton(object sender, EventArgs e)
+    {
+        src.Song_page.SongPage songPage = new(new Song(id: 0, name: "grainy days", artist: "test", album: "album",
+            duration: 123, path: "CaravanPalace-Raccoons.mp3"));
+        Navigation.PushAsync(songPage);
+    }
+
+
+
+
 }

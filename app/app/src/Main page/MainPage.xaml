@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="app.src.Main_page.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    HideSoftInputOnTapped="True">
+    >
 
     <Grid>
         <Image
@@ -23,6 +23,8 @@
                 <!--  bottom navbar  -->
                 <RowDefinition Height="0.1*" />
             </Grid.RowDefinitions>
+
+
             <!--  Account info| top navbar  -->
             <Grid Grid.Row="0" Margin="5,10,5,0">
                 <Grid.RowDefinitions>
@@ -34,6 +36,7 @@
                     <ColumnDefinition Width="0.1*" />
                     <ColumnDefinition Width="0.3*" />
                 </Grid.ColumnDefinitions>
+
                 <Frame
                     Grid.Row="0"
                     Grid.Column="0"
@@ -52,6 +55,7 @@
                         Source="mock_user.png"
                         WidthRequest="50" />
                 </Frame>
+
                 <VerticalStackLayout
                     Grid.Row="0"
                     Grid.Column="1"
@@ -76,6 +80,7 @@
                         Text="chandrama"
                         TextColor="White" />
                 </VerticalStackLayout>
+
                 <Frame
                     Grid.Row="0"
                     Grid.Column="2"
@@ -91,6 +96,7 @@
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onMusicCreatorTap" />
                     </Frame.GestureRecognizers>
+
                     <Image
                         Margin="-20"
                         Aspect="AspectFit"
@@ -157,6 +163,9 @@
 
                 </Grid>
             </Frame>
+
+
+
             <!--  Continue Listening  -->
             <Grid Grid.Row="2" Margin="5,10,5,0">
                 <Grid.RowDefinitions>
@@ -201,7 +210,8 @@
                                 <Image
                                     Margin="-20"
                                     Aspect="AspectFill"
-                                    Source="mock_playlist.jpeg" />
+                                    Source="song_image.jpeg" />
+
                             </Frame>
                             <Label
                                 Margin="5,0,0,0"
@@ -210,7 +220,16 @@
                                 FontSize="15"
                                 Text="Playlist 1"
                                 TextColor="White"
-                                VerticalOptions="Center" />
+                                VerticalOptions="Center" >
+
+                            </Label>
+
+                            <!--ADDED NEW-->
+                            <HorizontalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="firstSongButton" />
+                            </HorizontalStackLayout.GestureRecognizers>
+
+
                         </HorizontalStackLayout>
                     </Frame>
                     <Frame
@@ -673,6 +692,9 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+
+
+
                 <VerticalStackLayout x:Name="bottomNavbar_Home" Grid.Column="0">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onHomeTap" />
@@ -695,6 +717,9 @@
                         Text="Home"
                         TextColor="#00c2cb" />
                 </VerticalStackLayout>
+
+
+
                 <VerticalStackLayout x:Name="bottomNavbar_Explore" Grid.Column="1">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onExploreTap" />
@@ -717,6 +742,9 @@
                         Text="Explore"
                         TextColor="White" />
                 </VerticalStackLayout>
+
+
+
                 <VerticalStackLayout x:Name="bottomNavbar_Library" Grid.Column="2">
                     <VerticalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onLibraryTap" />
