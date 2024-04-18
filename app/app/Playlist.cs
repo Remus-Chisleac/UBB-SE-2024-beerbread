@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 namespace app
 {
 
-    internal class Playlist : GenericSongRepo
+    public class Playlist : GenericSongRepo
     {
-        public bool isPublic { get; set; }
-        public Playlist(int id, Guid owner, string name, bool isPublic = false) : base(owner, id, name)
+        public bool isPrivate { get; set; }
+        public string imagePath { get; set; }
+        public Playlist(int id, int owner, string name, bool isPrivate = false, string imagePath = "") : base(owner, id, name)
         {
-            this.isPublic = isPublic; // By default, a playlist is private
+            this.isPrivate = isPrivate;
+            this.imagePath = imagePath;
         }
         public bool emptyPlaylist()
         {

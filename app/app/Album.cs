@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace app
 {
-    internal class Album: GenericSongRepo
+    public class Album : GenericSongRepo
     {
 
         public string description { get; set; }
-        public Album(Guid owner, int id, string name, string description): base(owner, id, name)
+        public Album(int owner, int id, string name, string description) : base(owner, id, name)
         {
             this.description = description;
         }

@@ -72,6 +72,7 @@
 		<None Remove="Resources\Images\remove_icon.png" />
 		<None Remove="Resources\Images\report_icon.png" />
 		<None Remove="Resources\Images\report_icon1.png" />
+		<None Remove="Resources\Images\shuffle_button.jpeg" />
 		<None Remove="Resources\Images\song1.mp3" />
 		<None Remove="Resources\Images\song_image.png" />
 		<None Remove="Resources\Images\stop_icon.png" />
@@ -88,6 +89,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="3.1.0" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -102,6 +104,9 @@
 		</MauiXaml>
 		<MauiXaml Update="CreateUserAccount.xaml">
 			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="src\SinglePlaylist\SinglePlaylistPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="src\Song actions\SongActions.xaml">
 			<Generator>MSBuild:Compile</Generator>
@@ -119,5 +124,7 @@
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>
+
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionappHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

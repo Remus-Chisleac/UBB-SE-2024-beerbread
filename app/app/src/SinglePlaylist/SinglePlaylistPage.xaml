@@ -1,0 +1,640 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="app.src.SinglePlaylistPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="SinglePlaylistPage">
+
+
+
+
+
+
+
+    <Grid>
+        <Image
+            Aspect="AspectFill"
+            HeightRequest="1000"
+            Source="gradient_image.png" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <!--  back button | detail button  -->
+                <RowDefinition Height="0.1*" />
+                <!--  song image  -->
+                <RowDefinition Height="0.4*" />
+                <!--  shuffle | name song artist | play playlist  -->
+                <RowDefinition Height="0.2*" />
+                <!--  songs  -->
+                <RowDefinition Height="0.7*" />
+
+            </Grid.RowDefinitions>
+
+
+
+            <!--  back button | detail button  -->
+            <Grid Grid.Row="0" Margin="5,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*" />
+                    <ColumnDefinition Width="0.9*" />
+
+                </Grid.ColumnDefinitions>
+
+                <!--  back button  -->
+                <Frame
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="40,10,0,0"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    VerticalOptions="Center"
+                    WidthRequest="80">
+                    <Image
+                        Aspect="AspectFit"
+                        HeightRequest="30"
+                        Source="back_icon.png"
+                        WidthRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="onBackButtonTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+
+
+                <!--  details button  -->
+                <Frame
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="260,10,0,0"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    VerticalOptions="Center"
+                    WidthRequest="40">
+                    <Image
+                        Margin="-20"
+                        Aspect="AspectFit"
+                        HeightRequest="30"
+                        Source="delete_menu.png"
+                        WidthRequest="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="onPlaylistDetailButtonTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+
+                </Frame>
+            </Grid>
+
+
+            <!--  song image  -->
+            <Grid
+                Grid.Row="1"
+                Margin="20,20,20,0"
+                Padding="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+
+                <Frame
+                    Padding="0"
+                    CornerRadius="4"
+                    HeightRequest="200"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    VerticalOptions="Center"
+                    WidthRequest="200">
+
+                    <Image Source="song_image.jpeg" />
+
+                </Frame>
+
+            </Grid>
+
+
+
+            <!--  title | artist | liked song  -->
+            <Grid Grid.Row="2" Margin="20,20,20,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*" />
+                    <ColumnDefinition Width="0.6*" />
+                    <ColumnDefinition Width="0.1*" />
+
+                </Grid.ColumnDefinitions>
+
+
+
+                <!--  LOVE/LIKE BUTTON  -->
+                <Image
+                    x:Name="shuffle_button"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="60,0,0,0"
+                    Source="shuffle_button.png"
+                    WidthRequest="30">
+
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="onShuffledButtonClicked" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+
+
+                <!--  TITLE  -->
+                <Label
+                    x:Name="song_name"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Padding="0"
+                    FontAttributes="Bold"
+                    FontFamily="NunitoSans"
+                    FontSize="30"
+                    HorizontalTextAlignment="Center"
+                    Text="Playlist1"
+                    TextColor="White"
+                    VerticalTextAlignment="Start" />
+
+                <!--  PLAY  -->
+                <Image
+                    x:Name="like_button"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="0,0,50,0"
+                    Source="play_song_button.png"
+                    WidthRequest="60">
+
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="onPlayButtonClicked" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+
+
+
+                <!--  ARTIST  -->
+                <Label
+                    x:Name="artist_name"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="0,40,0,0"
+                    Padding="0"
+                    FontAttributes="Bold"
+                    FontFamily="NunitoSans"
+                    FontSize="16"
+                    HorizontalTextAlignment="Center"
+                    Text="rock, pop, jazz"
+                    TextColor="Gray" />
+
+            </Grid>
+
+
+
+
+
+
+
+            <!--  the playlists list  -->
+            <Grid Grid.Row="3" Margin="5,0,5,0">
+                <ScrollView>
+                    <Grid>
+
+
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+
+
+                        <Grid
+                            Grid.Row="0"
+                            Margin="20,0,20,0"
+                            Padding="0">
+
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--  row 1  -->
+                            <Frame
+                                Grid.Row="0"
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent">
+                                <HorizontalStackLayout>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="60"
+                                        WidthRequest="60">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="album1.jpeg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,0,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="grainy days"
+                                        TextColor="White"
+                                        VerticalOptions="Center"
+                                        WidthRequest="200" />
+
+                                    <Frame
+                                        Margin="30,0,0,0"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Transparent"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        IsClippedToBounds="True"
+                                        VerticalOptions="Center"
+                                        WidthRequest="40">
+
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFit"
+                                            HeightRequest="20"
+                                            Source="delete_menu.png"
+                                            WidthRequest="40">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="SongDetailsDelete" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Frame>
+                                </HorizontalStackLayout>
+                            </Frame>
+
+                            <!--  row 2  -->
+
+                            <Frame
+                                Grid.Row="1"
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent">
+                                <HorizontalStackLayout>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="60"
+                                        WidthRequest="60">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="album3.png" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,0,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Song 2"
+                                        TextColor="White"
+                                        VerticalOptions="Center"
+                                        WidthRequest="200" />
+
+                                    <Frame
+                                        Margin="30,0,0,0"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Transparent"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        IsClippedToBounds="True"
+                                        VerticalOptions="Center"
+                                        WidthRequest="40">
+
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFit"
+                                            HeightRequest="20"
+                                            Source="delete_menu.png"
+                                            WidthRequest="40">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="SongDetailsDelete" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Frame>
+
+                                </HorizontalStackLayout>
+                            </Frame>
+
+
+                            <!--  row 3  -->
+                            <Frame
+                                Grid.Row="2"
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent">
+                                <HorizontalStackLayout>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="60"
+                                        WidthRequest="60">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="album4.jpeg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,0,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Song 3"
+                                        TextColor="White"
+                                        VerticalOptions="Center"
+                                        WidthRequest="200" />
+
+                                    <Frame
+                                        Margin="30,0,0,0"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Transparent"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        IsClippedToBounds="True"
+                                        VerticalOptions="Center"
+                                        WidthRequest="40">
+
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFit"
+                                            HeightRequest="20"
+                                            Source="delete_menu.png"
+                                            WidthRequest="40">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="SongDetailsDelete" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Frame>
+
+                                </HorizontalStackLayout>
+                            </Frame>
+
+
+
+
+                            <!--  row 4  -->
+                            <Frame
+                                Grid.Row="3"
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent">
+                                <HorizontalStackLayout>
+                                    <Frame
+                                        CornerRadius="10"
+                                        HeightRequest="60"
+                                        WidthRequest="60">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="album5.jpg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,0,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Song 4"
+                                        TextColor="White"
+                                        VerticalOptions="Center"
+                                        WidthRequest="200" />
+
+                                    <Frame
+                                        Margin="30,0,0,0"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Transparent"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        IsClippedToBounds="True"
+                                        VerticalOptions="Center"
+                                        WidthRequest="40">
+
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFit"
+                                            HeightRequest="20"
+                                            Source="delete_menu.png"
+                                            WidthRequest="40">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="SongDetailsDelete" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Frame>
+
+                                </HorizontalStackLayout>
+                            </Frame>
+
+                            <!--  row 5  -->
+                            <Frame
+                                Grid.Row="4"
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent">
+                                <HorizontalStackLayout>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="60"
+                                        WidthRequest="60">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="album3.png" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,0,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Song 5"
+                                        TextColor="White"
+                                        VerticalOptions="Center"
+                                        WidthRequest="200" />
+
+                                    <Frame
+                                        Margin="30,0,0,0"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Transparent"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        IsClippedToBounds="True"
+                                        VerticalOptions="Center"
+                                        WidthRequest="40">
+
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFit"
+                                            HeightRequest="20"
+                                            Source="delete_menu.png"
+                                            WidthRequest="40">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="SongDetailsDelete" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Frame>
+
+                                </HorizontalStackLayout>
+                            </Frame>
+
+                            <!--  row 6  -->
+                            <Frame
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent">
+                                <HorizontalStackLayout>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="60"
+                                        WidthRequest="60">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="album4.jpg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,0,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Song 6"
+                                        TextColor="White"
+                                        VerticalOptions="Center"
+                                        WidthRequest="200" />
+
+                                    <Frame
+                                        Margin="30,0,0,0"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Transparent"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        IsClippedToBounds="True"
+                                        VerticalOptions="Center"
+                                        WidthRequest="40">
+
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFit"
+                                            HeightRequest="20"
+                                            Source="delete_menu.png"
+                                            WidthRequest="40">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="SongDetailsDelete" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Frame>
+                                </HorizontalStackLayout>
+                            </Frame>
+
+                            <!--  row 7  -->
+                            <Frame
+                                Grid.Row="6"
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent">
+                                <HorizontalStackLayout>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="60"
+                                        WidthRequest="60">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="album1.jpeg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,0,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Song 7"
+                                        TextColor="White"
+                                        VerticalOptions="Center"
+                                        WidthRequest="200" />
+
+                                    <Frame
+                                        Margin="30,0,0,0"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Transparent"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        IsClippedToBounds="True"
+                                        VerticalOptions="Center"
+                                        WidthRequest="40">
+
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFit"
+                                            HeightRequest="20"
+                                            Source="delete_menu.png"
+                                            WidthRequest="40">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="SongDetailsDelete" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Frame>
+
+                                </HorizontalStackLayout>
+                            </Frame>
+
+
+                        </Grid>
+
+                    </Grid>
+
+                </ScrollView>
+                <!--  Continue Listening  -->
+
+
+            </Grid>
+
+        </Grid>
+    </Grid>
+
+</ContentPage>

@@ -177,7 +177,7 @@
                     Margin="20,0,0,10"
                     FontAttributes="Bold"
                     FontSize="20"
-                    Text="Continue Listening"
+                    Text="Recommended for you"
                     TextColor="White" />
                 <Grid
                     x:Name="songsGrid"
