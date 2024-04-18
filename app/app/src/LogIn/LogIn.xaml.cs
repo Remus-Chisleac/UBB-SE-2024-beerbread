@@ -1,4 +1,6 @@
-﻿namespace app.src;
+﻿using app.src.SqlDataStorageAndRetrival;
+
+namespace app.src;
 
 public partial class LogIn : ContentPage
 {
@@ -24,8 +26,9 @@ public partial class LogIn : ContentPage
             return;
         }
 
+        AccountService service = new();
         // Check the email format
-        if (!IsValidEmail(email))
+        if (!service.IsValidEmail(email))
         {
             DisplayAlert("Validation Error", "Invalid email format", "OK");
             return;
@@ -33,34 +36,23 @@ public partial class LogIn : ContentPage
 
         // Perform log in action
 
-        src.Main_page.MainPage mainpage = new src.Main_page.MainPage();
-        Navigation.PushAsync(mainpage);
+        if (!service.Authenticate(email, password))
+        {
+            DisplayAlert("Error", "Invalid email or password", "OK");
+            return;
+        }
 
-        // Empty the fields
-        LogInEntryPassword.Text = "";
-        LogInEntryEmail.Text = "";
+        SqlAccountService SqlAccountService = new SqlAccountService();
+
+        src.Main_page.MainPage mainpage = new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email)));
+        Navigation.PushAsync(mainpage);
+        Navigation.RemovePage(this);
     }
 
     // Method to validate email format
-    private bool IsValidEmail(string email)
-    {
-        try
-        {
-            var addr = new System.Net.Mail.MailAddress(email);
-            return addr.Address == email;
-        }
-        catch
-        {
-            return false;
-        }
-    }
 
     private void SignUpButton_Clicked(object sender, EventArgs e)
     {
-
-        // Navigate to Sign Up page - to user 
-        CreateUserAccount createUserAccount = new CreateUserAccount();
-        Navigation.PushAsync(createUserAccount);
-
+        Navigation.PopAsync();
     }
 }

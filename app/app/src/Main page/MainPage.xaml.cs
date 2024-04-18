@@ -1,32 +1,26 @@
 
+using app.src.SqlDataStorageAndRetrival;
+
 namespace app.src.Main_page;
 
 public partial class MainPage : ContentPage
 {
-    internal List<Song> songs;
-    public MainPage()
+    internal List<Song> recomendedSongs = [];
+    private SqlSongService sqlSongService = new();
+    private mockAPI.MockAnalyticsAPI MockAnalyticsAPI;
+    User user;
+    public MainPage(User user)
     {
+        this.user = user;
+        MockAnalyticsAPI = new(user);
         LoadSongs();
         InitializeComponent();
-        DisplaySongs(songs);
+        DisplaySongs(recomendedSongs);
 
     }
     private void LoadSongs()
     {
-        songs = new List<Song>();
-        Song song = new(1, "Just Wanna Know", "Beat Mekanik", "beats", 196, "Beat Mekanik - Just Wanna Know.mp3");
-        Song song1 = new(2, "No Doubt", "Ketsa", "dir", 142, "Ketsa - No Doubt.mp3");
-        Song song2 = new(3, "Across the City", "Lobo Loco", "El Loco", 104, "Lobo Loco - Across the City (ID 2119).mp3");
-        Song song3 = new(4, "Call in the Night", "Lobo Loco", "El Loco", 252, "Lobo Loco - Call in the Night (ID 2141).mp3");
-        Song song4 = new(5, "Evening at Bonfire", "Lobo Loco", "Man in the river", 158, "Lobo Loco - Evening at Bonfire (ID 2081).mp3");
-        //Song song5 = new(6, "Water Sun and Love", "Lobo Loco", "Man in the river", 118, "Lobo Loco - Water Sun and Love (ID 2091).mp3");
-        Song song5 = new(7, "Raccoons", "Caravan Palace", "Gangbusters", 207, "CaravanPalace-Raccoons.mp3", "caravanpalace_raccoons.png");
-        songs.Add(song);
-        songs.Add(song1);
-        songs.Add(song2);
-        songs.Add(song3);
-        songs.Add(song4);
-        songs.Add(song5);
+        recomendedSongs = sqlSongService.GetSongs(MockAnalyticsAPI.GetRecomendedSongs(5));
     }
     private void DisplaySongs(List<Song> songs)
     {
@@ -64,9 +58,11 @@ public partial class MainPage : ContentPage
             };
 
             //create image
-            string img_path = song.img_path;
+            string img_path = song.urlImage;
             if (img_path == "")
                 img_path = "song_image.jpeg";
+            else
+                img_path = SourceLoader.GetPngPath() + img_path;
             Image image = new()
             {
                 Source = img_path,
@@ -155,7 +151,7 @@ public partial class MainPage : ContentPage
 
     private void onLibraryTap(object sender, TappedEventArgs e)
     {
-        src.PlaylistsPage playlistsPage = new src.PlaylistsPage();
+        src.PlaylistsPage playlistsPage = new src.PlaylistsPage(user);
         Navigation.PushAsync(playlistsPage);
     }
 
@@ -193,7 +189,7 @@ public partial class MainPage : ContentPage
     private void onSongTap(object sender, EventArgs e)
     {
         int id = Int32.Parse(((HorizontalStackLayout)sender).ClassId);
-        src.Song_page.SongPage songPage = new(songs[id]);
+        src.Song_page.SongPage songPage = new(recomendedSongs[id]);
         Navigation.PushAsync(songPage);
     }
 

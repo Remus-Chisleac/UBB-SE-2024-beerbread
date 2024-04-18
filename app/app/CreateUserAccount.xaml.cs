@@ -43,15 +43,25 @@ namespace app
                 DisplayAlert("Password Error", "Must be at least 8 characters", "OK");
                 return;
             }
-
-            if (!email.EndsWith("@gmail.com") && !email.EndsWith("@yahoo.com"))
+            //check if email
+            AccountService service = new();
+            if (!service.IsValidEmail(email))
             {
                 DisplayAlert("Email Error", "Should end with @gmail.com or @yahoo.com", "OK");
                 return;
             }
 
-            //pop up on screen saying "Account created successfully"
-            DisplayAlert("Alert", "Account created successfully", "OK");
+            bool ret = service.CreateUserAccount(email, username, password);
+
+            if (ret)
+            {
+                DisplayAlert("Success", "Account created successfully", "OK");
+                Navigation.PushAsync(new src.LogIn());
+            }
+            else
+            {
+                DisplayAlert("Error", "Account creation failed", "OK");
+            }
 
             //clear the text fields
             UserEntryUsername.Text = "";

@@ -2,50 +2,43 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
+using app.src.SqlDataStorageAndRetrival;
 
 namespace app
 {
-    internal class AccountService
+    public class AccountService
     {
-        private Dictionary<string, Account> accounts;
+        private readonly SqlAccountService sqlAccountService = new();
 
         public AccountService()
         {
-            accounts = new Dictionary<string, Account>();
-
-            List<Account> listOfAccounts = AccountsXmlDataStorage.LoadAccounts();
-            foreach (Account account in listOfAccounts)
-            {
-                accounts.Add(account.Email, account);
-            }
         }
 
         // Creation
-        public void CreateAccount(string email, string username, string password)
+        public bool CreateUserAccount(string email, string username, string password)
         {
             string salt = GenerateSalt();
             string hashedPassword = HashPassword(password, salt);
             Account newAccount = new Account(email, username, salt, hashedPassword);
-            accounts[email] = newAccount;
-            AccountsXmlDataStorage.SaveAccounts(new List<Account> { newAccount });
-        }
+            if (!sqlAccountService.AddAccount(newAccount))
+                return false;
 
+            return sqlAccountService.AddUserAccount(newAccount);
+        }
+        public bool CreateArtistAccount(string email, string username, string password)
+        {
+            //todo
+            return false;
+        }
         // Authentication
         public bool Authenticate(string email, string password)
         {
-            // Check account existance
-            if (accounts.ContainsKey(email))
-            {
-                Account account = accounts[email];
-                // Check password
-                string hashedPasswordAttempt = HashPassword(password, account.Salt);
-                return account.VerifyPassword(hashedPasswordAttempt);
-            }
-            else
-            {
-                // Account doesn't exist
+            Account account = sqlAccountService.GetAccount(email);
+            if (account == null)
                 return false;
-            }
+
+            string hashedPasswordAttempt = HashPassword(password, account.Salt);
+            return account.VerifyPassword(hashedPasswordAttempt);
         }
 
         // Salt generator
@@ -67,6 +60,18 @@ namespace app
                 var saltedPassword = password + salt;
                 var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(saltedPassword));
                 return Convert.ToBase64String(hashedBytes);
+            }
+        }
+        public bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
             }
         }
     }
