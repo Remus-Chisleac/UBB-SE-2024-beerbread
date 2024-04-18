@@ -68,7 +68,7 @@ from playlists
 select * 
 from songs
 
-delete from songs
+delete from songs where id = 4
 delete from playlists
 delete from users
 delete from accounts
@@ -82,9 +82,10 @@ id int primary key not null IDENTITY,
 	likes int not null,
 	urlSong varchar(100) not null,
 	urlImage varchar(100) not null,
+	/CaravanPalace-Raccoons.mp3
 
 INSERT INTO songs(songName,artistName,likes,urlSong,urlImage) Values
-	('Raccoons','CaravanPalace',0,'CaravanPalace-Raccoons.mp3','CaravanPalace-Raccoons.png')
+	('Human Leather Shoes for Crocodile Dandies','CaravanPalace',0,'/Caravan Palace - Human Leather Shoes for Crocodile Dandies.mp3','/Caravan Palace - Human Leather Shoes for Crocodile Dandies.png')
 
 
 
