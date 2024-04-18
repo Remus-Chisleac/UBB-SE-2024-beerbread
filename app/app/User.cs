@@ -8,18 +8,15 @@ using System.Threading.Tasks;
 
 namespace app
 {
-    internal class User : Account
+    public class User : Account
     {
         public Playlist history { get; set; }
         public Playlist likedSongs { get; set; }
         public Playlist blockedSongs { get; set; }
-        public Dictionary<int, Playlist> playlists { get; set; }
-        public User(string email, string username, string salt, string hashPassword) : base(email, username, salt, hashPassword)
+        public List<Playlist> playlists { get; set; }
+        public User(Account account) : base(account)
         {
-            //history = new Playlist(0, "History");
-            //likedSongs = new Playlist(1, "Liked Songs");
-            //blockedSongs = new Playlist(2, "Blocked Songs");
-            playlists = new Dictionary<int, Playlist>();
+
         }
 
     }

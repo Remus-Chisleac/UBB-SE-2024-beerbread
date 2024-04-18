@@ -7,50 +7,46 @@ using System.Threading.Tasks;
 
 namespace app
 {
-    internal class GenericSongRepo
+    public class GenericSongRepo
     {
-        public Dictionary<int, Song> songs { get; set; }
+        public List<int> songs { get; set; }
         public int id { get; set; }
         public string name { get; set; }
 
-        public Guid owner { get;}
+        public int owner { get; }
 
-        public GenericSongRepo(Guid owner, int id, string name)
+        public GenericSongRepo(int owner, int id, string name)
         {
             this.owner = owner;
             this.id = id;
             this.name = name;
-            songs = new Dictionary<int, Song>();
-
-            List<Song> values = SongsXmlDataStorage.LoadSongs();
-            foreach(Song s in values)
-            {
-                songs.Add(s.id, s);
-            }
-           
+            this.songs = new List<int>();
         }
 
-
-
-        public bool AddSong(Song songToAdd)
+        public bool AddSong(int songId)
         {
             try
             {
-                songs.Add(songToAdd.id, songToAdd);
-                SongsXmlDataStorage.SaveSongs(new List<Song> { songToAdd });
+                songs.Add(songId);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return false;
             }
             return true;
         }
 
-        public bool RemoveSong(Song songToRemove)
+        public bool RemoveSong(int songId)
         {
-            SongsXmlDataStorage.RemoveSong(songToRemove.id);
-            return songs.Remove(songToRemove.id);
-
+            try
+            {
+                songs.Remove(songId);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
         public int GetSongsNumber()
         {

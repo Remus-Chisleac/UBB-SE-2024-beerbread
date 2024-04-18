@@ -1,3 +1,4 @@
+using app.src.SqlDataStorageAndRetrival;
 using CommunityToolkit.Maui.Views;
 using Microsoft.Maui.Controls;
 using System.Diagnostics;
@@ -40,20 +41,23 @@ public partial class SongPage : ContentPage
         this.song = song;
         song_name.Text = song.name;
         artist_name.Text = song.artist;
-        Console.WriteLine(song.path);
-        if (!song.path.StartsWith("http://"))
-            mediaElement.Source = MediaSource.FromResource(song.path);
+        Trace.WriteLine(SourceLoader.GetMp3Path() + song.urlSong);
+
+        if (!song.urlSong.StartsWith("/"))
+            mediaElement.Source = MediaSource.FromResource(song.urlSong);
         else
-            mediaElement.Source = MediaSource.FromUri(song.path);
+            mediaElement.Source = MediaSource.FromUri(SourceLoader.GetMp3Path() + song.urlSong);
         mediaElement.Volume = 0.75;
-        if (song.img_path != "")
-            songImage.Source = song.img_path;
+        if (song.urlImage != "")
+            songImage.Source = song.urlImage;
         else
             songImage.Source = "song_image.jpeg";
+        songImage.Source = ImageSource.FromUri(new Uri(SourceLoader.GetPngPath() + song.urlImage));
     }
     private void mediaElement_loaded(object sender, EventArgs e)
     {
         mediaElement.PositionChanged += MediaElement_PositionChanged;
+        mediaElement.Source = MediaSource.FromUri(SourceLoader.GetMp3Path() + song.urlSong);
         total_song_time.Text = mediaElement.Duration.ToString(@"mm\:ss");
     }
 
@@ -65,24 +69,6 @@ public partial class SongPage : ContentPage
         OnPropertyChanged(nameof(Position));
         total_song_time.Text = mediaElement.Duration.ToString(@"mm\:ss");
     }
-
-    [Obsolete]
-    private async void progressBar_ValueChanged()
-    {
-        await Task.Factory.StartNew(() =>
-        {
-            while (isPlaying)
-            {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-
-                    current_song_time.Text = this.mediaElement.Position.ToString(@"mm\:ss");
-                });
-                Thread.Sleep(1000);
-            }
-        });
-    }
-
     private void onBackButtonTapped(object sender, EventArgs e)
     {
         mediaElement.Stop();
@@ -122,7 +108,15 @@ public partial class SongPage : ContentPage
         {
             isPlaying = true;
             play_one_song_button.Source = "pause_song_button";
-            mediaElement.Play();
+
+            try
+            {
+                mediaElement.Play();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
         else
         {
