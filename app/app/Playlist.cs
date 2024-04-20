@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace app
 {
 
-    public class Playlist : GenericSongRepo
+    public class Playlist : GenericSongRepo,Interfaces.IPlaylist
     {
         public bool isPrivate { get; set; }
         public string imagePath { get; set; }
