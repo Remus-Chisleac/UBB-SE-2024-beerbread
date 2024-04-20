@@ -26,28 +26,17 @@ namespace app
 
         public bool AddSong(int songId)
         {
-            try
+            if (Songs.Contains(songId))
             {
-                Songs.Add(songId);
+                return false; // Song with the same ID already exists
             }
-            catch (Exception)
-            {
-                return false;
-            }
+            Songs.Add(songId);
             return true;
         }
 
         public bool RemoveSong(int songId)
         {
-            try
-            {
-                Songs.Remove(songId);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            return true;
+            return Songs.Remove(songId);
         }
         public int GetSongsNumber()
         {
