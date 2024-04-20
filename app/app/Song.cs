@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace app
 {
-    public class Song
+    public class Song : Interfaces.ISong
     {
 
         public int id { get; set; }
