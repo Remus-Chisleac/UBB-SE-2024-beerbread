@@ -110,14 +110,14 @@ namespace app.src.SqlDataStorageAndRetrival
         {
             sqlconnection.Open();
             int isPrivate = 0;
-            if (playlist.isPrivate)
+            if (playlist.IsPrivate)
             {
                 isPrivate = 1;
             }
             Microsoft.Data.SqlClient.SqlCommand command = new(
                 "INSERT INTO Playlists (owner, name, isPrivate) " +
                 "VALUES ((select id from accounts where guid='" + owner.ToString() + "'), '" +
-                playlist.name + "', " + isPrivate + ")", sqlconnection);
+                playlist.Name + "', " + isPrivate + ")", sqlconnection);
             command.ExecuteNonQuery();
             sqlconnection.Close();
             return true;
