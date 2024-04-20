@@ -3,7 +3,7 @@ using System.Text;
 
 namespace app
 {
-    public class Account
+    public class Account: Interfaces.IAccount
     {
         // Properties
         public string Email { get; set; }

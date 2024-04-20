@@ -60,5 +60,14 @@ namespace app.Interfaces
         string imagePath { get; set; }
         bool emptyPlaylist();
     }
+    public interface IAccount
+    {
+        string Email { get; set; }
+        string Username { get; set; }
+        string Salt { get; set; }
+        Guid Id { get; }
+        bool VerifyPassword(string hashedPasswordAttempt);
+        string GetHashedPassword();
+    }
 
 }
