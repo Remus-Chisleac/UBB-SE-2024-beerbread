@@ -61,6 +61,15 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
+  
+	<ItemGroup>
+	  <AndroidResource Remove="Tests\**" />
+	  <Compile Remove="Tests\**" />
+	  <EmbeddedResource Remove="Tests\**" />
+	  <MauiCss Remove="Tests\**" />
+	  <MauiXaml Remove="Tests\**" />
+	  <None Remove="Tests\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Remove="Nunito_Sans_Font.ttf" />
@@ -133,10 +142,6 @@
 		<MauiXaml Update="src\Playlists\PlaylistsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Tests\NewFolder\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionappHideInfoBar="True" /></VisualStudio></ProjectExtensions>
