@@ -1,4 +1,5 @@
-﻿using System;
+﻿using app.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace app
 {
-    public class GenericSongRepo
+    public class GenericSongRepo:IGenericSongRepo
     {
         public List<int> songs { get; set; }
         public int id { get; set; }
