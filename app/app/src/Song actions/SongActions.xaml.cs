@@ -8,12 +8,12 @@ public partial class SongActions : ContentPage
     public SongActions(Song Song)
     {
         InitializeComponent();
-        if (Song.urlImage != "")
-            songImage.Source = SourceLoader.GetPngPath()+ Song.urlImage;
+        if (Song.UrlImage != "")
+            songImage.Source = SourceLoader.GetPngPath()+ Song.UrlImage;
         else
             songImage.Source = "song_image.jpeg";
-        songName.Text = Song.name;
-        songArtist.Text = Song.artist;
+        songName.Text = Song.Name;
+        songArtist.Text = Song.Artist;
     }
 
     private void OnAddToPlaylistTapped(object sender, EventArgs e)

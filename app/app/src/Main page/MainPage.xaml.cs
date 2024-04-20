@@ -32,7 +32,7 @@ public partial class MainPage : ContentPage
             //create song frame
             Frame songFrame = new()
             {
-                ClassId = song.id.ToString(),
+                ClassId = song.Id.ToString(),
                 Margin = new Thickness(5),
                 Padding = new Thickness(0),
                 CornerRadius = 15,
@@ -58,7 +58,7 @@ public partial class MainPage : ContentPage
             };
 
             //create image
-            string img_path = song.urlImage;
+            string img_path = song.UrlImage;
             if (img_path == "")
                 img_path = "song_image.jpeg";
             else
@@ -76,7 +76,7 @@ public partial class MainPage : ContentPage
             //add song name to stack layout
             Label songName = new()
             {
-                Text = song.name,
+                Text = song.Name,
                 FontSize = 12,
                 FontFamily = "NunitoSans",
                 FontAttributes = FontAttributes.Bold,

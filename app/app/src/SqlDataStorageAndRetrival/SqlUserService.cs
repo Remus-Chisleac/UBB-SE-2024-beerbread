@@ -47,7 +47,7 @@ namespace app.src.SqlDataStorageAndRetrival
 
             playlists.Add(blockedPlaylist);
 
-            command = new("select * from playlists where owner=" + id + " and id not in(" + historyPlaylist.id + "," + likedPlaylist.id + "," + blockedPlaylist.id + ")", sqlconnection);
+            command = new("select * from playlists where owner=" + id + " and id not in(" + historyPlaylist.Id + "," + likedPlaylist.Id + "," + blockedPlaylist.Id + ")", sqlconnection);
 
             reader = command.ExecuteReader();
             while (reader.Read())

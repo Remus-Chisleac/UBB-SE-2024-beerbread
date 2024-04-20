@@ -9,16 +9,16 @@ namespace app
 
     public class Playlist : GenericSongRepo,Interfaces.IPlaylist
     {
-        public bool isPrivate { get; set; }
-        public string imagePath { get; set; }
+        public bool IsPrivate { get; set; }
+        public string ImagePath { get; set; }
         public Playlist(int id, int owner, string name, bool isPrivate = false, string imagePath = "") : base(owner, id, name)
         {
-            this.isPrivate = isPrivate;
-            this.imagePath = imagePath;
+            this.IsPrivate = isPrivate;
+            this.ImagePath = imagePath;
         }
-        public bool emptyPlaylist()
+        public bool EmptyPlaylist()
         {
-            return songs.Count == 0;
+            return Songs.Count == 0;
         }
     }
 

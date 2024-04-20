@@ -10,25 +10,25 @@ namespace app
 {
     public class GenericSongRepo:IGenericSongRepo
     {
-        public List<int> songs { get; set; }
-        public int id { get; set; }
-        public string name { get; set; }
+        public List<int> Songs { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
 
-        public int owner { get; }
+        public int Owner { get; }
 
         public GenericSongRepo(int owner, int id, string name)
         {
-            this.owner = owner;
-            this.id = id;
-            this.name = name;
-            this.songs = new List<int>();
+            this.Owner = owner;
+            this.Id = id;
+            this.Name = name;
+            this.Songs = new List<int>();
         }
 
         public bool AddSong(int songId)
         {
             try
             {
-                songs.Add(songId);
+                Songs.Add(songId);
             }
             catch (Exception)
             {
@@ -41,7 +41,7 @@ namespace app
         {
             try
             {
-                songs.Remove(songId);
+                Songs.Remove(songId);
             }
             catch (Exception)
             {
@@ -51,7 +51,7 @@ namespace app
         }
         public int GetSongsNumber()
         {
-            return songs.Count;
+            return Songs.Count;
         }
 
     }

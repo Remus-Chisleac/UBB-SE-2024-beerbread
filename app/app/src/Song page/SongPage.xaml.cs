@@ -39,25 +39,25 @@ public partial class SongPage : ContentPage
         BindingContext = this;
         InitializeComponent();
         this.song = song;
-        song_name.Text = song.name;
-        artist_name.Text = song.artist;
-        Trace.WriteLine(SourceLoader.GetMp3Path() + song.urlSong);
+        song_name.Text = song.Name;
+        artist_name.Text = song.Artist;
+        Trace.WriteLine(SourceLoader.GetMp3Path() + song.UrlSong);
 
-        if (!song.urlSong.StartsWith("/"))
-            mediaElement.Source = MediaSource.FromResource(song.urlSong);
+        if (!song.UrlSong.StartsWith("/"))
+            mediaElement.Source = MediaSource.FromResource(song.UrlSong);
         else
-            mediaElement.Source = MediaSource.FromUri(SourceLoader.GetMp3Path() + song.urlSong);
+            mediaElement.Source = MediaSource.FromUri(SourceLoader.GetMp3Path() + song.UrlSong);
         mediaElement.Volume = 0.75;
-        if (song.urlImage != "")
-            songImage.Source = song.urlImage;
+        if (song.UrlImage != "")
+            songImage.Source = song.UrlImage;
         else
             songImage.Source = "song_image.jpeg";
-        songImage.Source = ImageSource.FromUri(new Uri(SourceLoader.GetPngPath() + song.urlImage));
+        songImage.Source = ImageSource.FromUri(new Uri(SourceLoader.GetPngPath() + song.UrlImage));
     }
     private void mediaElement_loaded(object sender, EventArgs e)
     {
         mediaElement.PositionChanged += MediaElement_PositionChanged;
-        mediaElement.Source = MediaSource.FromUri(SourceLoader.GetMp3Path() + song.urlSong);
+        mediaElement.Source = MediaSource.FromUri(SourceLoader.GetMp3Path() + song.UrlSong);
         total_song_time.Text = mediaElement.Duration.ToString(@"mm\:ss");
     }
 

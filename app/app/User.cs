@@ -9,14 +9,14 @@
 
     public class User : Account, Interfaces.IUser
     {
-        public Playlist history { get; set; }
+        public Playlist History { get; set; }
 
-        public Playlist likedSongs { get; set; }
+        public Playlist LikedSongs { get; set; }
 
-        public Playlist blockedSongs { get; set; }
+        public Playlist BlockedSongs { get; set; }
 
-        public List<Playlist> playlists { get; set; }
-
+        public List<Playlist> Playlists { get; set; }
+        
         public User(Account account) : base(account)
         {
         }
