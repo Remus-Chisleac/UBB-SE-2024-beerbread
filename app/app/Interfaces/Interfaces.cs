@@ -22,10 +22,10 @@ namespace app.Interfaces
     }
     public interface IGenericSongRepo
     {
-        List<int> songs { get; set; }
-        int id { get; }
-        string name { get; }
-        int owner { get; }
+        List<int> Songs { get; set; }
+        int Id { get; }
+        string Name { get; }
+        int Owner { get; }
         bool AddSong(int songId);
         bool RemoveSong(int songId);
         int GetSongsNumber();
@@ -33,32 +33,32 @@ namespace app.Interfaces
 
     public interface IAlbum : IGenericSongRepo
     {
-        string description { get; set; }
+        string Description { get; set; }
     }
 
     public interface ISong
     {
-        int id { get; set; }
-        string name { get; set; }
-        string artist { get; set; }
-        int likes { get; set; }
-        int timePlayed { get; set; }
-        string urlSong { get; set; }
-        string urlImage { get; set; }
+        int Id { get; set; }
+        string Name { get; set; }
+        string Artist { get; set; }
+        int Likes { get; set; }
+        int TimePlayed { get; set; }
+        string UrlSong { get; set; }
+        string UrlImage { get; set; }
     }
 
     public interface IUser : IAccount
     {
-        Playlist history { get; set; }
-        Playlist likedSongs { get; set; }
-        Playlist blockedSongs { get; set; }
-        List<Playlist> playlists { get; set; }
+        Playlist History { get; set; }
+        Playlist LikedSongs { get; set; }
+        Playlist BlockedSongs { get; set; }
+        List<Playlist> Playlists { get; set; }
     }
     public interface IPlaylist : IGenericSongRepo
     {
-        bool isPrivate { get; set; }
-        string imagePath { get; set; }
-        bool emptyPlaylist();
+        bool IsPrivate { get; set; }
+        string ImagePath { get; set; }
+        bool EmptyPlaylist();
     }
     public interface IAccount
     {

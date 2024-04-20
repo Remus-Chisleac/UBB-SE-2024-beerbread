@@ -45,7 +45,7 @@ public partial class PlaylistsPage : ContentPage
                 WidthRequest = 60,
                 BackgroundColor = Color.FromArgb("#FFFFFFFF")
             };
-            string imgPath = playlist.imagePath;
+            string imgPath = playlist.ImagePath;
             if (imgPath != "")
             {
                 imgPath = SourceLoader.GetPngPath() + imgPath;
@@ -60,7 +60,7 @@ public partial class PlaylistsPage : ContentPage
             stackLayout.Children.Add(imageFrame);
             Label label = new Label
             {
-                Text = playlist.name,
+                Text = playlist.Name,
                 FontSize = 15,
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = LayoutOptions.Center,

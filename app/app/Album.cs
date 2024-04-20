@@ -10,10 +10,10 @@ namespace app
     public class Album : GenericSongRepo,IAlbum
     {
 
-        public string description { get; set; }
+        public string Description { get; set; }
         public Album(int owner, int id, string name, string description) : base(owner, id, name)
         {
-            this.description = description;
+            this.Description = description;
         }
     }
 }
