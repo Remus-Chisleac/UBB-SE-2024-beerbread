@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace app
 {
-    public class User : Account
+    public class User : Account,Interfaces.IUser
     {
         public Playlist history { get; set; }
         public Playlist likedSongs { get; set; }
