@@ -13,7 +13,7 @@ namespace app.src.SqlDataStorageAndRetrival
         Microsoft.Data.SqlClient.SqlConnection sqlconnection;
         public SqlPlaylistService()
         {
-            sqlconnection = SqlConnection.GetConnection();
+            sqlconnection = SqlConnectionGenerator.GetConnection();
         }
 
         public List<Playlist> GetPlaylists(Guid owner)
@@ -21,7 +21,7 @@ namespace app.src.SqlDataStorageAndRetrival
             sqlconnection.Open();
             Microsoft.Data.SqlClient.SqlCommand command = new("SELECT * FROM Playlists where owner = (select id from accounts where guid='" + owner.ToString() + "')", sqlconnection);
             Microsoft.Data.SqlClient.SqlDataReader reader = command.ExecuteReader();
-            var conn2 = new Microsoft.Data.SqlClient.SqlConnection(SqlConnection.GetConnectionString());
+            var conn2 = new Microsoft.Data.SqlClient.SqlConnection(SqlConnectionGenerator.GetConnectionString());
             while (reader.Read())
             {
                 conn2.Open();

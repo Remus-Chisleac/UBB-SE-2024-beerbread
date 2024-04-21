@@ -43,10 +43,14 @@ public partial class LogIn : ContentPage
         }
 
         SqlAccountService SqlAccountService = new SqlAccountService();
-
+        Navigation.PushModalAsync(new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email))));
         src.Main_page.MainPage mainpage = new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email)));
-        Navigation.PushAsync(mainpage);
-        Navigation.RemovePage(this);
+
+        ////Navigation.PushAsync(mainpage);
+        ////Navigation.PushAsync(mainpage).GetAwaiter().GetResult();
+        Navigation.PushModalAsync(mainpage);
+        ////Navigation.Push
+        //Navigation.RemovePage(this);
     }
 
     // Method to validate email format
