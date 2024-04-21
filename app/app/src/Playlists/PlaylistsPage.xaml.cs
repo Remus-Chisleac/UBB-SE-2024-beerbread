@@ -1,4 +1,5 @@
-﻿using app.src.SqlDataStorageAndRetrival;
+﻿using app.Data;
+using app.src.SqlDataStorageAndRetrival;
 
 namespace app.src;
 
@@ -48,7 +49,7 @@ public partial class PlaylistsPage : ContentPage
             string imgPath = playlist.ImagePath;
             if (imgPath != "")
             {
-                imgPath = SourceLoader.GetPngPath() + imgPath;
+                imgPath = SongFilesServerPathGenerator.GetPngPath() + imgPath;
             }
             Image image = new Image
             {

@@ -1,4 +1,5 @@
 
+using app.Data;
 using app.src.SqlDataStorageAndRetrival;
 
 namespace app.src.Main_page;
@@ -62,7 +63,7 @@ public partial class MainPage : ContentPage
             if (img_path == "")
                 img_path = "song_image.jpeg";
             else
-                img_path = SourceLoader.GetPngPath() + img_path;
+                img_path = SongFilesServerPathGenerator.GetPngPath() + img_path;
             Image image = new()
             {
                 Source = img_path,
