@@ -27,7 +27,7 @@
 
         public SqlAccountTableCommandExecutor()
         {
-            currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
+            this.currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
         }
 
         public (int id, string guid) GetDatabaseIdAndGuidForAccountWithEmail(string email)
@@ -35,15 +35,15 @@
             string get_AccountIdGuid_Query = "SELECT id,guid FROM accounts WHERE email = '" + email + "'";
             try
             {
-                currentSqlConnection.Open();
+                this.currentSqlConnection.Open();
 
-                SqlCommand command = new(get_AccountIdGuid_Query, currentSqlConnection);
+                SqlCommand command = new (get_AccountIdGuid_Query, this.currentSqlConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
                 int id = reader.GetInt32(0);
                 string guid = reader.GetGuid(1).ToString();
                 reader.Close();
-                currentSqlConnection.Close();
+                this.currentSqlConnection.Close();
                 return (id, guid);
             }
             catch (Exception ex)
@@ -63,17 +63,17 @@
                 "', '" + account.Salt +
                 "', '" + account.GetHashedPassword() + "')";
 
-            return ExecuteNonQueryCommandFromString(insertQuery);
+            return this.ExecuteNonQueryCommandFromString(insertQuery);
         }
 
         public bool ExecuteNonQueryCommandFromString(string query)
         {
             try
             {
-                currentSqlConnection.Open();
-                SqlCommand command = new SqlCommand(query, currentSqlConnection);
+                this.currentSqlConnection.Open();
+                SqlCommand command = new SqlCommand(query, this.currentSqlConnection);
                 command.ExecuteNonQuery();
-                currentSqlConnection.Close();
+                this.currentSqlConnection.Close();
                 return true;
             }
             catch (Exception ex)
@@ -92,17 +92,17 @@
             string create_BlockedPlaylist_Query = "INSERT INTO playlists (name, isPrivate, owner) " +
                 "VALUES ('" + guid + "_Blocked', 1, " + id + ")";
 
-            if (!ExecuteNonQueryCommandFromString(create_HistoryPlaylist_Query))
+            if (!this.ExecuteNonQueryCommandFromString(create_HistoryPlaylist_Query))
             {
                 return false;
             }
 
-            if (!ExecuteNonQueryCommandFromString(create_LikedPlaylist_Query))
+            if (!this.ExecuteNonQueryCommandFromString(create_LikedPlaylist_Query))
             {
                 return false;
             }
 
-            if (!ExecuteNonQueryCommandFromString(create_BlockedPlaylist_Query))
+            if (!this.ExecuteNonQueryCommandFromString(create_BlockedPlaylist_Query))
             {
                 return false;
             }
@@ -118,7 +118,7 @@
                 "(SELECT id FROM playlists WHERE name = '" + guid + "_Liked'), " +
                 "(SELECT id FROM playlists WHERE name = '" + guid + "_Blocked'))";
 
-            return ExecuteNonQueryCommandFromString(create_UserAccount_Query);
+            return this.ExecuteNonQueryCommandFromString(create_UserAccount_Query);
         }
 
         public Account? GetAccountWithEmail(string email)
@@ -126,14 +126,13 @@
             string selectQuery = "SELECT guid, username, salt, hashedPassword FROM accounts WHERE email = '" + email + "'";
             try
             {
-                currentSqlConnection.Open();
-                SqlCommand command = new SqlCommand(selectQuery, currentSqlConnection);
+                this.currentSqlConnection.Open();
+                SqlCommand command = new SqlCommand(selectQuery, this.currentSqlConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-
                     Account temp = new Account(reader.GetGuid("guid"), email, reader.GetString("username"), reader.GetString("salt"), reader.GetString("hashedPassword"));
-                    currentSqlConnection.Close();
+                    this.currentSqlConnection.Close();
                     return temp;
                 }
             }
