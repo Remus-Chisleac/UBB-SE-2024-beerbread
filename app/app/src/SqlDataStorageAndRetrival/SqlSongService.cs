@@ -13,7 +13,7 @@ namespace app.src.SqlDataStorageAndRetrival
         Microsoft.Data.SqlClient.SqlConnection sqlconnection;
         public SqlSongService()
         {
-            sqlconnection = SqlConnection.GetConnection();
+            sqlconnection = SqlConnectionGenerator.GetConnection();
         }
 
         public List<int> GetSongIds()

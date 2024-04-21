@@ -5,7 +5,12 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "app", "app\app.csproj", "{9F999078-E24E-4112-A913-9EBECDFD1EE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicAppTests", "MusicAppTests\MusicAppTests.csproj", "{C299E0E9-2244-4CDE-BCED-C917CF6EA738}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicAppTests", "MusicAppTests\MusicAppTests.csproj", "{C299E0E9-2244-4CDE-BCED-C917CF6EA738}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A00D724-CC39-4A0F-BBD4-710E75EA6BE1}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,12 +14,10 @@ namespace app.src.SqlDataStorageAndRetrival
         Microsoft.Data.SqlClient.SqlConnection sqlconnection;
         public SqlAccountService()
         {
-            // Connect to database
-            sqlconnection = SqlConnection.GetConnection();
+            sqlconnection = SqlConnectionGenerator.GetConnection();
         }
         public bool AddAccount(Account account)
         {
-            // insert account into database
             string insertQuery = "INSERT INTO accounts (guid, email, username, salt, hashedPassword) " +
                 "VALUES ('" + account.Id + "', '" + account.Email + "', '" + account.Username + "', '" + account.Salt + "', '" + account.GetHashedPassword() + "')";
             try
