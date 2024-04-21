@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace app.src.SqlDataStorageAndRetrival
+namespace app.Data
 {
-    internal class SqlConnectionGenerator
+    public class SqlConnectionGenerator
     {
         private static string ip = "188.24.47.96";
         private static string port = "1433";

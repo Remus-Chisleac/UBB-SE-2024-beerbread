@@ -140,8 +140,8 @@
                 </Frame.GestureRecognizers>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.1*" />
-                        <ColumnDefinition Width="0.9*" />
+                        <ColumnDefinition Width="0.1" />
+                        <ColumnDefinition Width="0.9" />
                     </Grid.ColumnDefinitions>
                     <Image
                         Grid.Column="0"

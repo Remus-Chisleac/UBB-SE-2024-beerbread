@@ -43,12 +43,20 @@ public partial class LogIn : ContentPage
         }
 
         SqlAccountService SqlAccountService = new SqlAccountService();
-        Navigation.PushModalAsync(new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email))));
-        src.Main_page.MainPage mainpage = new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email)));
+        //Navigation.PushModalAsync(new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email))));
+        try
+        {
+            src.Main_page.MainPage mainpage = new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email)));
 
-        ////Navigation.PushAsync(mainpage);
+            Navigation.PushAsync(mainpage);
+
+        }
+        catch (Exception exc)
+        {
+            Console.WriteLine(exc.ToString());
+        }
         ////Navigation.PushAsync(mainpage).GetAwaiter().GetResult();
-        Navigation.PushModalAsync(mainpage);
+        //Navigation.PushModalAsync(mainpage);
         ////Navigation.Push
         //Navigation.RemovePage(this);
     }

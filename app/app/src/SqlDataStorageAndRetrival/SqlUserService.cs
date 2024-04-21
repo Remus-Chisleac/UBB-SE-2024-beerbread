@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Text;
+    using app.Data;
     using app.Interfaces;
 
     public class SqlUserService : ISqlUserService
