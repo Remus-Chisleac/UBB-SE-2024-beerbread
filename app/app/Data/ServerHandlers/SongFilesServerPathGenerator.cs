@@ -1,4 +1,4 @@
-﻿namespace app.src.SqlDataStorageAndRetrival
+﻿namespace app.Data.ServerHandlers
 {
     public class SongFilesServerPathGenerator
     {
@@ -7,10 +7,6 @@
         private static string port = "1444";
         private static string mp3FilePath = "/api/source/mp3";
         private static string pngFilePath = "/api/source/png";
-
-        public SongFilesServerPathGenerator()
-        {
-        }
 
         public static string GetMp3Path()
         {

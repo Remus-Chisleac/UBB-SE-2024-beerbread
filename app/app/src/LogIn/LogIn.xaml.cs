@@ -1,4 +1,4 @@
-﻿using app.src.SqlDataStorageAndRetrival;
+﻿using app.Data.Repositories;
 
 namespace app.src;
 
@@ -42,7 +42,7 @@ public partial class LogIn : ContentPage
             return;
         }
 
-        SqlAccountService SqlAccountService = new SqlAccountService();
+        SqlAccountRepository SqlAccountService = new SqlAccountRepository();
         //Navigation.PushModalAsync(new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email))));
         try
         {

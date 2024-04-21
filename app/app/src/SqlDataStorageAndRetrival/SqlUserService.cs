@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Text;
-    using app.Data;
+    using app.Data.ServerHandlers;
     using app.Interfaces;
 
     public class SqlUserService : ISqlUserService
@@ -12,7 +12,7 @@
 
         public SqlUserService()
         {
-            this.sqlConnection = SqlConnectionGenerator.GetConnection();
+            this.sqlConnection = StaticSqlConnectionGenerator.GetConnection();
         }
 
         public SqlUserService(Microsoft.Data.SqlClient.SqlConnection sqlConnection)

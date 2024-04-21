@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using app.Data;
+using app.Data.ServerHandlers;
 
 namespace app.src.SqlDataStorageAndRetrival
 {
@@ -14,7 +14,7 @@ namespace app.src.SqlDataStorageAndRetrival
         Microsoft.Data.SqlClient.SqlConnection sqlconnection;
         public SqlSongService()
         {
-            sqlconnection = SqlConnectionGenerator.GetConnection();
+            sqlconnection = StaticSqlConnectionGenerator.GetConnection();
         }
 
         public List<int> GetSongIds()
