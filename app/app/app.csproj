@@ -144,6 +144,11 @@
 		</MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Data\NewFolder1\" />
+	  <Folder Include="Data\NewFolder\" />
+	</ItemGroup>
+
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionappHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

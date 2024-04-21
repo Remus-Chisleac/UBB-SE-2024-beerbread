@@ -1,4 +1,4 @@
-using app.src.SqlDataStorageAndRetrival;
+using app.Data.ServerHandlers;
 using CommunityToolkit.Maui.Views;
 
 namespace app.src.Song_actions;
@@ -9,7 +9,7 @@ public partial class SongActions : ContentPage
     {
         InitializeComponent();
         if (Song.UrlImage != "")
-            songImage.Source = SourceLoader.GetPngPath()+ Song.UrlImage;
+            songImage.Source = SongFilesServerPathGenerator.GetPngPath()+ Song.UrlImage;
         else
             songImage.Source = "song_image.jpeg";
         songName.Text = Song.Name;

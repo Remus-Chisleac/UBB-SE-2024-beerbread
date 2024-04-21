@@ -1,4 +1,4 @@
-﻿using app.src.SqlDataStorageAndRetrival;
+﻿using app.Data.Repositories;
 
 namespace app.src;
 
@@ -42,13 +42,21 @@ public partial class LogIn : ContentPage
             return;
         }
 
-        SqlAccountService SqlAccountService = new SqlAccountService();
-        Navigation.PushModalAsync(new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email))));
-        src.Main_page.MainPage mainpage = new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email)));
+        SqlAccountRepository SqlAccountService = new SqlAccountRepository();
+        //Navigation.PushModalAsync(new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email))));
+        try
+        {
+            src.Main_page.MainPage mainpage = new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email)));
 
-        ////Navigation.PushAsync(mainpage);
+            Navigation.PushAsync(mainpage);
+
+        }
+        catch (Exception exc)
+        {
+            Console.WriteLine(exc.ToString());
+        }
         ////Navigation.PushAsync(mainpage).GetAwaiter().GetResult();
-        Navigation.PushModalAsync(mainpage);
+        //Navigation.PushModalAsync(mainpage);
         ////Navigation.Push
         //Navigation.RemovePage(this);
     }

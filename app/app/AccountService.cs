@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
-using app.src.SqlDataStorageAndRetrival;
+﻿
+
 
 namespace app
 {
+    using System;
+    using System.Text;
+    using System.Security.Cryptography;
+    using app.Data.Repositories;
+
     public class AccountService: Interfaces.IAccountService
     {
-        private readonly SqlAccountService sqlAccountService = new();
+        private readonly SqlAccountRepository sqlAccountService = new();
 
         public AccountService()
         {
@@ -25,23 +27,25 @@ namespace app
 
             return sqlAccountService.AddUserAccount(newAccount);
         }
+
         public bool CreateArtistAccount(string email, string username, string password)
         {
             //todo
             return false;
         }
-        // Authentication
+
         public bool Authenticate(string email, string password)
         {
             Account account = sqlAccountService.GetAccount(email);
             if (account == null)
+            {
                 return false;
+            }
 
             string hashedPasswordAttempt = HashPassword(password, account.Salt);
             return account.VerifyPassword(hashedPasswordAttempt);
         }
 
-        // Salt generator
         private string GenerateSalt()
         {
             byte[] saltBytes = new byte[32];
