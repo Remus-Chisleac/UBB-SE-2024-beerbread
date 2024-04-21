@@ -10,10 +10,16 @@ namespace app
 
     public class AccountService: Interfaces.IAccountService
     {
-        private readonly SqlAccountRepository sqlAccountService = new();
+        private readonly ISqlAccountRepository sqlAccountService;
 
         public AccountService()
         {
+            this.sqlAccountService = new SqlAccountRepository();
+        }
+
+        public AccountService(ISqlAccountRepository sqlAccountRepository)
+        {
+            this.sqlAccountService = sqlAccountRepository;
         }
 
         // Creation

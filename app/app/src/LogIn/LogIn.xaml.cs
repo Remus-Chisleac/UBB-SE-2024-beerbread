@@ -42,11 +42,10 @@ public partial class LogIn : ContentPage
             return;
         }
 
-        SqlAccountRepository SqlAccountService = new SqlAccountRepository();
-        //Navigation.PushModalAsync(new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email))));
+        ISqlAccountRepository sqlAccountRepository = new SqlAccountRepository();
         try
         {
-            src.Main_page.MainPage mainpage = new src.Main_page.MainPage(new User(SqlAccountService.GetAccount(email)));
+            src.Main_page.MainPage mainpage = new src.Main_page.MainPage(new User(sqlAccountRepository.GetAccount(email)));
 
             Navigation.PushAsync(mainpage);
 
@@ -55,10 +54,8 @@ public partial class LogIn : ContentPage
         {
             Console.WriteLine(exc.ToString());
         }
-        ////Navigation.PushAsync(mainpage).GetAwaiter().GetResult();
-        //Navigation.PushModalAsync(mainpage);
-        ////Navigation.Push
-        //Navigation.RemovePage(this);
+
+        Navigation.RemovePage(this);
     }
 
     // Method to validate email format

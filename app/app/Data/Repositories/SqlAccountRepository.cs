@@ -1,10 +1,17 @@
-﻿
-
-namespace app.src.SqlDataStorageAndRetrival
+﻿namespace app.Data.Repositories
 {
     using app.Data.SqlCommandHandlers;
 
-    public class SqlAccountRepository
+    public interface ISqlAccountRepository
+    {
+        public bool AddAccount(Account account);
+
+        public bool AddUserAccount(Account account);
+
+        public Account? GetAccount(string email);
+    }
+
+    public class SqlAccountRepository : ISqlAccountRepository
     {
         private ISqlAccountTableCommandExecutor sqlAccountTableCommandExecutor;
 

@@ -12,14 +12,6 @@ namespace app.Interfaces
         bool CreateUserAccount(string email, string username, string password);
         bool Authenticate(string email, string password);
     }
-
-    public interface ISqlAccountService
-    {
-        bool AddAccount(Account account);
-        bool AddUserAccount(Account account);
-        Account GetAccount(string email);
-        string GetAccountHashedPassword(string email);
-    }
     public interface IGenericSongRepo
     {
         List<int> Songs { get; set; }
