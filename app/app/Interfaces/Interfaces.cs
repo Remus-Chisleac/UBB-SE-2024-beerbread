@@ -62,9 +62,6 @@ namespace app.Interfaces
         string GetHashedPassword();
     }
 
-    public interface ISqlUserService
-    {
-        public List<IPlaylist> GetPlaylists(int id);
-    }
+    
 
 }
