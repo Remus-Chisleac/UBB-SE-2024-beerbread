@@ -1,12 +1,12 @@
+using app.Data.Repositories;
 using app.Data.ServerHandlers;
-using app.src.SqlDataStorageAndRetrival;
 
 namespace app.src.Main_page;
 
 public partial class MainPage : ContentPage
 {
     internal List<Song> recomendedSongs = [];
-    private SqlSongService sqlSongService = new();
+    private ISqlSongRepository sqlSongService = new SqlSongRepository();
     private mockAPI.MockAnalyticsAPI MockAnalyticsAPI;
     User user;
     public MainPage(User user)
@@ -20,7 +20,7 @@ public partial class MainPage : ContentPage
     }
     private void LoadSongs()
     {
-        recomendedSongs = sqlSongService.GetSongs(MockAnalyticsAPI.GetRecomendedSongs(5));
+        recomendedSongs = sqlSongService.GetSongsWithIds(MockAnalyticsAPI.GetRecomendedSongs(5));
     }
     private void DisplaySongs(List<Song> songs)
     {
