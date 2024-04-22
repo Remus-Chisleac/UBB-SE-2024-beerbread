@@ -1,12 +1,13 @@
-﻿using app.Data.ServerHandlers;
-using app.src.SqlDataStorageAndRetrival;
+﻿using app.Data.Repositories;
+using app.Data.ServerHandlers;
+using app.Interfaces;
 
 namespace app.src;
 
 public partial class PlaylistsPage : ContentPage
 {
     private User user;
-    List<Playlist> playlists;
+    List<IPlaylist> playlists;
     public PlaylistsPage(User user)
     {
         this.user = user;
@@ -18,12 +19,12 @@ public partial class PlaylistsPage : ContentPage
     {
         // Load playlists
         // Get playlists from the database
-        SqlPlaylistService sqlPlaylistService = new SqlPlaylistService();
-        List<Playlist> playlists = sqlPlaylistService.GetPlaylists(user.Id);
+        ISqlPlaylistRepository sqlPlaylistService = new SqlPlaylistRepository();
+        List<IPlaylist> playlists = sqlPlaylistService.GetUserPlaylists(user.Id);
         this.playlists = playlists;
         int crt = 0;
         playlistLayout.Children.Clear();
-        foreach (Playlist playlist in playlists)
+        foreach (IPlaylist playlist in playlists)
         {
 
             Frame frame = new Frame
@@ -122,7 +123,7 @@ public partial class PlaylistsPage : ContentPage
     {
         // Get the playlist id
         int playlistId = Int32.Parse(((HorizontalStackLayout)sender).ClassId);
-        Playlist playlist = playlists[playlistId];
+        IPlaylist playlist = playlists[playlistId];
         // Go to the playlist page
         SinglePlaylistPage singlePlaylistPage = new SinglePlaylistPage(playlist);
         Navigation.PushAsync(singlePlaylistPage);
@@ -141,8 +142,8 @@ public partial class PlaylistsPage : ContentPage
 
         // Add the playlist to the database
 
-        SqlPlaylistService sqlPlaylistService = new SqlPlaylistService();
-        Playlist playlist = new Playlist(-1, -1, result, isPrivate);
+        ISqlPlaylistRepository sqlPlaylistService = new SqlPlaylistRepository();
+        IPlaylist playlist = new Playlist(-1, -1, result, isPrivate);
 
         sqlPlaylistService.AddPlaylist(playlist, user.Id);
         loadPlaylists();

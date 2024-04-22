@@ -15,17 +15,17 @@
 
         public SqlCommandExecutor()
         {
-            currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
+            this.currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
         }
 
         public bool ExecuteNonQueryCommandFromString(string query)
         {
             try
             {
-                currentSqlConnection.Open();
-                SqlCommand command = new SqlCommand(query, currentSqlConnection);
+                this.currentSqlConnection.Open();
+                SqlCommand command = new SqlCommand(query, this.currentSqlConnection);
                 command.ExecuteNonQuery();
-                currentSqlConnection.Close();
+                this.currentSqlConnection.Close();
                 return true;
             }
             catch (Exception ex)

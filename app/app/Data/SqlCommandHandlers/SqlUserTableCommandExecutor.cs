@@ -21,30 +21,13 @@
         List<IPlaylist> GetUserDefinedPlaylistsForUserWithId(int userId, int historyPlaylistId, int likedPlaylistId, int blockedPlaylistId);
     }
 
-    internal class SqlUserTableCommandExecutor : ISqlUserTableCommandExecutor
+    internal class SqlUserTableCommandExecutor : SqlCommandExecutor, ISqlUserTableCommandExecutor
     {
         private readonly SqlConnection currentSqlConnection;
 
         public SqlUserTableCommandExecutor()
         {
             this.currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
-        }
-
-        public bool ExecuteNonQueryCommandFromString(string query)
-        {
-            try
-            {
-                this.currentSqlConnection.Open();
-                SqlCommand command = new SqlCommand(query, this.currentSqlConnection);
-                command.ExecuteNonQuery();
-                this.currentSqlConnection.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Trace.WriteLine(ex.Message);
-                return false;
-            }
         }
 
         public IPlaylist? GetBlockedPlaylistForUserWithId(int userId)

@@ -61,7 +61,4 @@ namespace app.Interfaces
         bool VerifyPassword(string hashedPasswordAttempt);
         string GetHashedPassword();
     }
-
-    
-
 }

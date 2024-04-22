@@ -21,7 +21,7 @@
         Account? GetAccountWithEmail(string email);
     }
 
-    internal class SqlAccountTableCommandExecutor : ISqlAccountTableCommandExecutor
+    internal class SqlAccountTableCommandExecutor : SqlCommandExecutor, ISqlAccountTableCommandExecutor
     {
         private readonly SqlConnection currentSqlConnection;
 
@@ -64,23 +64,6 @@
                 "', '" + account.GetHashedPassword() + "')";
 
             return this.ExecuteNonQueryCommandFromString(insertQuery);
-        }
-
-        public bool ExecuteNonQueryCommandFromString(string query)
-        {
-            try
-            {
-                this.currentSqlConnection.Open();
-                SqlCommand command = new SqlCommand(query, this.currentSqlConnection);
-                command.ExecuteNonQuery();
-                this.currentSqlConnection.Close();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Trace.WriteLine(ex.Message);
-                return false;
-            }
         }
 
         public bool ExecuteCreateHistoryLikedBlockedPlaylistsForAccount(int id, string guid)
