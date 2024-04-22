@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using app.MVVM.ViewModel;
-
-namespace app
+﻿namespace app
 {
+    using System;
+    using app.MVVM.ViewModel;
+
     public partial class CreateUserAccount : ContentPage
     {
         public CreateUserAccount()

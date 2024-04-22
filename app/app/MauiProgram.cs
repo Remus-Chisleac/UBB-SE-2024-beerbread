@@ -1,8 +1,8 @@
-﻿using CommunityToolkit.Maui;
-using Microsoft.Extensions.Logging;
-
-namespace app
+﻿namespace app
 {
+    using CommunityToolkit.Maui;
+    using Microsoft.Extensions.Logging;
+
     public static class MauiProgram
     {
         public static MauiApp CreateMauiApp()
