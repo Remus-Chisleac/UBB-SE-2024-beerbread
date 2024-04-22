@@ -1,7 +1,8 @@
-﻿namespace app.src.SqlDataStorageAndRetrival
+﻿namespace app.MVVM.Model.Data.Repositories
 {
     using System.Collections.Generic;
-    using app.Data.SqlCommandHandlers;
+    using app.MVVM.Model.Data.SqlCommandHandlers;
+    using app.MVVM.Model.Domain;
 
     public interface ISqlSongRepository
     {
@@ -16,17 +17,17 @@
 
         public SqlSongRepository()
         {
-            this.sqlSongTableCommandExecutor = new SqlSongTableCommandExecutor();
+            sqlSongTableCommandExecutor = new SqlSongTableCommandExecutor();
         }
 
         public List<int> GetAllSongIds()
         {
-            return this.sqlSongTableCommandExecutor.GetAllSongIdsInDatabase();
+            return sqlSongTableCommandExecutor.GetAllSongIdsInDatabase();
         }
 
         public List<Song> GetSongsWithIds(List<int> songIds)
         {
-            return this.sqlSongTableCommandExecutor.GetSongsWithIds(songIds);
+            return sqlSongTableCommandExecutor.GetSongsWithIds(songIds);
         }
     }
 }

@@ -1,25 +1,30 @@
-﻿
-
-
-namespace app
+﻿namespace app.MVVM.ViewModel
 {
     using System;
-    using System.Text;
     using System.Security.Cryptography;
-    using app.Data.Repositories;
+    using System.Text;
+    using app.MVVM.Model.Data.Repositories;
+    using app.MVVM.Model.Domain;
 
-    public class AccountService: Interfaces.IAccountService
+    public interface IAccountService
+    {
+        bool CreateUserAccount(string email, string username, string password);
+
+        bool Authenticate(string email, string password);
+    }
+
+    public class AccountService : IAccountService
     {
         private readonly ISqlAccountRepository sqlAccountService;
 
         public AccountService()
         {
-            this.sqlAccountService = new SqlAccountRepository();
+            sqlAccountService = new SqlAccountRepository();
         }
 
         public AccountService(ISqlAccountRepository sqlAccountRepository)
         {
-            this.sqlAccountService = sqlAccountRepository;
+            sqlAccountService = sqlAccountRepository;
         }
 
         // Creation
@@ -55,7 +60,7 @@ namespace app
         private string GenerateSalt()
         {
             byte[] saltBytes = new byte[32];
-            using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())
+            using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(saltBytes);
             }

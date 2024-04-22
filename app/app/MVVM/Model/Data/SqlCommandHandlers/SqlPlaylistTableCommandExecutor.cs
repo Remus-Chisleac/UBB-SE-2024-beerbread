@@ -1,12 +1,12 @@
-﻿namespace app.Data.SqlCommandHandlers
+﻿namespace app.MVVM.Model.Data.SqlCommandHandlers
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics;
     using System.Text;
-    using app.Data.ServerHandlers;
-    using app.Interfaces;
+    using app.MVVM.Model.Data.ServerHandlers;
+    using app.MVVM.Model.Domain;
     using Microsoft.Data.SqlClient;
 
     public interface ISqlPlaylistTableCommandExecutor
@@ -24,7 +24,7 @@
 
         public SqlPlaylistTableCommandExecutor()
         {
-            this.currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
+            currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
         }
 
         public List<IPlaylist> GetUserPlaylistIdsWithGuid(Guid userGuid)
@@ -32,8 +32,8 @@
             List<IPlaylist> userPlaylists = [];
             try
             {
-                this.currentSqlConnection.Open();
-                SqlCommand command = new ("SELECT * FROM Playlists where owner = (select id from accounts where guid='" + userGuid.ToString() + "')", this.currentSqlConnection);
+                currentSqlConnection.Open();
+                SqlCommand command = new("SELECT * FROM Playlists where owner = (select id from accounts where guid='" + userGuid.ToString() + "')", currentSqlConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -45,7 +45,7 @@
                 }
 
                 reader.Close();
-                this.currentSqlConnection.Close();
+                currentSqlConnection.Close();
             }
             catch (Exception ex)
             {
@@ -60,13 +60,13 @@
             string imagePath = string.Empty;
             try
             {
-                this.currentSqlConnection.Open();
-                SqlCommand command = new ("Select urlImage from songs where id = (SELECT TOP 1 idSong FROM songs_in_playlist Where idPlaylist = " + playlistId + ")", this.currentSqlConnection);
+                currentSqlConnection.Open();
+                SqlCommand command = new("Select urlImage from songs where id = (SELECT TOP 1 idSong FROM songs_in_playlist Where idPlaylist = " + playlistId + ")", currentSqlConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
                 imagePath = reader.GetString("urlImage");
                 reader.Close();
-                this.currentSqlConnection.Close();
+                currentSqlConnection.Close();
             }
             catch (Exception ex)
             {
@@ -81,7 +81,7 @@
             string command = "INSERT INTO Playlists (owner, name, isPrivate) " +
                              "VALUES ((select id from accounts where guid='" +
                              userGuid + "'), '" + playlistName + "', " + isPrivate + ")";
-            return this.ExecuteNonQueryCommandFromString(command);
+            return ExecuteNonQueryCommandFromString(command);
         }
 
     }

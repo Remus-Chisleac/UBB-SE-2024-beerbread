@@ -1,9 +1,9 @@
-﻿namespace app.Data.Repositories
+﻿namespace app.MVVM.Model.Data.Repositories
 {
     using System;
     using System.Collections.Generic;
-    using app.Data.SqlCommandHandlers;
-    using app.Interfaces;
+    using app.MVVM.Model.Data.SqlCommandHandlers;
+    using app.MVVM.Model.Domain;
 
     public interface ISqlPlaylistRepository
     {
@@ -19,7 +19,7 @@
 
         public SqlPlaylistRepository()
         {
-            this.sqlPlaylistTableCommandExecutor = new SqlPlaylistTableCommandExecutor();
+            sqlPlaylistTableCommandExecutor = new SqlPlaylistTableCommandExecutor();
         }
 
         public SqlPlaylistRepository(ISqlPlaylistTableCommandExecutor sqlPlaylistTableCommandExecutor)

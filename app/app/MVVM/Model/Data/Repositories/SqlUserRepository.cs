@@ -1,8 +1,8 @@
-﻿namespace app.Data.Repositories
+﻿namespace app.MVVM.Model.Data.Repositories
 {
     using System.Collections.Generic;
-    using app.Data.SqlCommandHandlers;
-    using app.Interfaces;
+    using app.MVVM.Model.Data.SqlCommandHandlers;
+    using app.MVVM.Model.Domain;
 
     public interface ISqlUserRepository
     {
@@ -15,7 +15,7 @@
 
         public SqlUserRepository()
         {
-            this.sqlUserTableCommandExecutor = new SqlUserTableCommandExecutor();
+            sqlUserTableCommandExecutor = new SqlUserTableCommandExecutor();
         }
 
         public SqlUserRepository(ISqlUserTableCommandExecutor sqlUserTableCommandExecutor)
@@ -27,21 +27,21 @@
         {
             List<IPlaylist> playlists = [];
 
-            IPlaylist? historyPlaylist = this.sqlUserTableCommandExecutor.GetHistoryPlaylistForUserWithId(id);
+            IPlaylist? historyPlaylist = sqlUserTableCommandExecutor.GetHistoryPlaylistForUserWithId(id);
 
             if (historyPlaylist != null)
             {
                 playlists.Add(historyPlaylist);
             }
 
-            IPlaylist? blockedPlaylist = this.sqlUserTableCommandExecutor.GetBlockedPlaylistForUserWithId(id);
+            IPlaylist? blockedPlaylist = sqlUserTableCommandExecutor.GetBlockedPlaylistForUserWithId(id);
 
             if (blockedPlaylist != null)
             {
                 playlists.Add(blockedPlaylist);
             }
 
-            IPlaylist? likedPlaylist = this.sqlUserTableCommandExecutor.GetLikedPlaylistForUserWithId(id);
+            IPlaylist? likedPlaylist = sqlUserTableCommandExecutor.GetLikedPlaylistForUserWithId(id);
 
             if (likedPlaylist != null)
             {
@@ -50,7 +50,7 @@
 
             if (historyPlaylist != null && blockedPlaylist != null && likedPlaylist != null)
             {
-                foreach (IPlaylist playlist in this.sqlUserTableCommandExecutor.GetUserDefinedPlaylistsForUserWithId(id, historyPlaylist.Id, likedPlaylist.Id, blockedPlaylist.Id))
+                foreach (IPlaylist playlist in sqlUserTableCommandExecutor.GetUserDefinedPlaylistsForUserWithId(id, historyPlaylist.Id, likedPlaylist.Id, blockedPlaylist.Id))
                 {
                     playlists.Add(playlist);
                 }

@@ -1,4 +1,5 @@
-using app.Data.ServerHandlers;
+using app.MVVM.Model.Data.ServerHandlers;
+using app.MVVM.Model.Domain;
 using CommunityToolkit.Maui.Views;
 
 namespace app.src.Song_actions;

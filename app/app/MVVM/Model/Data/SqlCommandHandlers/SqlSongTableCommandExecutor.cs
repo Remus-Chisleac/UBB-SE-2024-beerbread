@@ -1,11 +1,12 @@
-﻿namespace app.Data.SqlCommandHandlers
+﻿namespace app.MVVM.Model.Data.SqlCommandHandlers
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics;
     using System.Text;
-    using app.Data.ServerHandlers;
+    using app.MVVM.Model.Data.ServerHandlers;
+    using app.MVVM.Model.Domain;
     using Microsoft.Data.SqlClient;
 
     public interface ISqlSongTableCommandExecutor
@@ -21,7 +22,7 @@
 
         public SqlSongTableCommandExecutor()
         {
-            this.currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
+            currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
         }
 
         public List<int> GetAllSongIdsInDatabase()
@@ -30,8 +31,8 @@
             List<int> allSongIds = new List<int>();
             try
             {
-                this.currentSqlConnection.Open();
-                SqlCommand command = new ("SELECT id FROM songs", this.currentSqlConnection);
+                currentSqlConnection.Open();
+                SqlCommand command = new("SELECT id FROM songs", currentSqlConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -39,7 +40,7 @@
                 }
 
                 reader.Close();
-                this.currentSqlConnection.Close();
+                currentSqlConnection.Close();
             }
             catch (Exception ex)
             {
@@ -54,14 +55,14 @@
             List<Song> songs = new List<Song>();
             try
             {
-                this.currentSqlConnection.Open();
+                currentSqlConnection.Open();
                 string stringIds = string.Empty;
                 foreach (int id in songIds)
                 {
                     stringIds += id + ",";
                 }
 
-                SqlCommand command = new ("SELECT * FROM Songs WHERE id in (" + stringIds.Substring(0, stringIds.Length - 1) + ")", this.currentSqlConnection);
+                SqlCommand command = new("SELECT * FROM Songs WHERE id in (" + stringIds.Substring(0, stringIds.Length - 1) + ")", currentSqlConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -74,7 +75,7 @@
                 }
 
                 reader.Close();
-                this.currentSqlConnection.Close();
+                currentSqlConnection.Close();
             }
             catch (Exception ex)
             {
