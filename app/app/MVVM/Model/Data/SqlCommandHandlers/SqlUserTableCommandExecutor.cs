@@ -1,11 +1,11 @@
-﻿namespace app.Data.SqlCommandHandlers
+﻿namespace app.MVVM.Model.Data.SqlCommandHandlers
 {
     using System;
     using System.Data;
     using System.Diagnostics;
     using System.Text;
-    using app.Data.ServerHandlers;
-    using app.Interfaces;
+    using app.MVVM.Model.Data.ServerHandlers;
+    using app.MVVM.Model.Domain;
     using Microsoft.Data.SqlClient;
 
     public interface ISqlUserTableCommandExecutor
@@ -27,15 +27,15 @@
 
         public SqlUserTableCommandExecutor()
         {
-            this.currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
+            currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
         }
 
         public IPlaylist? GetBlockedPlaylistForUserWithId(int userId)
         {
             try
             {
-                this.currentSqlConnection.Open();
-                SqlCommand command = new ("select * from playlists where id = (select likedPlaylist from users where id=" + userId + ")", this.currentSqlConnection);
+                currentSqlConnection.Open();
+                SqlCommand command = new("select * from playlists where id = (select likedPlaylist from users where id=" + userId + ")", currentSqlConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
                 IPlaylist likedPlaylist = new Playlist(
@@ -44,7 +44,7 @@
                     reader.GetString("name"),
                     reader.GetBoolean("isPrivate"));
                 reader.Close();
-                this.currentSqlConnection.Close();
+                currentSqlConnection.Close();
                 return likedPlaylist;
             }
             catch (Exception ex)
@@ -59,8 +59,8 @@
 
             try
             {
-                this.currentSqlConnection.Open();
-                SqlCommand command = new ("select * from playlists where id = (select historyPlaylist from users where id=" + userId + ")", this.currentSqlConnection);
+                currentSqlConnection.Open();
+                SqlCommand command = new("select * from playlists where id = (select historyPlaylist from users where id=" + userId + ")", currentSqlConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
                 IPlaylist historyPlaylist = new Playlist(
@@ -69,7 +69,7 @@
                     reader.GetString("name"),
                     reader.GetBoolean("isPrivate"));
                 reader.Close();
-                this.currentSqlConnection.Close();
+                currentSqlConnection.Close();
                 return historyPlaylist;
             }
             catch (Exception ex)
@@ -83,8 +83,8 @@
         {
             try
             {
-                this.currentSqlConnection.Open();
-                SqlCommand command = new ("select * from playlists where id = (select blockedplaylist from users where id=" + userId + ")", this.currentSqlConnection);
+                currentSqlConnection.Open();
+                SqlCommand command = new("select * from playlists where id = (select blockedplaylist from users where id=" + userId + ")", currentSqlConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
                 IPlaylist blockedPlaylist = new Playlist(
@@ -93,7 +93,7 @@
                     reader.GetString("name"),
                     reader.GetBoolean("isPrivate"));
                 reader.Close();
-                this.currentSqlConnection.Close();
+                currentSqlConnection.Close();
                 return blockedPlaylist;
             }
             catch (Exception ex)
@@ -108,8 +108,8 @@
             List<IPlaylist> userDefinedPlaylists = [];
             try
             {
-                this.currentSqlConnection.Open();
-                SqlCommand command = new ("select * from playlists where owner=" + userId + " and id not in(" + historyPlaylistId + "," + likedPlaylistId + "," + blockedPlaylistId + ")", this.currentSqlConnection);
+                currentSqlConnection.Open();
+                SqlCommand command = new("select * from playlists where owner=" + userId + " and id not in(" + historyPlaylistId + "," + likedPlaylistId + "," + blockedPlaylistId + ")", currentSqlConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -121,7 +121,7 @@
                 }
 
                 reader.Close();
-                this.currentSqlConnection.Close();
+                currentSqlConnection.Close();
             }
             catch (Exception ex)
             {

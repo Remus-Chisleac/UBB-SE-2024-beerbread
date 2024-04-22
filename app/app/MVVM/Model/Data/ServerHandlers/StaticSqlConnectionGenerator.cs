@@ -1,4 +1,4 @@
-﻿namespace app.Data.ServerHandlers
+﻿namespace app.MVVM.Model.Data.ServerHandlers
 {
     using Microsoft.Data.SqlClient;
     public class StaticSqlConnectionGenerator

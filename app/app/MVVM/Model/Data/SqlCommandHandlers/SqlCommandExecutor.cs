@@ -1,7 +1,7 @@
-﻿namespace app.Data.SqlCommandHandlers
+﻿namespace app.MVVM.Model.Data.SqlCommandHandlers
 {
     using System.Diagnostics;
-    using app.Data.ServerHandlers;
+    using app.MVVM.Model.Data.ServerHandlers;
     using Microsoft.Data.SqlClient;
 
     public interface ISqlCommandExecutor
@@ -15,17 +15,17 @@
 
         public SqlCommandExecutor()
         {
-            this.currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
+            currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
         }
 
         public bool ExecuteNonQueryCommandFromString(string query)
         {
             try
             {
-                this.currentSqlConnection.Open();
-                SqlCommand command = new SqlCommand(query, this.currentSqlConnection);
+                currentSqlConnection.Open();
+                SqlCommand command = new SqlCommand(query, currentSqlConnection);
                 command.ExecuteNonQuery();
-                this.currentSqlConnection.Close();
+                currentSqlConnection.Close();
                 return true;
             }
             catch (Exception ex)

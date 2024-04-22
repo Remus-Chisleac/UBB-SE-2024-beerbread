@@ -1,6 +1,4 @@
-﻿using app.src.SqlDataStorageAndRetrival;
-
-namespace app
+﻿namespace app
 {
     public partial class MainPage : ContentPage
     {

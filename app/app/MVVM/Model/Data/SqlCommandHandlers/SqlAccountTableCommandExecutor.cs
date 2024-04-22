@@ -1,9 +1,9 @@
-﻿namespace app.Data.SqlCommandHandlers
+﻿namespace app.MVVM.Model.Data.SqlCommandHandlers
 {
     using System.Data;
     using System.Diagnostics;
-    using app;
-    using app.Data.ServerHandlers;
+    using app.MVVM.Model.Data.ServerHandlers;
+    using app.MVVM.Model.Domain;
     using Microsoft.Data.SqlClient;
 
     public interface ISqlAccountTableCommandExecutor
@@ -27,7 +27,7 @@
 
         public SqlAccountTableCommandExecutor()
         {
-            this.currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
+            currentSqlConnection = StaticSqlConnectionGenerator.GetConnection();
         }
 
         public (int id, string guid) GetDatabaseIdAndGuidForAccountWithEmail(string email)
@@ -35,15 +35,15 @@
             string get_AccountIdGuid_Query = "SELECT id,guid FROM accounts WHERE email = '" + email + "'";
             try
             {
-                this.currentSqlConnection.Open();
+                currentSqlConnection.Open();
 
-                SqlCommand command = new (get_AccountIdGuid_Query, this.currentSqlConnection);
+                SqlCommand command = new(get_AccountIdGuid_Query, currentSqlConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 reader.Read();
                 int id = reader.GetInt32(0);
                 string guid = reader.GetGuid(1).ToString();
                 reader.Close();
-                this.currentSqlConnection.Close();
+                currentSqlConnection.Close();
                 return (id, guid);
             }
             catch (Exception ex)
@@ -63,7 +63,7 @@
                 "', '" + account.Salt +
                 "', '" + account.GetHashedPassword() + "')";
 
-            return this.ExecuteNonQueryCommandFromString(insertQuery);
+            return ExecuteNonQueryCommandFromString(insertQuery);
         }
 
         public bool ExecuteCreateHistoryLikedBlockedPlaylistsForAccount(int id, string guid)
@@ -75,17 +75,17 @@
             string create_BlockedPlaylist_Query = "INSERT INTO playlists (name, isPrivate, owner) " +
                 "VALUES ('" + guid + "_Blocked', 1, " + id + ")";
 
-            if (!this.ExecuteNonQueryCommandFromString(create_HistoryPlaylist_Query))
+            if (!ExecuteNonQueryCommandFromString(create_HistoryPlaylist_Query))
             {
                 return false;
             }
 
-            if (!this.ExecuteNonQueryCommandFromString(create_LikedPlaylist_Query))
+            if (!ExecuteNonQueryCommandFromString(create_LikedPlaylist_Query))
             {
                 return false;
             }
 
-            if (!this.ExecuteNonQueryCommandFromString(create_BlockedPlaylist_Query))
+            if (!ExecuteNonQueryCommandFromString(create_BlockedPlaylist_Query))
             {
                 return false;
             }
@@ -101,7 +101,7 @@
                 "(SELECT id FROM playlists WHERE name = '" + guid + "_Liked'), " +
                 "(SELECT id FROM playlists WHERE name = '" + guid + "_Blocked'))";
 
-            return this.ExecuteNonQueryCommandFromString(create_UserAccount_Query);
+            return ExecuteNonQueryCommandFromString(create_UserAccount_Query);
         }
 
         public Account? GetAccountWithEmail(string email)
@@ -109,13 +109,13 @@
             string selectQuery = "SELECT guid, username, salt, hashedPassword FROM accounts WHERE email = '" + email + "'";
             try
             {
-                this.currentSqlConnection.Open();
-                SqlCommand command = new SqlCommand(selectQuery, this.currentSqlConnection);
+                currentSqlConnection.Open();
+                SqlCommand command = new SqlCommand(selectQuery, currentSqlConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
                     Account temp = new Account(reader.GetGuid("guid"), email, reader.GetString("username"), reader.GetString("salt"), reader.GetString("hashedPassword"));
-                    this.currentSqlConnection.Close();
+                    currentSqlConnection.Close();
                     return temp;
                 }
             }

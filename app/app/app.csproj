@@ -64,10 +64,20 @@
   
 	<ItemGroup>
 	  <AndroidResource Remove="Tests\**" />
+	  <Compile Remove="MVVM\Model\Data\NewFolder1\**" />
+	  <Compile Remove="MVVM\Model\Data\NewFolder\**" />
 	  <Compile Remove="Tests\**" />
+	  <EmbeddedResource Remove="MVVM\Model\Data\NewFolder1\**" />
+	  <EmbeddedResource Remove="MVVM\Model\Data\NewFolder\**" />
 	  <EmbeddedResource Remove="Tests\**" />
+	  <MauiCss Remove="MVVM\Model\Data\NewFolder1\**" />
+	  <MauiCss Remove="MVVM\Model\Data\NewFolder\**" />
 	  <MauiCss Remove="Tests\**" />
+	  <MauiXaml Remove="MVVM\Model\Data\NewFolder1\**" />
+	  <MauiXaml Remove="MVVM\Model\Data\NewFolder\**" />
 	  <MauiXaml Remove="Tests\**" />
+	  <None Remove="MVVM\Model\Data\NewFolder1\**" />
+	  <None Remove="MVVM\Model\Data\NewFolder\**" />
 	  <None Remove="Tests\**" />
 	</ItemGroup>
 
@@ -92,6 +102,11 @@
 		<None Remove="Resources\Images\song_image.png" />
 		<None Remove="Resources\Images\stop_icon.png" />
 		<None Remove="Resources\Images\user_icon.png" />
+		<None Remove="stylecop.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AdditionalFiles Include="stylecop.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -145,8 +160,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Data\NewFolder1\" />
-	  <Folder Include="Data\NewFolder\" />
+	  <Folder Include="MVVM\View\" />
+	  <Folder Include="src\SqlDataStorageAndRetrival\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionappHideInfoBar="True" /></VisualStudio></ProjectExtensions>

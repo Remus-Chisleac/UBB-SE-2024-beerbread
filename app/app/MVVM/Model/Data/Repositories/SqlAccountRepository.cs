@@ -1,6 +1,7 @@
-﻿namespace app.Data.Repositories
+﻿namespace app.MVVM.Model.Data.Repositories
 {
-    using app.Data.SqlCommandHandlers;
+    using app.MVVM.Model.Data.SqlCommandHandlers;
+    using app.MVVM.Model.Domain;
 
     public interface ISqlAccountRepository
     {
@@ -17,7 +18,7 @@
 
         public SqlAccountRepository()
         {
-            this.sqlAccountTableCommandExecutor = new SqlAccountTableCommandExecutor();
+            sqlAccountTableCommandExecutor = new SqlAccountTableCommandExecutor();
         }
 
         public SqlAccountRepository(ISqlAccountTableCommandExecutor sqlAccountTableCommandExecutor)
@@ -27,24 +28,24 @@
 
         public bool AddAccount(Account account)
         {
-            return this.sqlAccountTableCommandExecutor.ExecuteInsertCommandForAccount(account);
+            return sqlAccountTableCommandExecutor.ExecuteInsertCommandForAccount(account);
         }
 
         public bool AddUserAccount(Account account)
         {
-            (int databaseId, string guid) = this.sqlAccountTableCommandExecutor.GetDatabaseIdAndGuidForAccountWithEmail(account.Email);
+            (int databaseId, string guid) = sqlAccountTableCommandExecutor.GetDatabaseIdAndGuidForAccountWithEmail(account.Email);
 
             if (databaseId == -1)
             {
                 return false;
             }
 
-            if (!this.sqlAccountTableCommandExecutor.ExecuteCreateHistoryLikedBlockedPlaylistsForAccount(databaseId, guid))
+            if (!sqlAccountTableCommandExecutor.ExecuteCreateHistoryLikedBlockedPlaylistsForAccount(databaseId, guid))
             {
                 return false;
             }
 
-            if (!this.sqlAccountTableCommandExecutor.ExecuteCreateUserAccount(databaseId, guid))
+            if (!sqlAccountTableCommandExecutor.ExecuteCreateUserAccount(databaseId, guid))
             {
                 return false;
             }
@@ -54,7 +55,7 @@
 
         public Account? GetAccount(string email)
         {
-            return this.sqlAccountTableCommandExecutor.GetAccountWithEmail(email);
+            return sqlAccountTableCommandExecutor.GetAccountWithEmail(email);
         }
     }
 }
