@@ -11,12 +11,11 @@
 
     public class SqlUserRepository : ISqlUserRepository
     {
-        private readonly Microsoft.Data.SqlClient.SqlConnection sqlConnection;
         private readonly ISqlUserTableCommandExecutor sqlUserTableCommandExecutor;
 
         public SqlUserRepository()
         {
-            sqlUserTableCommandExecutor = new SqlUserTableCommandExecutor();
+            this.sqlUserTableCommandExecutor = new SqlUserTableCommandExecutor();
         }
 
         public SqlUserRepository(ISqlUserTableCommandExecutor sqlUserTableCommandExecutor)
@@ -28,21 +27,21 @@
         {
             List<IPlaylist> playlists = [];
 
-            IPlaylist? historyPlaylist = sqlUserTableCommandExecutor.GetHistoryPlaylistForUserWithId(id);
+            IPlaylist? historyPlaylist = this.sqlUserTableCommandExecutor.GetHistoryPlaylistForUserWithId(id);
 
             if (historyPlaylist != null)
             {
                 playlists.Add(historyPlaylist);
             }
 
-            IPlaylist? blockedPlaylist = sqlUserTableCommandExecutor.GetBlockedPlaylistForUserWithId(id);
+            IPlaylist? blockedPlaylist = this.sqlUserTableCommandExecutor.GetBlockedPlaylistForUserWithId(id);
 
             if (blockedPlaylist != null)
             {
                 playlists.Add(blockedPlaylist);
             }
 
-            IPlaylist? likedPlaylist = sqlUserTableCommandExecutor.GetLikedPlaylistForUserWithId(id);
+            IPlaylist? likedPlaylist = this.sqlUserTableCommandExecutor.GetLikedPlaylistForUserWithId(id);
 
             if (likedPlaylist != null)
             {
@@ -51,7 +50,7 @@
 
             if (historyPlaylist != null && blockedPlaylist != null && likedPlaylist != null)
             {
-                foreach (IPlaylist playlist in sqlUserTableCommandExecutor.GetUserDefinedPlaylistsForUserWithId(id, historyPlaylist.Id, likedPlaylist.Id, blockedPlaylist.Id))
+                foreach (IPlaylist playlist in this.sqlUserTableCommandExecutor.GetUserDefinedPlaylistsForUserWithId(id, historyPlaylist.Id, likedPlaylist.Id, blockedPlaylist.Id))
                 {
                     playlists.Add(playlist);
                 }

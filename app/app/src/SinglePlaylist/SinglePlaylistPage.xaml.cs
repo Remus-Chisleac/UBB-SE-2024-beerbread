@@ -1,8 +1,10 @@
-﻿namespace app.src;
+﻿using app.Interfaces;
+
+namespace app.src;
 
 public partial class SinglePlaylistPage : ContentPage
 {
-    public SinglePlaylistPage(Playlist playlist)
+    public SinglePlaylistPage(IPlaylist playlist)
     {
         InitializeComponent();
     }
