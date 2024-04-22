@@ -1,7 +1,8 @@
-﻿using app;
+﻿
 
 namespace MusicAppTests
 {
+    using app.MVVM.Model.Data.Repositories;
     public class GenericSongRepoTests
     {
         [Fact]

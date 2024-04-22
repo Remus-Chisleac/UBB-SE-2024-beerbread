@@ -10,26 +10,26 @@ namespace app.src.Main_page
         internal List<Song> recomendedSongs = [];
         private ISqlSongRepository sqlSongService = new SqlSongRepository();
 
-/* Unmerged change from project 'app (net8.0-ios)'
-Before:
-        private mockAPI.MockAnalyticsAPI MockAnalyticsAPI;
-After:
-        private MockAnalyticsAPI MockAnalyticsAPI;
-*/
+        /* Unmerged change from project 'app (net8.0-ios)'
+        Before:
+                private mockAPI.MockAnalyticsAPI MockAnalyticsAPI;
+        After:
+                private MockAnalyticsAPI MockAnalyticsAPI;
+        */
 
-/* Unmerged change from project 'app (net8.0-maccatalyst)'
-Before:
-        private Data.Utilities.MockAnalyticsAPI MockAnalyticsAPI;
-After:
-        private MockAnalyticsAPI MockAnalyticsAPI;
-*/
-        private MVVM.Model.Data.Utilities.MockAnalyticsAPI MockAnalyticsAPI;
-        User user;
+        /* Unmerged change from project 'app (net8.0-maccatalyst)'
+        Before:
+                private Data.Utilities.MockAnalyticsAPI MockAnalyticsAPI;
+        After:
+                private MockAnalyticsAPI MockAnalyticsAPI;
+        */
+        private readonly User user;
+        private MockAnalyticsAPI mockAnalyticsAPI;
 
         public MainPage(User user)
         {
             this.user = user;
-            MockAnalyticsAPI = new(user);
+            mockAnalyticsAPI = new(user);
             LoadSongs();
             InitializeComponent();
             DisplaySongs(recomendedSongs);
@@ -38,7 +38,7 @@ After:
 
         private void LoadSongs()
         {
-            recomendedSongs = sqlSongService.GetSongsWithIds(MockAnalyticsAPI.GetRecomendedSongs(5));
+            recomendedSongs = sqlSongService.GetSongsWithIds(mockAnalyticsAPI.GetRecomendedSongs(5));
         }
 
         private void DisplaySongs(List<Song> songs)

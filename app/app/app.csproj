@@ -82,7 +82,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="Nunito_Sans_Font.ttf" />
 		<None Remove="Resources\Images\add_song_icon.png" />
 		<None Remove="Resources\Images\block_icon.png" />
 		<None Remove="Resources\Images\calendar_icon.png" />
@@ -114,10 +113,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<MauiFont Include="Nunito_Sans_Font.ttf" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="3.1.0" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.20" />
@@ -130,38 +125,33 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<MauiXaml Update="CreateAccountDefault.xaml">
+		<MauiXaml Update="MVVM\View\CreateAccountDefault.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="CreateArtistAccount.xaml">
+		<MauiXaml Update="MVVM\View\CreateArtistAccount.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="CreateUserAccount.xaml">
+		<MauiXaml Update="MVVM\View\CreateUserAccount.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="src\SinglePlaylist\SinglePlaylistPage.xaml">
+		<MauiXaml Update="MVVM\View\SinglePlaylistPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="src\Song actions\SongActions.xaml">
+		<MauiXaml Update="MVVM\View\SongActions.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="src\Song page\SongPage.xaml">
+		<MauiXaml Update="MVVM\View\SongPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="src\Join us\StartUpPage.xaml">
+		<MauiXaml Update="MVVM\View\StartUpPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="src\LogIn\LogIn.xaml">
+		<MauiXaml Update="MVVM\View\LogIn.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="src\Playlists\PlaylistsPage.xaml">
+		<MauiXaml Update="MVVM\View\PlaylistsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="MVVM\View\" />
-	  <Folder Include="src\SqlDataStorageAndRetrival\" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionappHideInfoBar="True" /></VisualStudio></ProjectExtensions>
