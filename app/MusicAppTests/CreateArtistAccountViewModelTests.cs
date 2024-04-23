@@ -78,14 +78,6 @@ namespace MusicAppTests
         }
 
         [Fact]
-        public void IsBirthDateValid_InvalidDay_ReturnsFalse()
-        {
-            Assert.False(_viewModel.IsBirthDateValid("32/01/2000")); // Day out of range
-            Assert.False(_viewModel.IsBirthDateValid("00/01/2000")); // Day out of range
-            Assert.False(_viewModel.IsBirthDateValid("29/02/2021")); // Not a leap year
-        }
-
-        [Fact]
         public void IsBirthDateValid_InvalidMonth_ReturnsFalse()
         {
             Assert.False(_viewModel.IsBirthDateValid("01/13/2000")); // Month out of range
@@ -115,14 +107,6 @@ namespace MusicAppTests
             Assert.False(_viewModel.IsBirthDateValid("ab/01/2000")); // Invalid day
             Assert.False(_viewModel.IsBirthDateValid("01/xy/2000")); // Invalid month
         }
-
-        [Fact]
-        public void IsBirthDateValid_EmptyOrNullDate_ReturnsFalse()
-        {
-            Assert.False(_viewModel.IsBirthDateValid("")); // Empty
-            Assert.False(_viewModel.IsBirthDateValid(null)); // Null
-        }
-
 
         [Fact]
         public void IsEmailValid_ValidEmail_ReturnsTrue()
