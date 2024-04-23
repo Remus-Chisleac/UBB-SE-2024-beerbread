@@ -33,13 +33,15 @@ public partial class SongPage : ContentPage
     }
     bool noAutoChange = true;
     Song song;
+
+
     public SongPage(Song song)
     {
         BindingContext = this;
         InitializeComponent();
         this.song = song;
-        song_name.Text = song.Name;
-        artist_name.Text = song.Artist;
+        //song_name.Text = song.Name;
+        //artist_name.Text = song.Artist;
         Trace.WriteLine(SongFilesServerPathGenerator.GetMp3Path() + song.UrlSong);
 
         if (!song.UrlSong.StartsWith("/"))
@@ -80,58 +82,58 @@ public partial class SongPage : ContentPage
         Navigation.PushAsync(songActions);
     }
 
-    private void onLikedButtonClicked(object sender, TappedEventArgs e)
-    {
-        if (!isLiked)
-        {
-            isLiked = true;
-            like_button.Source = "liked_button.png";
-        }
-        else
-        {
-            isLiked = false;
-            like_button.Source = "liked_unpressed_button.png";
-        }
-    }
-    private void goBackSongButton(object sender, EventArgs e)
-    {
-        if (mediaElement.Position.TotalSeconds > 5)
-        {
-            mediaElement.SeekTo(TimeSpan.FromSeconds(0));
-        }
-    }
+    //private void onLikedButtonClicked(object sender, TappedEventArgs e)
+    //{
+    //    if (!isLiked)
+    //    {
+    //        isLiked = true;
+    //        like_button.Source = "liked_button.png";
+    //    }
+    //    else
+    //    {
+    //        isLiked = false;
+    //        like_button.Source = "liked_unpressed_button.png";
+    //    }
+    //}
+    //private void goBackSongButton(object sender, EventArgs e)
+    //{
+    //    if (mediaElement.Position.TotalSeconds > 5)
+    //    {
+    //        mediaElement.SeekTo(TimeSpan.FromSeconds(0));
+    //    }
+    //}
 
-    private void PlayPauseButton(object sender, TappedEventArgs e)
-    {
-        if (!isPlaying)
-        {
-            isPlaying = true;
-            play_one_song_button.Source = "pause_song_button";
+    //private void PlayPauseButton(object sender, TappedEventArgs e)
+    //{
+    //    if (!isPlaying)
+    //    {
+    //        isPlaying = true;
+    //        play_one_song_button.Source = "pause_song_button";
 
-            try
-            {
-                mediaElement.Play();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-        else
-        {
-            isPlaying = false;
-            play_one_song_button.Source = "play_song_button";
-            mediaElement.Pause();
-        }
+    //        try
+    //        {
+    //            mediaElement.Play();
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            Debug.WriteLine(ex.Message);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        isPlaying = false;
+    //        play_one_song_button.Source = "play_song_button";
+    //        mediaElement.Pause();
+    //    }
 
-    }
+    //}
 
 
-    private void goForwardSongButton(object sender, EventArgs e)
-    {
-        DisplayAlert("Error", "Not implemented yet..", "OK");
-        return;
-    }
+    //private void goForwardSongButton(object sender, EventArgs e)
+    //{
+    //    DisplayAlert("Error", "Not implemented yet..", "OK");
+    //    return;
+    //}
 
     private void onDragStartedValueChange(object sender, EventArgs e)
     {
