@@ -43,6 +43,7 @@ namespace app.src.Song_page
 
             mediaElement.Volume = 0.75;
             mediaElement.Source = this.songPageViewModel.GetMediaElementSource(song);
+            songImage.Source = this.songPageViewModel.GetSongImageSource(song);
             songImage.Source = ImageSource.FromUri(new Uri(SongFilesServerPathGenerator.GetPngPath() + song.UrlImage));
         }
         private void mediaElement_loaded(object sender, EventArgs e)
