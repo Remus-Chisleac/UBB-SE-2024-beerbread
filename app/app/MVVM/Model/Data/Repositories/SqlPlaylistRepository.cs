@@ -13,7 +13,7 @@
 
     }
 
-    internal class SqlPlaylistRepository : ISqlPlaylistRepository
+    public class SqlPlaylistRepository : ISqlPlaylistRepository
     {
         private readonly ISqlPlaylistTableCommandExecutor sqlPlaylistTableCommandExecutor;
 
