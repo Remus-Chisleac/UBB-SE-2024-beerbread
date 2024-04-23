@@ -17,6 +17,7 @@
         bool IsEmailValid(string email);
 
         User? GetAccountWithCredentials(string email, string password);
+        
     }
 
     public class AccountService : IAccountService
@@ -80,21 +81,31 @@
 
         public User? GetAccountWithCredentials(string email, string password)
         {
-            if (!this.AreAuthenticationCredentialsValid(email, password))
+            try
             {
-                return null;
-            }
+                if (!this.AreAuthenticationCredentialsValid(email, password))
+                {
+                    return null;
+                }
 
-            Account? account = this.sqlAccountRepository.GetAccount(email);
-            if (account == null)
+                Account? account = this.sqlAccountRepository.GetAccount(email);
+
+                if (account == null)
+                {
+                    return null;
+                }
+
+                return new User(account);
+            }
+            catch (Exception ex)
             {
-                return null;
+                System.Diagnostics.Trace.WriteLine($"Exception in GetAccountWithCredentials: {ex.Message}");
+                return null;  
             }
-
-            return new User(account);
         }
 
-        private static string HashPassword(string password, string salt)
+
+        public static string HashPassword(string password, string salt)
         {
             using (var sha256 = SHA256.Create())
             {
@@ -104,7 +115,7 @@
             }
         }
 
-        private static string GenerateSalt()
+        public static string GenerateSalt()
         {
             byte[] saltBytes = new byte[32];
             using (var rng = RandomNumberGenerator.Create())
