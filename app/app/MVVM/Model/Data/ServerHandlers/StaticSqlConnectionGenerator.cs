@@ -18,8 +18,8 @@
             {
                 sqlConnection = new SqlConnection(connectionString);
                 // Alex: these lines worked on my computer to get the connection ready. They may or may not solve the connection problems on your computer.
-                sqlConnection.Open();
-                sqlConnection.Close();
+                //sqlConnection.Open();
+                //sqlConnection.Close();
             }
             return sqlConnection;
 
