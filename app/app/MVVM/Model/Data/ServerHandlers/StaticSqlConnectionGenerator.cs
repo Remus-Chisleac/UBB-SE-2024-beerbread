@@ -26,7 +26,8 @@
         }
         public static string GetConnectionString()
         {
-            return "Server=" + ip + "," + port + ";Database=" + database + ";User Id=" + user + ";Password=" + password + ";" + otherConfig;
+            //return "Server=" + ip + "," + port + ";Database=" + database + ";User Id=" + user + ";Password=" + password + ";" + otherConfig;
+            return "Data Source=DESKTOP-3O5NAR2\\SQLEXPRESS;Initial Catalog=breadcrumbwhatever;Persist Security Info=True;User ID=sa;Password=iss;Trust Server Certificate=True";
         }
     }
 }

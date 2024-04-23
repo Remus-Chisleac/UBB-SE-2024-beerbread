@@ -9,38 +9,34 @@ namespace app.src.Main_page
     {
         internal List<Song> recomendedSongs = [];
         private ISqlSongRepository sqlSongService = new SqlSongRepository();
-
-        /* Unmerged change from project 'app (net8.0-ios)'
-        Before:
-                private mockAPI.MockAnalyticsAPI MockAnalyticsAPI;
-        After:
-                private MockAnalyticsAPI MockAnalyticsAPI;
-        */
-
-        /* Unmerged change from project 'app (net8.0-maccatalyst)'
-        Before:
-                private Data.Utilities.MockAnalyticsAPI MockAnalyticsAPI;
-        After:
-                private MockAnalyticsAPI MockAnalyticsAPI;
-        */
         private readonly User user;
         private MockAnalyticsAPI mockAnalyticsAPI;
 
         public MainPage(User user)
         {
+            InitializeComponent();
             this.user = user;
             mockAnalyticsAPI = new(user);
             LoadSongs();
-            InitializeComponent();
-            DisplaySongs(recomendedSongs);
+            //DisplaySongs(recomendedSongs);
 
         }
 
         private void LoadSongs()
         {
             recomendedSongs = sqlSongService.GetSongsWithIds(mockAnalyticsAPI.GetRecomendedSongs(5));
+            Task.Delay(3);
+            DisplaySongs(recomendedSongs);
         }
 
+        ////ADDED NEW
+        private void onSongTap(object sender, EventArgs e)
+        {
+            int id = Int32.Parse(((HorizontalStackLayout)sender).ClassId);
+            src.Song_page.SongPage songPage = new(recomendedSongs[id]);
+            //Navigation.NavigationStack[3] = songPage;
+            Navigation.PushAsync(songPage);
+        }
         private void DisplaySongs(List<Song> songs)
         {
             int row = 0;
@@ -201,12 +197,5 @@ namespace app.src.Main_page
             bottomNavbar_HomeLabel.TextColor = Color.FromArgb("#00c2cb");
         }
 
-        //ADDED NEW
-        private void onSongTap(object sender, EventArgs e)
-        {
-            int id = Int32.Parse(((HorizontalStackLayout)sender).ClassId);
-            src.Song_page.SongPage songPage = new(recomendedSongs[id]);
-            Navigation.PushAsync(songPage);
-        }
     }
 }

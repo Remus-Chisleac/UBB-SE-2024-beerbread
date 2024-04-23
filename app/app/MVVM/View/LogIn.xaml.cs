@@ -5,6 +5,8 @@ namespace app.src
     using app.MVVM.Model.Data.Repositories;
     using app.MVVM.Model.Domain;
     using app.MVVM.ViewModel;
+    using app.src.Main_page;
+
     public partial class LogIn : ContentPage
     {
 
@@ -44,19 +46,33 @@ namespace app.src
             }
 
             ISqlAccountRepository sqlAccountRepository = new SqlAccountRepository();
-            try
+            User currentUser = new User(sqlAccountRepository.GetAccount(email));
+            if (currentUser != null)
             {
-                src.Main_page.MainPage mainpage = new src.Main_page.MainPage(new User(sqlAccountRepository.GetAccount(email)));
-
-                Navigation.PushAsync(mainpage);
-
+                MainPage mainPage = new MainPage(currentUser);
+                Navigation.PushAsync(mainPage);
+                //Task.Delay(1);
+                //Navigation.RemovePage(this);
             }
-            catch (Exception exc)
+            else
             {
-                Console.WriteLine(exc.ToString());
+                DisplayAlert("Error", "Invalid email or password", "OK");
             }
 
-            Navigation.RemovePage(this);
+                //Navigation.PopAsync();
+            //try
+            //{
+            //    src.Main_page.MainPage mainpage = new src.Main_page.MainPage(new User(sqlAccountRepository.GetAccount(email)));
+
+            //    Navigation.PushAsync(mainpage);
+
+            //}
+            //catch (Exception exc)
+            //{
+            //    Console.WriteLine(exc.ToString());
+            //}
+
+            //Navigation.RemovePage(this);
         }
 
         // Method to validate email format
