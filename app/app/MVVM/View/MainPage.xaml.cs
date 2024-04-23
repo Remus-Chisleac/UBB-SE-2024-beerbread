@@ -4,39 +4,40 @@ namespace app.src.Main_page
     using app.MVVM.Model.Data.ServerHandlers;
     using app.MVVM.Model.Data.Utilities;
     using app.MVVM.Model.Domain;
+    using app.MVVM.ViewModel;
 
     public partial class MainPage : ContentPage
     {
-        internal List<Song> recomendedSongs = [];
-        private ISqlSongRepository sqlSongService = new SqlSongRepository();
+        internal List<Song> RecomendedSongs = [];
+        private readonly SongService songService = new ();
         private readonly User user;
-        private MockAnalyticsAPI mockAnalyticsAPI;
+        private readonly MockAnalyticsAPI mockAnalyticsAPI;
 
         public MainPage(User user)
         {
             InitializeComponent();
             this.user = user;
-            mockAnalyticsAPI = new(user);
+            mockAnalyticsAPI = new (user);
             LoadSongs();
-            //DisplaySongs(recomendedSongs);
-
+            //DisplaySongs(RecomendedSongs);
         }
 
         private void LoadSongs()
         {
-            recomendedSongs = sqlSongService.GetSongsWithIds(mockAnalyticsAPI.GetRecomendedSongs(5));
+            RecomendedSongs = songService.GetSongsWithIds(mockAnalyticsAPI.GetRecomendedSongs(5));
             Task.Delay(3);
-            DisplaySongs(recomendedSongs);
+            DisplaySongs(RecomendedSongs);
         }
 
         ////ADDED NEW
-        private void onSongTap(object sender, EventArgs e)
+        private void OnSongTap(object sender, EventArgs e)
         {
             int id = Int32.Parse(((HorizontalStackLayout)sender).ClassId);
-            src.Song_page.SongPage songPage = new(recomendedSongs[id]);
+            src.Song_page.SongPage songPage = new(RecomendedSongs[id]);
             //Navigation.NavigationStack[3] = songPage;
             Navigation.PushAsync(songPage);
         }
+
         private void DisplaySongs(List<Song> songs)
         {
             int row = 0;
@@ -106,7 +107,7 @@ namespace app.src.Main_page
 
                 //add tap gesture recognizer to stack layout
                 TapGestureRecognizer tap_fn = new();
-                tap_fn.Tapped += (s, e) => onSongTap(s, e);
+                tap_fn.Tapped += (s, e) => OnSongTap(s, e);
                 stackLayout.GestureRecognizers.Add(tap_fn);
 
                 songFrame.Content = stackLayout;

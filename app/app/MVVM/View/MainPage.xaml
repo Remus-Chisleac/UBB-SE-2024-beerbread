@@ -220,7 +220,7 @@
                                 TextColor="White"
                                 VerticalOptions="Center" />
                             <HorizontalStackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="onSongTap"/>
+                                <TapGestureRecognizer Tapped="OnSongTap"/>
                             </HorizontalStackLayout.GestureRecognizers>
 
 
