@@ -8,13 +8,20 @@ namespace MusicAppTests
     public class SqlSongRepositoryTests
     {
         [Fact]
+        public void SqlSongRepository_EmptyConstructor()
+        {
+            var sqlSongRepository = new SqlSongRepository();
+            Assert.IsType<SqlSongRepository>(sqlSongRepository);
+        }
+
+        [Fact]
         public void GetAllSongIds_Valid_ReturnsAllSongIds()
         {
             // Arrange
             var mockCommandExecutor = new Mock<ISqlSongTableCommandExecutor>();
             var expectedIds = new List<int> { 1, 2, 3 };
             mockCommandExecutor.Setup(e => e.GetAllSongIdsInDatabase()).Returns(expectedIds);
-            var songRepository = new SqlSongRepository();
+            var songRepository = new SqlSongRepository(mockCommandExecutor.Object);
 
             // Act
             List<int> result = songRepository.GetAllSongIds();
@@ -36,7 +43,7 @@ namespace MusicAppTests
                 new Song(3, "Song 3", "Artist 3", "url3", "image3")
             };
             mockCommandExecutor.Setup(e => e.GetSongsWithIds(songIds)).Returns(expectedSongs);
-            var songRepository = new SqlSongRepository();
+            var songRepository = new SqlSongRepository(mockCommandExecutor.Object);
 
             // Act
             List<Song> result = songRepository.GetSongsWithIds(songIds);
