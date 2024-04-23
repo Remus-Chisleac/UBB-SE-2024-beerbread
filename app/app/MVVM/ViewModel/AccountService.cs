@@ -10,58 +10,62 @@
     {
         bool CreateUserAccount(string email, string username, string password);
 
-        bool Authenticate(string email, string password);
+        bool AreAuthenticationCredentialsValid(string email, string password);
 
         bool CreateArtistAccount(string email, string username, string password);
 
-        bool IsValidEmail(string email);
+        bool IsEmailValid(string email);
+
+        User? GetAccountWithCredentials(string email, string password);
     }
 
     public class AccountService : IAccountService
     {
-        private readonly ISqlAccountRepository sqlAccountService;
+        private readonly ISqlAccountRepository sqlAccountRepository;
 
         public AccountService()
         {
-            sqlAccountService = new SqlAccountRepository();
+            this.sqlAccountRepository = new SqlAccountRepository();
         }
 
         public AccountService(ISqlAccountRepository sqlAccountRepository)
         {
-            sqlAccountService = sqlAccountRepository;
+            this.sqlAccountRepository = sqlAccountRepository;
         }
 
-        // Creation
         public bool CreateUserAccount(string email, string username, string password)
         {
-            string salt = AccountService.GenerateSalt();
-            string hashedPassword = AccountService.HashPassword(password, salt);
-            Account newAccount = new Account(email, username, salt, hashedPassword);
-            if (!sqlAccountService.AddAccount(newAccount))
+            string salt = GenerateSalt();
+            string hashedPassword = HashPassword(password, salt);
+            Account newAccount = new (email, username, salt, hashedPassword);
+            if (!this.sqlAccountRepository.AddAccount(newAccount))
+            {
                 return false;
+            }
 
-            return sqlAccountService.AddUserAccount(newAccount);
+            return this.sqlAccountRepository.AddUserAccount(newAccount);
         }
 
         public bool CreateArtistAccount(string email, string username, string password)
         {
-            //todo
+            // todo never
             return false;
         }
 
-        public bool Authenticate(string email, string password)
+        public bool AreAuthenticationCredentialsValid(string email, string password)
         {
-            Account account = sqlAccountService.GetAccount(email);
+            Account? account = this.sqlAccountRepository.GetAccount(email);
+
             if (account == null)
             {
                 return false;
             }
 
-            string hashedPasswordAttempt = AccountService.HashPassword(password, account.Salt);
+            string hashedPasswordAttempt = HashPassword(password, account.Salt);
             return account.VerifyPassword(hashedPasswordAttempt);
         }
 
-        public bool IsValidEmail(string email)
+        public bool IsEmailValid(string email)
         {
             try
             {
@@ -72,6 +76,22 @@
             {
                 return false;
             }
+        }
+
+        public User? GetAccountWithCredentials(string email, string password)
+        {
+            if (!this.AreAuthenticationCredentialsValid(email, password))
+            {
+                return null;
+            }
+
+            Account? account = this.sqlAccountRepository.GetAccount(email);
+            if (account == null)
+            {
+                return null;
+            }
+
+            return new User(account);
         }
 
         private static string HashPassword(string password, string salt)

@@ -27,17 +27,17 @@
 
         public bool IsUsernameLengthValid(string username)
         {
-            return !(username == null) && username.Length >= 6;
+            return !string.IsNullOrEmpty(username) && username.Length >= 6;
         }
 
         public bool IsPasswordLengthValid(string password)
         {
-            return !(password == null) && password.Length >= 8;
+            return !string.IsNullOrEmpty(password) && password.Length >= 8;
         }
 
         public bool IsEmailValid(string email)
         {
-            return !(email == null) && this.accountService.IsValidEmail(email);
+            return !string.IsNullOrEmpty(email) && this.accountService.IsEmailValid(email);
         }
 
         public bool CreateUserAccount(string email, string username, string password)
