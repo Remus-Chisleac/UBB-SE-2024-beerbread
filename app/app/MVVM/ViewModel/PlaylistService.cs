@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace app.MVVM.ViewModel
 {
-    internal class PlaylistService
+    public class PlaylistService
     {
         private ISqlPlaylistRepository playlistRepository;
 
@@ -17,12 +17,18 @@ namespace app.MVVM.ViewModel
             this.playlistRepository = new SqlPlaylistRepository();
         }
 
+        // New constructor to allow injection of ISqlPlaylistRepository
+        public PlaylistService(ISqlPlaylistRepository repository)
+        {
+            this.playlistRepository = repository;
+        }
+
         public List<IPlaylist> GetUserPlaylists(Guid userId)
         {
             return this.playlistRepository.GetUserPlaylists(userId);
         }
 
-        internal void AddPlaylist(IPlaylist playlist, Guid id)
+        public void AddPlaylist(IPlaylist playlist, Guid id)
         {
             this.playlistRepository.AddPlaylist(playlist, id);
         }
