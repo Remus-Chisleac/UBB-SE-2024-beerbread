@@ -16,6 +16,8 @@
     {
         private readonly IAccountService accountService;
 
+        public object? AccountService { get; set; }
+
         public LoginViewModel()
         {
             this.accountService = new AccountService();
