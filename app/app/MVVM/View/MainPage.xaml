@@ -118,12 +118,13 @@
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onUserAccountTap" />
                     </Frame.GestureRecognizers>
+                    <!-- THIS SHIT DROVE ME MAD, IT WAS HEIGHT AND WIDTH 35 BEFORE AND IT CRASHED EVERYTHING-->
                     <Image
                         Margin="-20"
                         Aspect="AspectFit"
-                        HeightRequest="35"
+                        HeightRequest="40"
                         Source="user_account.png"
-                        WidthRequest="35" />
+                        WidthRequest="40" />
                 </Frame>
             </Grid>
             <!--  search bar  -->
@@ -162,9 +163,6 @@
 
                 </Grid>
             </Frame>
-
-
-
             <!--  Continue Listening  -->
             <Grid Grid.Row="2" Margin="5,10,5,0">
                 <Grid.RowDefinitions>
@@ -193,7 +191,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <!--
+                    
                     <Frame
                         Grid.Row="0"
                         Grid.Column="0"
@@ -222,7 +220,7 @@
                                 TextColor="White"
                                 VerticalOptions="Center" />
                             <HorizontalStackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="onSongTap"/>
+                                <TapGestureRecognizer Tapped="OnSongTap"/>
                             </HorizontalStackLayout.GestureRecognizers>
 
 
@@ -373,7 +371,7 @@
                                 VerticalOptions="Center" />
                         </HorizontalStackLayout>
                     </Frame>
-                    -->
+                    
                 </Grid>
             </Grid>
             <!--  Your Top Mixes  -->
@@ -398,7 +396,7 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <!--  5 playlist in a horizontal scroll view  -->
+                      <!--5 playlist in a horizontal scroll view-->  
                     <ScrollView Grid.Row="0" Orientation="Horizontal">
                         <StackLayout Orientation="Horizontal">
                             <Frame

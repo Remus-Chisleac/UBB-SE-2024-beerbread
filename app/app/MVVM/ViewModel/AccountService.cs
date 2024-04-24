@@ -10,44 +10,53 @@
     {
         bool CreateUserAccount(string email, string username, string password);
 
-        bool Authenticate(string email, string password);
+        bool AreAuthenticationCredentialsValid(string email, string password);
+
+        bool CreateArtistAccount(string email, string username, string password);
+
+        bool IsEmailValid(string email);
+
+        User? GetAccountWithCredentials(string email, string password);
+        
     }
 
     public class AccountService : IAccountService
     {
-        private readonly ISqlAccountRepository sqlAccountService;
+        private readonly ISqlAccountRepository sqlAccountRepository;
 
         public AccountService()
         {
-            sqlAccountService = new SqlAccountRepository();
+            this.sqlAccountRepository = new SqlAccountRepository();
         }
 
         public AccountService(ISqlAccountRepository sqlAccountRepository)
         {
-            sqlAccountService = sqlAccountRepository;
+            this.sqlAccountRepository = sqlAccountRepository;
         }
 
-        // Creation
         public bool CreateUserAccount(string email, string username, string password)
         {
             string salt = GenerateSalt();
             string hashedPassword = HashPassword(password, salt);
-            Account newAccount = new Account(email, username, salt, hashedPassword);
-            if (!sqlAccountService.AddAccount(newAccount))
+            Account newAccount = new (email, username, salt, hashedPassword);
+            if (!this.sqlAccountRepository.AddAccount(newAccount))
+            {
                 return false;
+            }
 
-            return sqlAccountService.AddUserAccount(newAccount);
+            return this.sqlAccountRepository.AddUserAccount(newAccount);
         }
 
         public bool CreateArtistAccount(string email, string username, string password)
         {
-            //todo
+            // todo never
             return false;
         }
 
-        public bool Authenticate(string email, string password)
+        public bool AreAuthenticationCredentialsValid(string email, string password)
         {
-            Account account = sqlAccountService.GetAccount(email);
+            Account? account = this.sqlAccountRepository.GetAccount(email);
+
             if (account == null)
             {
                 return false;
@@ -57,27 +66,7 @@
             return account.VerifyPassword(hashedPasswordAttempt);
         }
 
-        private string GenerateSalt()
-        {
-            byte[] saltBytes = new byte[32];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(saltBytes);
-            }
-            return Convert.ToBase64String(saltBytes);
-        }
-
-        // Method to hash the password
-        protected string HashPassword(string password, string salt)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var saltedPassword = password + salt;
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(saltedPassword));
-                return Convert.ToBase64String(hashedBytes);
-            }
-        }
-        public bool IsValidEmail(string email)
+        public bool IsEmailValid(string email)
         {
             try
             {
@@ -88,6 +77,50 @@
             {
                 return false;
             }
+        }
+
+        public User? GetAccountWithCredentials(string email, string password)
+        {
+            try
+            {
+                if (!this.AreAuthenticationCredentialsValid(email, password))
+                {
+                    return null;
+                }
+
+                Account? account = this.sqlAccountRepository.GetAccount(email);
+
+                if (account == null)
+                {
+                    return null;
+                }
+
+                return new User(account);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Trace.WriteLine($"Exception in GetAccountWithCredentials: {ex.Message}");
+                return null;
+            }
+        }
+        public static string HashPassword(string password, string salt)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var saltedPassword = password + salt;
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(saltedPassword));
+                return Convert.ToBase64String(hashedBytes);
+            }
+        }
+
+        public static string GenerateSalt()
+        {
+            byte[] saltBytes = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(saltBytes);
+            }
+            return Convert.ToBase64String(saltBytes);
         }
     }
 }

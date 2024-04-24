@@ -23,7 +23,7 @@
             {
                 return mediaElement.Position.ToString(@"mm\:ss");
             }
-
+            
             return "00:00";
         }
 
@@ -57,6 +57,4 @@
             return "song_image.jpeg";
         }
     }
-
-    
 }

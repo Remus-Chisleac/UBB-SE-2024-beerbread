@@ -1,20 +1,22 @@
 using app.MVVM.Model.Data.ServerHandlers;
 using app.MVVM.Model.Domain;
+using app.MVVM.ViewModel;
 using CommunityToolkit.Maui.Views;
 
 namespace app.src.Song_actions;
 
 public partial class SongActions : ContentPage
 {
-    public SongActions(Song Song)
+    ISongActionsViewModel songActionsViewModel;
+
+    public SongActions(Song song)
     {
         InitializeComponent();
-        if (Song.UrlImage != "")
-            songImage.Source = SongFilesServerPathGenerator.GetPngPath()+ Song.UrlImage;
-        else
-            songImage.Source = "song_image.jpeg";
-        songName.Text = Song.Name;
-        songArtist.Text = Song.Artist;
+
+        songActionsViewModel = new SongActionsViewModel();
+        songImage.Source = songActionsViewModel.getSongImageSource(song);
+        songName.Text = song.Name;
+        songArtist.Text = song.Artist;
     }
 
     private void OnAddToPlaylistTapped(object sender, EventArgs e)
