@@ -23,6 +23,7 @@
             {
                 return mediaElement.Position.ToString(@"mm\:ss");
             }
+            
             return "00:00";
         }
 
@@ -32,23 +33,28 @@
             {
                 return mediaElement.Duration.ToString(@"mm\:ss");
             }
+
             return "00:00";
         }
 
         public MediaSource GetMediaElementSource(Song song)
         {
             if (!song.UrlSong.StartsWith("/"))
+            {
                 return MediaSource.FromResource(song.UrlSong);
-            else
-                return MediaSource.FromUri(SongFilesServerPathGenerator.GetMp3Path() + song.UrlSong);
+            }
+
+            return MediaSource.FromUri(SongFilesServerPathGenerator.GetMp3Path() + song.UrlSong);
         }
 
         public ImageSource GetSongImageSource(Song song)
         {
             if (song.UrlImage != "")
+            {
                 return song.UrlImage;
-            else
-                return "song_image.jpeg";
+            }
+
+            return "song_image.jpeg";
         }
     }
 }
