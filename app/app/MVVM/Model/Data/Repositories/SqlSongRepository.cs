@@ -20,6 +20,11 @@
             sqlSongTableCommandExecutor = new SqlSongTableCommandExecutor();
         }
 
+        public SqlSongRepository(ISqlSongTableCommandExecutor sqlSongTableCommandExecutor)
+        {
+            this.sqlSongTableCommandExecutor = sqlSongTableCommandExecutor;
+        }
+
         public List<int> GetAllSongIds()
         {
             return sqlSongTableCommandExecutor.GetAllSongIdsInDatabase();
