@@ -6,7 +6,7 @@ using app.src.SqlDataStorageAndRetrival;
 
 namespace app
 {
-    public class AccountService
+    public class AccountService: Interfaces.IAccountService
     {
         private readonly SqlAccountService sqlAccountService = new();
 
