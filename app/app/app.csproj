@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks>net8.0;net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
@@ -13,7 +13,8 @@
 		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
 		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
-		<OutputType>Exe</OutputType>
+		<!--<OutputType>Exe</OutputType>-->
+		<OutputType Condition="'$(TargetFramework)' != 'net8.0'">Exe</OutputType>
 		<RootNamespace>app</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
@@ -36,8 +37,13 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-	</PropertyGroup>
+		
+  </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>SE.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -55,9 +61,27 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
+  
+	<ItemGroup>
+	  <AndroidResource Remove="Tests\**" />
+	  <Compile Remove="MVVM\Model\Data\NewFolder1\**" />
+	  <Compile Remove="MVVM\Model\Data\NewFolder\**" />
+	  <Compile Remove="Tests\**" />
+	  <EmbeddedResource Remove="MVVM\Model\Data\NewFolder1\**" />
+	  <EmbeddedResource Remove="MVVM\Model\Data\NewFolder\**" />
+	  <EmbeddedResource Remove="Tests\**" />
+	  <MauiCss Remove="MVVM\Model\Data\NewFolder1\**" />
+	  <MauiCss Remove="MVVM\Model\Data\NewFolder\**" />
+	  <MauiCss Remove="Tests\**" />
+	  <MauiXaml Remove="MVVM\Model\Data\NewFolder1\**" />
+	  <MauiXaml Remove="MVVM\Model\Data\NewFolder\**" />
+	  <MauiXaml Remove="Tests\**" />
+	  <None Remove="MVVM\Model\Data\NewFolder1\**" />
+	  <None Remove="MVVM\Model\Data\NewFolder\**" />
+	  <None Remove="Tests\**" />
+	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="Nunito_Sans_Font.ttf" />
 		<None Remove="Resources\Images\add_song_icon.png" />
 		<None Remove="Resources\Images\block_icon.png" />
 		<None Remove="Resources\Images\calendar_icon.png" />
@@ -77,6 +101,11 @@
 		<None Remove="Resources\Images\song_image.png" />
 		<None Remove="Resources\Images\stop_icon.png" />
 		<None Remove="Resources\Images\user_icon.png" />
+		<None Remove="stylecop.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AdditionalFiles Include="stylecop.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -84,43 +113,43 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<MauiFont Include="Nunito_Sans_Font.ttf" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="3.1.0" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.20" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.20" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
-		<MauiXaml Update="CreateAccountDefault.xaml">
+		<MauiXaml Update="MVVM\View\CreateAccountDefault.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="CreateArtistAccount.xaml">
+		<MauiXaml Update="MVVM\View\CreateArtistAccount.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="CreateUserAccount.xaml">
+		<MauiXaml Update="MVVM\View\CreateUserAccount.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="src\SinglePlaylist\SinglePlaylistPage.xaml">
+		<MauiXaml Update="MVVM\View\SinglePlaylistPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="src\Song actions\SongActions.xaml">
+		<MauiXaml Update="MVVM\View\SongActions.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="src\Song page\SongPage.xaml">
+		<MauiXaml Update="MVVM\View\SongPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="src\Join us\StartUpPage.xaml">
+		<MauiXaml Update="MVVM\View\StartUpPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="src\LogIn\LogIn.xaml">
+		<MauiXaml Update="MVVM\View\LogIn.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="src\Playlists\PlaylistsPage.xaml">
+		<MauiXaml Update="MVVM\View\PlaylistsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>

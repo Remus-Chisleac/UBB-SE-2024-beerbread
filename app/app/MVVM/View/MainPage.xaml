@@ -1,0 +1,768 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="app.src.Main_page.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Grid>
+        <Image
+            Aspect="AspectFill"
+            HeightRequest="1000"
+            Source="background_gradient_mainpage.png" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <!--  Account info| top navbar  -->
+                <RowDefinition Height="0.1*" />
+                <!--  search bar  -->
+                <RowDefinition Height="0.15*" />
+                <!--  Continue Listening  -->
+                <RowDefinition Height="0.4*" />
+                <!--  Your Top Mixes  -->
+                <RowDefinition Height="0.55*" />
+                <!--  bottom navbar  -->
+                <RowDefinition Height="0.1*" />
+            </Grid.RowDefinitions>
+
+
+            <!--  Account info| top navbar  -->
+            <Grid Grid.Row="0" Margin="5,10,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.1*" />
+                    <ColumnDefinition Width="0.3*" />
+                </Grid.ColumnDefinitions>
+
+                <Frame
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,10,0,0"
+                    Padding="0"
+                    CornerRadius="50"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    VerticalOptions="Center"
+                    WidthRequest="40">
+                    <Image
+                        Margin="-20"
+                        Aspect="AspectFit"
+                        HeightRequest="50"
+                        Source="mock_user.png"
+                        WidthRequest="50" />
+                </Frame>
+
+                <VerticalStackLayout
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,10,0,0"
+                    Padding="0"
+                    HeightRequest="40"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    WidthRequest="120">
+                    <Label
+                        Margin="0,5,0,0"
+                        FontAttributes="Bold"
+                        FontFamily="NunitoSans"
+                        FontSize="15"
+                        Text="Welcome back !"
+                        TextColor="White" />
+                    <Label
+                        Margin="0,-5,0,0"
+                        FontAttributes="None"
+                        FontFamily="NunitoSans"
+                        FontSize="13"
+                        Text="chandrama"
+                        TextColor="White" />
+                </VerticalStackLayout>
+
+                <Frame
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="0,10,0,0"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    VerticalOptions="Center"
+                    WidthRequest="40">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onMusicCreatorTap" />
+                    </Frame.GestureRecognizers>
+
+                    <Image
+                        Margin="-20"
+                        Aspect="AspectFit"
+                        HeightRequest="40"
+                        Source="music_creator.png"
+                        WidthRequest="40" />
+                </Frame>
+                <Frame
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    Margin="0,10,0,0"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    VerticalOptions="Center"
+                    WidthRequest="40">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onUserAccountTap" />
+                    </Frame.GestureRecognizers>
+                    <!-- THIS SHIT DROVE ME MAD, IT WAS HEIGHT AND WIDTH 35 BEFORE AND IT CRASHED EVERYTHING-->
+                    <Image
+                        Margin="-20"
+                        Aspect="AspectFit"
+                        HeightRequest="40"
+                        Source="user_account.png"
+                        WidthRequest="40" />
+                </Frame>
+            </Grid>
+            <!--  search bar  -->
+            <Frame
+                x:Name="search_frame"
+                Grid.Row="1"
+                Margin="20,0,20,0"
+                Padding="0"
+                BackgroundColor="#d9d9d9"
+                CornerRadius="15"
+                HeightRequest="45">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onSearchTap" />
+                </Frame.GestureRecognizers>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.1" />
+                        <ColumnDefinition Width="0.9" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Grid.Column="0"
+                        Margin="10"
+                        HeightRequest="20"
+                        Source="search_icon.png"
+                        WidthRequest="20" />
+                    <Entry
+                        x:Name="search_entry"
+                        Grid.Column="1"
+                        Margin="0,0,20,0"
+                        Focused="onSearchFocus"
+                        FontSize="15"
+                        Placeholder="Search"
+                        PlaceholderColor="Black"
+                        TextColor="Black"
+                        Unfocused="onSearchUnFocus" />
+
+                </Grid>
+            </Frame>
+            <!--  Continue Listening  -->
+            <Grid Grid.Row="2" Margin="5,10,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="20,0,0,10"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Text="Recommended for you"
+                    TextColor="White" />
+                <Grid
+                    x:Name="songsGrid"
+                    Grid.Row="1"
+                    Margin="20,0,20,0"
+                    Padding="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Frame
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="5,5,5,5"
+                        Padding="0"
+                        BackgroundColor="#33436369"
+                        BorderColor="Transparent"
+                        CornerRadius="15">
+                        <HorizontalStackLayout ClassId="0">
+                            <Frame
+                                BackgroundColor="White"
+                                CornerRadius="10"
+                                HeightRequest="60"
+                                WidthRequest="60">
+                                <Image
+                                    Margin="-20"
+                                    Aspect="AspectFill"
+                                    Source="song_image.jpeg" />
+                            </Frame>
+                            <Label
+                                Margin="5,0,0,0"
+                                FontAttributes="Bold"
+                                FontFamily="NunitoSans"
+                                FontSize="15"
+                                Text="Playlist 1"
+                                TextColor="White"
+                                VerticalOptions="Center" />
+                            <HorizontalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="onSongTap"/>
+                            </HorizontalStackLayout.GestureRecognizers>
+
+
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="5,5,5,5"
+                        Padding="0"
+                        BackgroundColor="#33436369"
+                        BorderColor="Transparent"
+                        CornerRadius="15">
+                        <HorizontalStackLayout>
+                            <Frame
+                                BackgroundColor="White"
+                                CornerRadius="10"
+                                HeightRequest="60"
+                                WidthRequest="60">
+                                <Image
+                                    Margin="-20"
+                                    Aspect="AspectFill"
+                                    Source="mock_playlist.jpeg" />
+                            </Frame>
+                            <Label
+                                Margin="5,0,0,0"
+                                FontAttributes="Bold"
+                                FontFamily="NunitoSans"
+                                FontSize="15"
+                                Text="Playlist 2"
+                                TextColor="White"
+                                VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="5,5,5,5"
+                        Padding="0"
+                        BackgroundColor="#33436369"
+                        BorderColor="Transparent"
+                        CornerRadius="15">
+                        <HorizontalStackLayout>
+                            <Frame
+                                BackgroundColor="White"
+                                CornerRadius="10"
+                                HeightRequest="60"
+                                WidthRequest="60">
+                                <Image
+                                    Margin="-20"
+                                    Aspect="AspectFill"
+                                    Source="mock_playlist.jpeg" />
+                            </Frame>
+                            <Label
+                                Margin="5,0,0,0"
+                                FontAttributes="Bold"
+                                FontFamily="NunitoSans"
+                                FontSize="15"
+                                Text="Playlist 3"
+                                TextColor="White"
+                                VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="5,5,5,5"
+                        Padding="0"
+                        BackgroundColor="#33436369"
+                        BorderColor="Transparent"
+                        CornerRadius="15">
+                        <HorizontalStackLayout>
+                            <Frame
+                                BackgroundColor="White"
+                                CornerRadius="10"
+                                HeightRequest="60"
+                                WidthRequest="60">
+                                <Image
+                                    Margin="-20"
+                                    Aspect="AspectFill"
+                                    Source="mock_playlist.jpeg" />
+                            </Frame>
+                            <Label
+                                Margin="5,0,0,0"
+                                FontAttributes="Bold"
+                                FontFamily="NunitoSans"
+                                FontSize="15"
+                                Text="Playlist 4"
+                                TextColor="White"
+                                VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="5,5,5,5"
+                        Padding="0"
+                        BackgroundColor="#33436369"
+                        BorderColor="Transparent"
+                        CornerRadius="15">
+                        <HorizontalStackLayout>
+                            <Frame
+                                BackgroundColor="White"
+                                CornerRadius="10"
+                                HeightRequest="60"
+                                WidthRequest="60">
+                                <Image
+                                    Margin="-20"
+                                    Aspect="AspectFill"
+                                    Source="mock_playlist.jpeg" />
+                            </Frame>
+                            <Label
+                                Margin="5,0,0,0"
+                                FontAttributes="Bold"
+                                FontFamily="NunitoSans"
+                                FontSize="15"
+                                Text="Playlist 5"
+                                TextColor="White"
+                                VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <Frame
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="5,5,5,5"
+                        Padding="0"
+                        BackgroundColor="#33436369"
+                        BorderColor="Transparent"
+                        CornerRadius="15">
+                        <HorizontalStackLayout>
+                            <Frame
+                                BackgroundColor="White"
+                                CornerRadius="10"
+                                HeightRequest="60"
+                                WidthRequest="60">
+                                <Image
+                                    Margin="-20"
+                                    Aspect="AspectFill"
+                                    Source="mock_playlist.jpeg" />
+                            </Frame>
+                            <Label
+                                Margin="5,0,0,0"
+                                FontAttributes="Bold"
+                                FontFamily="NunitoSans"
+                                FontSize="15"
+                                Text="Playlist 6"
+                                TextColor="White"
+                                VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    
+                </Grid>
+            </Grid>
+            <!--  Your Top Mixes  -->
+            <Grid Grid.Row="3" Margin="5,30,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="20,0,0,10"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    Text="Your Top Mixes"
+                    TextColor="White" />
+                <Grid
+                    Grid.Row="1"
+                    Margin="20,0,20,0"
+                    Padding="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                      <!--5 playlist in a horizontal scroll view-->  
+                    <ScrollView Grid.Row="0" Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal">
+                            <Frame
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="#33436369"
+                                BorderColor="Transparent"
+                                CornerRadius="15">
+                                <Grid>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="125"
+                                        WidthRequest="125">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="mock_playlist.jpeg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,5,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Pop Mix"
+                                        TextColor="White"
+                                        VerticalOptions="Start" />
+                                </Grid>
+                            </Frame>
+                            <Frame
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="#33436369"
+                                BorderColor="Transparent"
+                                CornerRadius="15">
+                                <Grid>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="125"
+                                        WidthRequest="125">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="mock_playlist.jpeg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,5,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Chill Mix"
+                                        TextColor="White"
+                                        VerticalOptions="Start" />
+                                </Grid>
+                            </Frame>
+                            <Frame
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="#33436369"
+                                BorderColor="Transparent"
+                                CornerRadius="15">
+                                <Grid>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="125"
+                                        WidthRequest="125">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="mock_playlist.jpeg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,5,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Rock Mix"
+                                        TextColor="White"
+                                        VerticalOptions="Start" />
+                                </Grid>
+                            </Frame>
+                            <Frame
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="#33436369"
+                                BorderColor="Transparent"
+                                CornerRadius="15">
+                                <Grid>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="125"
+                                        WidthRequest="125">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="mock_playlist.jpeg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,5,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Jazz Mix"
+                                        TextColor="White"
+                                        VerticalOptions="Start" />
+                                </Grid>
+                            </Frame>
+                            <Frame
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="#33436369"
+                                BorderColor="Transparent"
+                                CornerRadius="15">
+                                <Grid>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="125"
+                                        WidthRequest="125">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="mock_playlist.jpeg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,5,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Hip Hop Mix"
+                                        TextColor="White"
+                                        VerticalOptions="Start" />
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </ScrollView>
+                    <ScrollView Grid.Row="1" Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal">
+                            <Frame
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="#33436369"
+                                BorderColor="Transparent"
+                                CornerRadius="15">
+                                <Grid>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="125"
+                                        WidthRequest="125">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="mock_playlist.jpeg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,5,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Pop Mix"
+                                        TextColor="White"
+                                        VerticalOptions="Start" />
+                                </Grid>
+                            </Frame>
+                            <Frame
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="#33436369"
+                                BorderColor="Transparent"
+                                CornerRadius="15">
+                                <Grid>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="125"
+                                        WidthRequest="125">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="mock_playlist.jpeg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,5,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Chill Mix"
+                                        TextColor="White"
+                                        VerticalOptions="Start" />
+                                </Grid>
+                            </Frame>
+                            <Frame
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="#33436369"
+                                BorderColor="Transparent"
+                                CornerRadius="15">
+                                <Grid>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="125"
+                                        WidthRequest="125">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="mock_playlist.jpeg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,5,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Rock Mix"
+                                        TextColor="White"
+                                        VerticalOptions="Start" />
+                                </Grid>
+                            </Frame>
+                            <Frame
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="#33436369"
+                                BorderColor="Transparent"
+                                CornerRadius="15">
+                                <Grid>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="125"
+                                        WidthRequest="125">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="mock_playlist.jpeg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,5,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Jazz Mix"
+                                        TextColor="White"
+                                        VerticalOptions="Start" />
+                                </Grid>
+                            </Frame>
+                            <Frame
+                                Margin="5,5,5,5"
+                                Padding="0"
+                                BackgroundColor="#33436369"
+                                BorderColor="Transparent"
+                                CornerRadius="15">
+                                <Grid>
+                                    <Frame
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HeightRequest="125"
+                                        WidthRequest="125">
+                                        <Image
+                                            Margin="-20"
+                                            Aspect="AspectFill"
+                                            Source="mock_playlist.jpeg" />
+                                    </Frame>
+                                    <Label
+                                        Margin="5,5,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="NunitoSans"
+                                        FontSize="15"
+                                        Text="Hip Hop Mix"
+                                        TextColor="White"
+                                        VerticalOptions="Start" />
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </ScrollView>
+                </Grid>
+            </Grid>
+            <!--  bottom navbar  -->
+            <Grid Grid.Row="4" HeightRequest="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+
+
+                <VerticalStackLayout x:Name="bottomNavbar_Home" Grid.Column="0">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onHomeTap" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image
+                        x:Name="bottomNavbar_HomeImage"
+                        Margin="0,15,0,0"
+                        Aspect="AspectFit"
+                        HeightRequest="15"
+                        HorizontalOptions="Center"
+                        Source="home_blue.png"
+                        VerticalOptions="Center"
+                        WidthRequest="15" />
+                    <Label
+                        x:Name="bottomNavbar_HomeLabel"
+                        Margin="0,5,0,0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="Center"
+                        Text="Home"
+                        TextColor="#00c2cb" />
+                </VerticalStackLayout>
+
+
+
+                <VerticalStackLayout x:Name="bottomNavbar_Explore" Grid.Column="1">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onExploreTap" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image
+                        x:Name="bottomNavbar_ExploreImage"
+                        Margin="0,15,0,0"
+                        Aspect="AspectFit"
+                        HeightRequest="15"
+                        HorizontalOptions="Center"
+                        Source="explore.png"
+                        VerticalOptions="Center"
+                        WidthRequest="15" />
+                    <Label
+                        x:Name="bottomNavbar_ExploreLabel"
+                        Margin="0,5,0,0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="Center"
+                        Text="Explore"
+                        TextColor="White" />
+                </VerticalStackLayout>
+
+
+
+                <VerticalStackLayout x:Name="bottomNavbar_Library" Grid.Column="2">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="onLibraryTap" />
+                    </VerticalStackLayout.GestureRecognizers>
+                    <Image
+                        x:Name="bottomNavbar_LibraryImage"
+                        Margin="0,15,0,0"
+                        Aspect="AspectFit"
+                        HeightRequest="15"
+                        HorizontalOptions="Center"
+                        Source="library.png"
+                        VerticalOptions="Center"
+                        WidthRequest="15" />
+                    <Label
+                        x:Name="bottomNavbar_LibraryLabel"
+                        Margin="0,5,0,0"
+                        FontAttributes="Bold"
+                        FontSize="12"
+                        HorizontalOptions="Center"
+                        Text="Library"
+                        TextColor="White" />
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>
