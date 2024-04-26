@@ -1,6 +1,4 @@
-﻿
-
-namespace app.src
+﻿namespace app.src
 {
     using app.MVVM.Model.Data.Repositories;
     using app.MVVM.Model.Domain;
@@ -9,79 +7,53 @@ namespace app.src
 
     public partial class LogIn : ContentPage
     {
+        private ILoginViewModel loginViewModel = new LoginViewModel();
 
         public LogIn()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void LogInButton_Clicked(object sender, EventArgs e)
         {
-            // Perform log in action
-            string password = LogInEntryPassword.Text;
-            string email = LogInEntryEmail.Text;
+            string password = this.LogInEntryPassword.Text;
+            string email = this.LogInEntryEmail.Text;
 
-
-            // Validate email and password
-            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+            if (!this.loginViewModel.IsEmailValid(email))
             {
-                DisplayAlert("Validation Error", "Email and password are required", "OK");
+                this.DisplayAlert("Validation Error", "Invalid email format", "OK");
                 return;
             }
 
-            AccountService service = new ();
-
-            // Check the email format
-            if (!service.IsValidEmail(email))
+            if (!this.loginViewModel.IsPasswordValid(password))
             {
-                DisplayAlert("Validation Error", "Invalid email format", "OK");
+                this.DisplayAlert("Validation Error", "Password must be at least 8 characters long", "OK");
                 return;
             }
 
-            // Perform log in action
-            if (!service.Authenticate(email, password))
+            if (!this.loginViewModel.AreAuthenticationCredentialsValid(email, password))
             {
-                DisplayAlert("Error", "Invalid email or password", "OK");
+                this.DisplayAlert("Error", "Invalid email or password", "OK");
                 return;
             }
 
-            ISqlAccountRepository sqlAccountRepository = new SqlAccountRepository();
-            User currentUser = new User(sqlAccountRepository.GetAccount(email));
+            User? currentUser = this.loginViewModel.AuthenticateAndGetCurrentUser(email, password);
             if (currentUser != null)
             {
                 MainPage mainPage = new MainPage(currentUser);
-                Navigation.PushAsync(mainPage);
-                //Task.Delay(1);
-                //Navigation.RemovePage(this);
+                this.Navigation.PushAsync(mainPage);
+
+                // Navigation.RemovePage(this); this breaks the app on my pc
             }
             else
             {
-                DisplayAlert("Error", "Invalid email or password", "OK");
+                this.DisplayAlert("Error", "Invalid email or password", "OK");
             }
-
-                //Navigation.PopAsync();
-            //try
-            //{
-            //    src.Main_page.MainPage mainpage = new src.Main_page.MainPage(new User(sqlAccountRepository.GetAccount(email)));
-
-            //    Navigation.PushAsync(mainpage);
-
-            //}
-            //catch (Exception exc)
-            //{
-            //    Console.WriteLine(exc.ToString());
-            //}
-
-            //Navigation.RemovePage(this);
         }
-
-        // Method to validate email format
 
         private void SignUpButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PopAsync();
+            this.Navigation.PopAsync();
         }
     }
 }
-
-
